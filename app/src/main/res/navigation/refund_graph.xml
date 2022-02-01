@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refund_graph"
+    app:startDestination="@id/passwordInsertFragment">
+    <fragment
+        android:id="@+id/passwordInsertFragment"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.passwordInsert.PasswordInsertFragment"
+        android:label="PasswordInsertFragment" >
+        <action
+            android:id="@+id/action_passwordInsertFragment_to_amountInsertFragment2"
+            app:destination="@id/amountInsertFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/amountInsertFragment2"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.amountInsert.AmountInsertFragment"
+        android:label="AmountInsertFragment" >
+        <action
+            android:id="@+id/action_amountInsertFragment2_to_stanInsertFragment"
+            app:destination="@id/stanInsertFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stanInsertFragment"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.stanInsert.StanInsertFragment"
+        android:label="StanInsertFragment" >
+        <action
+            android:id="@+id/action_stanInsertFragment_to_dateInsertFragment"
+            app:destination="@id/dateInsertFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dateInsertFragment"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.dateInsert.DateInsertFragment"
+        android:label="DateInsertFragment" />
+</navigation>

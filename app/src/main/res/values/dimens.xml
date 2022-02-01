@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="receipt_text_top">10dp</dimen>
+    <dimen name="button_padding">10dp</dimen>
+    <dimen name="button_margin_left">10dp</dimen>
+    <dimen name="button_height">50dp</dimen>
+    <dimen name="errortext_size">15sp</dimen>
+    <dimen name="border_thickness">1dp</dimen>
+    <dimen name="border_thickness_light">0.5dp</dimen>
+    <dimen name="half_border_thickness_pinpad_grid">1dp</dimen>
+    <dimen name="corner_radius">5dp</dimen>
+    <dimen name="elevation">2dp</dimen>
+
+    <dimen name="content_offset_bookmarkbar">100dp</dimen>
+    <dimen name="content_offset_no_bookmarkbar">56dp</dimen>
+    <dimen name="bullet_number">8dp</dimen>
+
+    <!-- paddings -->
+    <dimen name="padding_extra_small">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="padding_extra_large">32dp</dimen>
+    <dimen name="padding_huge">40dp</dimen>
+    <dimen name="padding_extra_huge">48dp</dimen>
+    <dimen name="padding_massive">56dp</dimen>
+
+    <!-- activvity last receipt -->
+    <dimen name="margin_top_brad_icon">74dp</dimen>
+
+</resources>

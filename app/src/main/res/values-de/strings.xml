@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Navigation drawer texts -->
+    <string name="payment">Zahlung</string>
+    <string name="day_totals">tägliche Summen</string>
+    <string name="financial_totals">Finanzielle Summen</string>
+    <string name="print_last_receipt">Druck letzte Quittung ab</string>
+    <string name="refund">Rückzahlen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="update_parameters">Parameter aktualisieren</string>
+    <string name="software_version">SW Version: %1$s</string>
+    <string name="device_serial_number">Gerät S/N: %1$s</string>
+    <string name="statuses">Zustände</string>
+    <string name="request_info">Infos anfordern</string>
+
+    <!-- Amount/tip entry screen texts -->
+    <string name="enter_amount">Betrag eingeben</string>
+    <string name="enter_tip_amount">Tipp eingeben</string>
+    <string name="tip_gratuity">Verkaufsbetrag %1$s</string>
+
+    <!-- Refund information entry screens -->
+    <string name="enter_stan">STAN einführen</string>
+    <string name="enter_date">Verkaufsdatum einführen</string>
+
+    <!-- Payment method selection screen texts -->
+    <string name="select_payment_method">Wählen Sie die Zahlungsmethode</string>
+
+    <!-- QR code scanner screen texts -->
+    <string name="scan_qr_code">QR-Code scannen</string>
+
+    <!-- Popup texts -->
+    <string name="replace_paper">Druckpapier erneuen</string>
+    <string name="tear_off_receipt">Quittung abreißen</string>
+    <string name="tear_off_and_take_signature">Reiße die Quittung ab\n\n Bitte den Kunden om Unterschrift</string>
+    <string name="take_signature">Bitte den Kunden om Unterschrift</string>
+    <string name="sign_customer_receipt">Unterschreibe Kunde-Quittung</string>
+    <string name="enter_password">Passwort eingeben</string>
+    <string name="signature_alert">Bitte unterschreiben Sie die Quittung</string>
+
+    <!-- Health check messages -->
+    <string name="pairing_failed_contact_sp">Das Terminal ist nicht betriebsbereit. Bitte überprüfen Sie, ob das Gerät
+        mit dem Netzwerk verbunden ist, und versuchen Sie, die Parameter zu aktualisieren. Wenn das Problem weiterhin
+        besteht, wenden Sie sich an Ihren Diensteanbieter. \nDevice-Seriennummer: %1$s\nFhelercode: %2$d
+    </string>
+    <string name="configuration_error">nicht behebbarer Fehler</string>
+    <string name="error_occurred" translatable="false">Ein Fehler ist aufgetreten. \nGarät seriennummer: %1$s\n%2$s
+    </string>
+    <string name="enable_button">Stellen Sie die automatische Zeitzone ein</string>
+    <string name="change_button">Zeitzone ändern</string>
+    <string name="cancel_button">Stornieren</string>
+    <string name="auto_timezone_not_enabled">Das Gerät ist nicht auf automatische Zeitzone eingestellt. Klicken Sie zum
+        Ausführen von Transaktionen auf Aktivieren, um Einstellungen zu öffnen und die automatische Zeitzone
+        festzulegen.
+    </string>
+    <string name="incorrect_timezone">Das Gerät ist auf eine falsche Zeitzone eingestellt. Um Transaktionen
+        durchzuführen, klicken Sie auf "Ändern", um die Einstellungen zu öffnen und die richtige Zeitzone einzustellen.
+    </string>
+
+    <!-- Electronic signature screen texts -->
+    <string name="carhdolder_signature_required">Die Unterschrift des Karteninhabers ist erforderlich</string>
+    <string name="merchant_signature_required">Unterschreiben Sie die Kunden-Quittung</string>
+    <string name="confirm_signature">Bestätigen</string>
+    <string name="clear_signature">Löschen</string>
+
+    <!-- Transaction result screen texts -->
+    <string name="retry_payment">Versuchen Sie die Zahlung nochmal</string>
+
+    <!-- On-screen receipt screen texts -->
+    <string name="print_receipt">Abdrücken</string>
+    <string name="close" >Schließen</string>
+    <string name="do_not_print_receipt">Quittung nicht abdrücken</string>
+    <string name="acknowledge">Bestätigen</string>
+
+    <!-- Transaction complete screen texts -->
+    <string name="transaction_complete">Transaktion abgeschlossen</string>
+    <string name="start_new_payment">Neue Zahlung starten</string>
+
+    <!-- PaymentResultCode enum displayable labels -->
+    <string name="payment_result_success">Erfolgreich</string>
+    <string name="payment_result_authorization_failure">Autorisation fehlgeschlagen</string>
+    <string name="payment_result_authorization_timeout">Die Autorisierung hat zu lange gedauert</string>
+    <string name="payment_result_canceled">Abgebrochen</string>
+    <string name="payment_result_card_blocked">Karte ist Gesperrt</string>
+    <string name="payment_result_card_invalid">Karte is ungültig</string>
+    <string name="payment_result_declined_by_card">Abgelehnt</string>
+    <string name="payment_result_insufficient_funds">Unzureichende Balance</string>
+    <string name="payment_result_failed">Fehlgeschlagen</string>
+    <string name="payment_result_amount_exceeded">Limit überschritten</string>
+    <string name="payment_result_host_blocked_print_receipt">Belege aus früheren Transaktionen wurden nicht gedruckt</string>
+    <string name="payment_result_blocked_configure_application">Blockiert, Konfigurieren Sie die Anwendung</string>
+    <string name="payment_result_transaction_not_found">Transaktion nicht gefunden</string>
+
+    <!-- TransactionFlow enum displayable texts -->
+    <string name="transaction_flow_previous_receipt_request">Drücke letzte Quittung nochmal</string>
+    <string name="transaction_flow_financial_totals_request">Finanzielle Summen anfordern</string>
+    <string name="transaction_flow_update_parameters">Parametern aktualisieren</string>
+
+    <!-- Settings screen texts -->
+    <string name="settings_transaction_currency">Währung der Transaktion</string>
+    <string name="settings_payments">Zahlungen</string>
+    <string name="settings_general">Allgemeines</string>
+    <string name="settings_beep_volume">Pieptonlautstärke</string>
+    <string name="settings_on_screen_signature">Unterschrift auf dem Bildschirm</string>
+    <string name="settings_on_screen_signature_off">Kunden erhalten Quittungen auf herkömmliche Weise, wenn eine
+        Unterschrift erforderlich ist
+    </string>
+    <string name="settings_on_screen_signature_on">Kunden unterschreiben auf dem Bildschirm, wenn eine Unterschrift
+        erforderlich ist
+    </string>
+    <string name="settings_use_printer">Drucker verwenden</string>
+    <string name="settings_use_printer_off">Transaktionsbelege werden auf dem Bildschirm angezeigt</string>
+    <string name="settings_use_printer_on">Transaktionsbelege werden auf Papier gedrückt</string>
+    <string name="settings_receipts">Quittungen</string>
+    <string name="settings_ecr">ECR</string>
+    <string name="new_payment">Neue Zahlung</string>
+
+    <string name="enable_wifi">Schalten Sie WIFI ein</string>
+    <string name="use_mobile_network">Mobilfunknetz Verwenden</string>
+    <string name="mobile_network_text">Das Gerät kann nicht auf ein Netzwerk zugreifen. Überprüfen Sie die Netzwerkeinstellungen</string>
+    <string name="wifi_enabled_text">WIFI ist eingeschaltet</string>
+    <string name="no_network">Es gibt keine Verbindung zu einem Netzwerk</string>
+    <string name="ok">OK</string>
+    <string name="cancel_payment">Zahlung stornieren</string>
+    <string name="configuration_version">Konfigurationsversion</string>
+    <string name="invalid_date">Ungültiges Datum</string>
+    <string name="date_hint">tt/mm/jj</string>
+    <string name="password_error">Ungültiges Passwort. Bitte versuche es erneut</string>
+
+    <string name="tip_limit_exceeded">Trinkgeldbetrag darf %1$s%2$s%3$s %4$s nicht üb;erschreiten</string>
+
+    <!-- Error codes -->
+    <string-array name="error_codes">
+        <item>-1:Unbekannte Fehler.</item>
+        <item>-11:Terminal Anwendung ist nicht installiert.</item>
+        <item>-12:Autorisation hat fehlgeschlagen.</item>
+        <item>-13:Parametern herunterladen fehlgeschlagen.</item>
+        <item>-14:Terminal Anwendung Prüfung fehlgeschlagen.</item>
+        <item>-15:Missgebildete Intent.</item>
+        <item>-16:Transaktion-typ ist nicht erlaubt.</item>
+        <item>-17:Drucker installation fehlgeschlagen</item>
+        <item>-18:Für dieses Terminal wurde noch kein Vertrag abgeschlossen. Bitte wenden Sie sich an Ihren Diensteanbieter.</item>
+        <item>-23:Automatische Zeitzone ist nicht eingestellt.</item>
+        <item>-24:Die falsche Zeitzone wurde eingestellt.</item>
+        <item>-25:Die Verbindung zum Server ist fehlgeschlagen.</item>
+        <item>-26:Anwendung parametern wurden nicht heruntergeladen.</item>
+        <item>-27:Anwendung parametern wurden nicht heruntergeladen, fortsetzen met den alten Parametern.</item>
+        <item>-28:Transaction rejected by server.</item>
+        <item>-34:Interne Programmafehler: Runtime Exception.</item>
+    </string-array>
+
+    <!-- Component keypad -->
+    <string name="component_keypad_key_backspace">rücktaste</string>
+    <string name="component_keypad_key_confirm">bestätigen</string>
+
+    <!-- Error fragment -->
+    <string name="return_vending_machine">Bitte Automaten zurückgebene</string>
+    <string name="bottom_button">Weiter</string>
+
+    <!-- Loader fragment -->
+    <string name="loading_header">Laden</string>
+    <string name="cancel_operation_dialog">Möchten Sie diesen Vorgang abbrechen?</string>
+
+    <!-- Statuses -->
+    <string name="statuses_amount">Betrag: %1$s</string>
+    <string name="statuses_result">Ergebnis: %1$s</string>
+    <string name="statuses_type">Typ: %1$s</string>
+    <string name="row_receipt_button">Quittung</string>
+
+    <!-- Request info dialog -->
+    <string name="request_info_dialog">Keine Informationen verfügbar, erneut versuchen?</string>
+
+    <!-- UI strings -->
+    <!-- Bookmark bar labels -->
+    <string name="bookmark_amount">Betrag</string>
+    <string name="bookmark_method">Methode</string>
+    <string name="bookmark_qr_transaction">QR-Transaktion</string>
+    <string name="bookmark_card_transaction">Kartentransaktion</string>
+    <string name="bookmark_other_transaction">Verarbeitung</string>
+    <string name="bookmark_result">Ergebnis</string>
+    <string name="bookmark_receipt">Quittung</string>
+    <string name="bookmark_overflow">"Ausgewähltes Lesezeichen %d ist größer als die Anzahl der Lesezeichen %d"</string>
+    <string name="bookmark_zero">"Ausgewähltes Lesezeichen %d ist kleiner als 1"</string>
+    <string name="bookmark_page">Seite %d</string>
+    <string name="bookmark_date">Datum</string>
+    <string name="bookmark_totals">Summen</string>
+
+    <!-- Pinpad button labels -->
+    <string name="pinpad_cancel">Abbrechen</string>
+    <string name="pinpad_delete">Löschen</string>
+    <string name="pinpad_confirm">Eingabe</string>
+
+    <!-- Transaction information footer widget texts -->
+    <string name="transaction_footer_amount">Gesamtbetrag %1$s</string>
+    <string name="transaction_footer_card_payment">Zahlung mit Karte</string>
+    <string name="transaction_footer_alipay_payment">Bezahlung mit Alipay</string>
+    <string name="transaction_footer_wechatpay_payment">Bezahlung mit WeChat Pay</string>
+    <string name="transaction_footer_card_refund">Erstattung mit Karte</string>
+    <string name="transaction_footer_alipay_refund">Rückerstattung mit Alipay</string>
+    <string name="transaction_footer_wechatpay_refund">Rückerstattung mit WeChat Pay</string>
+    <string name="do_not_enter_pin">PIN NICHT EINGEBEN</string>
+
+    <!-- Progress screen texts -->
+    <string name="transaction_processing">Verarbeitung von Transaktionen</string>
+    <string name="printing_receipts">Drucken</string>
+
+    <!-- Popup widget texts -->
+    <string name="popup_confirm">Bestätigen Sie</string>
+    <string name="popup_cancel_transaction">Transaktion abbrechen?</string>
+
+    <!-- PaymentMethod enum displayable labels -->
+    <string name="payment_method_card">Karte</string>
+    <string name="payment_method_alipay" translatable="false">Alipay</string>
+    <string name="payment_method_wechat_pay" translatable="false">WeChat Pay</string>
+
+    <!-- TransactionType enum displayable labels -->
+    <string name="transaction_type_purchase">Kaufen Sie</string>
+    <string name="transaction_type_refund">Erstattung</string>
+
+    <!-- Electronic signature screen texts -->
+    <string name="sign_here">HIER UNTERSCHREIBEN</string>
+</resources>

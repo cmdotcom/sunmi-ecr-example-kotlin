@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="yantramanav_glyphs">
+        <item>@drawable/little_checkmark</item>
+        <item>@drawable/yantramanav_1</item>
+        <item>@drawable/yantramanav_2</item>
+        <item>@drawable/yantramanav_3</item>
+        <item>@drawable/yantramanav_4</item>
+        <item>@drawable/yantramanav_5</item>
+    </array>
+    <array name="sourcesanspro_glyphs">
+        <item>@drawable/little_checkmark</item>
+        <item>@drawable/sourcesanspro_1</item>
+        <item>@drawable/sourcesanspro_2</item>
+        <item>@drawable/sourcesanspro_3</item>
+        <item>@drawable/sourcesanspro_4</item>
+        <item>@drawable/sourcesanspro_5</item>
+    </array>
+</resources>

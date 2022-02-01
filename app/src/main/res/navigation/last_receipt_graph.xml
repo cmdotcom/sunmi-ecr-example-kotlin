@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/last_receipt_graph"
+    app:startDestination="@id/loaderFragment2">
+    <fragment
+        android:id="@+id/loaderFragment2"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.loader.LoaderFragment"
+        android:label="LoaderFragment" >
+        <action
+            android:id="@+id/action_loaderFragment2_to_receiptViewFragment2"
+            app:destination="@id/receiptViewFragment2" />
+        <action
+            android:id="@+id/action_loaderFragment2_to_errorFragment2"
+            app:destination="@id/errorFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/receiptViewFragment2"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewFragment"
+        android:label="ReceiptViewFragment" />
+    <fragment
+        android:id="@+id/errorFragment2"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragment"
+        android:label="ErrorFragment" />
+</navigation>

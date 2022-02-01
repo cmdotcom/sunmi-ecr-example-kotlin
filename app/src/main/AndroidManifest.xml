@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cm.payplaza.ecr_sdk_integration">
+
+    <application
+        android:name=".application.EcrApplication"
+        android:allowBackup="true"
+        android:icon="${appIcon}"
+        android:label="@string/app_name_icon"
+        android:roundIcon="${appIcon}"
+        android:supportsRtl="true"
+        android:theme="${launcherTheme}"
+        android:fullBackupContent="true"
+        android:extractNativeLibs="true">
+        <activity
+            android:name=".activity.payment.PaymentActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.transactionResult.TransactionResultActivity"/>
+        <activity android:name=".activity.refund.RefundActivity"/>
+        <activity android:name=".activity.lastReceipt.LastReceiptActivity"/>
+        <activity android:name=".activity.totals.TotalsActivity"/>
+        <activity android:name=".activity.statuses.StatusesActivity"/>
+    </application>
+
+</manifest>

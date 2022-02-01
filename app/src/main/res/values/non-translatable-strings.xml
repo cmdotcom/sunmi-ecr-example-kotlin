@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    translatable="false">
+    <string name="app_name">ECR_SDK_Integration</string>
+    <string name="app_name_icon">ECR 2.0</string>
+
+    <string name="component_keypad_key_0">0</string>
+    <string name="component_keypad_key_1">1</string>
+    <string name="component_keypad_key_2">2</string>
+    <string name="component_keypad_key_3">3</string>
+    <string name="component_keypad_key_4">4</string>
+    <string name="component_keypad_key_5">5</string>
+    <string name="component_keypad_key_6">6</string>
+    <string name="component_keypad_key_7">7</string>
+    <string name="component_keypad_key_8">8</string>
+    <string name="component_keypad_key_9">9</string>
+
+    <string name="component_amount_view_initial_amount">0.00</string>
+</resources>

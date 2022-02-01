@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/statuses_graph"
+    app:startDestination="@id/loaderFragment4">
+
+    <fragment
+        android:id="@+id/loaderFragment4"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.loader.LoaderFragment"
+        android:label="LoaderFragment" >
+        <action
+            android:id="@+id/action_loaderFragment4_to_errorFragment3"
+            app:destination="@id/errorFragment3" />
+        <action
+            android:id="@+id/action_loaderFragment4_to_statusesFragment"
+            app:destination="@id/statusesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/errorFragment3"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragment"
+        android:label="ErrorFragment" />
+    <fragment
+        android:id="@+id/statusesFragment"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.statuses.StatusesFragment"
+        android:label="StatusesFragment" >
+        <action
+            android:id="@+id/action_statusesFragment_to_receiptViewFragment3"
+            app:destination="@id/receiptViewFragment3" />
+        <action
+            android:id="@+id/action_statusesFragment_to_errorFragment3"
+            app:destination="@id/errorFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/receiptViewFragment3"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewFragment"
+        android:label="ReceiptViewFragment" >
+        <action
+            android:id="@+id/action_receiptViewFragment3_to_statusesFragment4"
+            app:destination="@id/statusesFragment" />
+    </fragment>
+</navigation>

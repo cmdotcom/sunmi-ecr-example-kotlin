@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/amount_view_layout">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="@string/new_payment"
+            android:textAppearance="@style/TextAppearance.Header"
+            android:visibility="invisible"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/header_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/enter_amount"
+            android:textAppearance="@style/TextAppearance.Body" />
+
+        <com.cm.payplaza.ecr_sdk_integration.uicomponents.amountViewComponent.AmountViewComponent
+            android:id="@+id/component_amount_view"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:background="@drawable/border_with_rounded_corners"
+            android:divider="@drawable/amount_view_currency_separator"
+            android:elevation="@dimen/elevation"
+            android:minWidth="200dp"
+            android:padding="@dimen/border_thickness"
+            android:showDividers="middle"
+            android:weightSum="1" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pin_warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/do_not_enter_pin"
+            android:paddingTop="20dp"
+            android:textAppearance="@style/TextAppearance.ExtraInformation" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/store_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textAppearance="@style/TextAppearance.ExtraInformation"
+            android:textAlignment="center"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="bottom|center"
+        android:id="@+id/keypad_layout"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <com.cm.payplaza.ecr_sdk_integration.uicomponents.numericKeypadComponent.NumericKeypadComponent
+            android:id="@+id/component_numeric_keypad"
+            android:layout_width="match_parent"
+            android:layout_height="214dp"
+            android:visibility="visible"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

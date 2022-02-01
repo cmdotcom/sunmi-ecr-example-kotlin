@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row_statuses_amount"
+        android:text="@string/statuses_amount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/padding_extra_small"
+        android:layout_marginStart="@dimen/padding_small"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row_statuses_result"
+        android:text="@string/statuses_result"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_statuses_amount"
+        android:layout_marginTop="@dimen/padding_extra_small"
+        android:layout_marginStart="@dimen/padding_small"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row_statuses_type"
+        android:text="@string/statuses_type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_statuses_result"
+        android:layout_marginTop="@dimen/padding_extra_small"
+        android:layout_marginStart="@dimen/padding_small"
+        android:layout_marginBottom="@dimen/padding_extra_small"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row_statuses_receipt"
+        android:text="@string/row_receipt_button"
+        android:textSize="16sp"
+
+        style="@style/Widget.Button.Payplaza.Keypad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/row_statuses_result"
+        app:layout_constraintBottom_toBottomOf="@+id/row_statuses_result"
+        android:layout_marginEnd="@dimen/padding_small"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightShadeColor"
+        android:id="@+id/row_statuses_head_separator"
+        app:layout_constraintTop_toBottomOf="@+id/row_statuses_type"
+        android:layout_marginTop="@dimen/padding_extra_small"
+        android:layout_marginStart="@dimen/padding_extra_small"
+        android:layout_marginEnd="@dimen/padding_extra_small"
+        android:visibility="visible"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

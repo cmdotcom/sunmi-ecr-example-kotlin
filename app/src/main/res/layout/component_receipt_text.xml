@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layout_receipt"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/receipt_text_top"
+            android:layout_marginBottom="@dimen/receipt_text_top"
+            android:background="@drawable/border_with_rounded_corners"
+            android:padding="@dimen/receipt_text_top">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_receipt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    tools:text="text"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageview_signature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="-40dp"
+                    android:layout_marginTop="-40dp"
+                    android:scaleType="fitCenter"
+            />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textview_receipt_footer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:maxWidth="280dp"
+            />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

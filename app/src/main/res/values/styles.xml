@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="error_text">
+        <item name="android:textSize">@dimen/errortext_size</item>
+    </style>
+
+    <style name="TextAppearance">
+        <item name="android:textColor">@color/primaryFontColor</item>
+    </style>
+
+    <!-- Required transaction indicator messages -->
+    <style name="TextAppearance.ExtraInformation">
+        <item name="android:fontFamily">?lightFont</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- Sub text in launcher activity -->
+    <style name="TextAppearance.LauncherActivity" parent="TextAppearance.ExtraInformation">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- The bookmark bar page title -->
+    <style name="TextAppearance.BookmarkTitle">
+        <item name="fontFamily">?regularFont</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/primaryFontColor</item>
+    </style>
+
+    <!-- The bookmark bar bullet -->
+    <style name="TextAppearance.BookmarkDigit">
+        <item name="android:fontFamily">?mediumFont</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/windowBackgroundColor</item>
+    </style>
+
+    <!-- Page header -->
+    <style name="TextAppearance.Header">
+        <item name="android:fontFamily">?mediumFont</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- The page body text -->
+    <style name="TextAppearance.Body">
+        <item name="fontFamily">?regularFont</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Transaction state messages, important information -->
+    <style name="TextAppearance.ImportantInformation">
+        <item name="android:fontFamily">?mediumFont</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!-- Button text -->
+    <style name="TextAppearance.Button">
+        <item name="fontFamily">?regularFont</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Amount entry, keypad digits -->
+    <style name="TextAppearance.Number">
+        <item name="fontFamily">?regularFont</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="TextAppearance.Button.Pinpad">
+        <item name="fontFamily">?mediumFont</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.Button.Payplaza" parent="android:Widget.Material.Light.Button.Borderless">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:elevation">@dimen/elevation</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAppearance">@style/TextAppearance.Button</item>
+    </style>
+
+    <style name="Widget.Button.Payplaza.Keypad" parent="android:Widget.Material.Light.Button.Borderless">
+        <item name="android:elevation">0dp</item>
+        <item name="android:background">@color/lightShadeColor</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAppearance">@style/TextAppearance.Number</item>
+    </style>
+
+    <style name="Widget.Button.Payplaza.Keypad.Cancel" parent="Widget.Button.Payplaza.Keypad">
+        <item name="android:background">?errorColor</item>
+        <item name="android:textAppearance">@style/TextAppearance.Button.Pinpad</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Widget.Button.Payplaza.Keypad.Delete" parent="Widget.Button.Payplaza.Keypad">
+        <item name="android:background">?warningColor</item>
+        <item name="android:textAppearance">@style/TextAppearance.Button.Pinpad</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="AppCompatImageView">
+        <item name="android:background">?brandingLogo</item>
+    </style>
+
+    <!-- Payplaza branding, without bookmark bar -->
+    <style name="Payplaza.Whitelabel" parent="BaseStyle">
+        <item name="bookmarkBarVisibility">gone</item>
+        <item name="contentViewTopOffset">@dimen/content_offset_no_bookmarkbar</item>
+    </style>
+</resources>

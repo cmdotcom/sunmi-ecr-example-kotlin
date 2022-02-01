@@ -1,0 +1,98 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        minSdk 25
+        targetSdk 29
+        versionCode 1
+        versionName "2.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders.launcherTheme = "@style/Base.Launcher"
+        manifestPlaceholders.appIcon = "@mipmap/ic_launcher"
+
+        setProperty("archivesBaseName", "ecr-$versionName")
+    }
+
+    buildTypes {
+        debug {
+            // minifyEnabled true
+            // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders.appIcon = "@mipmap/ic_launcher_dev"
+            applicationIdSuffix = ".debug"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    dataBinding {
+        enabled true
+    }
+    flavorDimensions("ecr")
+    productFlavors {
+        genericBrand {
+            dimension = "ecr"
+            applicationId "com.cm.generic.ecr_sdk_integration"
+        }
+    }
+}
+
+task copyApks(type: Copy) {
+    from("$projectDir/build/outputs/apk")
+    include '**/*.apk'
+    into "$rootDir/artifacts"
+}
+
+dependencies {
+
+    // AndroidX
+    implementation "androidx.core:core-ktx:$rootProject.ext.core_ktx"
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayout"
+    implementation "com.google.android.material:material:$rootProject.ext.material"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.ext.nav_version"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$rootProject.ext.nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.ext.nav_version"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$rootProject.ext.nav_version"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.recycler_view"
+    implementation "com.jakewharton.timber:timber:$rootProject.ext.timber"
+    implementation "com.google.code.gson:gson:$rootProject.ext.gson"
+
+    // Test
+    testImplementation "junit:junit:$rootProject.ext.junit"
+    debugImplementation "androidx.test.ext:junit:$rootProject.ext.androidx_junit"
+    debugImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espresso_core"
+    debugImplementation "androidx.test:runner:$rootProject.ext.espresso"
+    debugImplementation "androidx.test:rules:$rootProject.ext.espresso"
+    debugImplementation "androidx.test:core-ktx:$rootProject.ext.espresso"
+    debugImplementation "androidx.fragment:fragment-testing:$rootProject.ext.fragment_testing"
+    debugImplementation "androidx.navigation:navigation-testing:$rootProject.ext.nav_version"
+
+    // Koin
+    implementation "io.insert-koin:koin-android:$rootProject.ext.koin_android"
+
+    // Integration SDK for sunmi
+    implementation "com.github.cmdotcom.android-pos-integration-sdk-kotlin:androidposintegrationsdk-debug:$android_pos_integration"
+
+    // Gif's
+    implementation "pl.droidsonroids.gif:android-gif-drawable:$rootProject.ext.gif"
+
+    // Sunmi
+    implementation "com.sunmi:printerlibrary:$rootProject.ext.printer"
+}

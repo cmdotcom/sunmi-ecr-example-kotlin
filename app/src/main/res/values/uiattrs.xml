@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom attributes for BookmarkBarView widget -->
+    <declare-styleable name="BookmarkComponent">
+        <attr name="numberBookmarks" format="integer"/>
+        <attr name="selectedBookmark" format="integer"/>
+        <attr name="margin" format="dimension"/>
+        <attr name="padding" format="dimension"/>
+        <attr name="widthDivider" format="dimension"/>
+        <attr name="backgroundHighlight" format="reference"/>
+        <attr name="backgroundBullet" format="reference"/>
+        <attr name="backgroundBulletInactive" format="reference"/>
+        <attr name="backgroundBulletSelected" format="reference"/>
+        <attr name="backgroundDivider" format="reference"/>
+        <attr name="appearanceTextBookmark" format="reference"/>
+        <attr name="glyphs" format="reference"/>
+    </declare-styleable>
+
+    <!-- Custom attributes for ElectronicSignatureView widget -->
+    <declare-styleable name="ElectronicSignatureView">
+        <attr name="strokeColor" format="color"/>
+        <attr name="backgroundColor" format="color"/>
+        <attr name="hintColor" format="color"/>
+        <attr name="hintText" format="string"/>
+        <attr name="hintFontSize" format="dimension"/>
+    </declare-styleable>
+
+    <!-- Custom attributes for NumericEntryView widget -->
+    <declare-styleable name="NumericEntryView">
+        <attr name="maxLength" format="integer"/>
+        <attr name="allowLeadingZero" format="boolean"/>
+        <attr name="backspaceStrategy" format="enum">
+            <enum name="delete_one" value="0"/>
+            <enum name="delete_all" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <!-- Custom theme attributes -->
+    <declare-styleable name="BrandingAttributes">
+        <attr name="brandingLogo" format="reference"/>
+        <attr name="progressAnimation" format="reference"/>
+        <attr name="transactionCompleteAnimation" format="reference"/>
+        <attr name="regularFont" format="reference"/>
+        <attr name="lightFont" format="reference"/>
+        <attr name="mediumFont" format="reference"/>
+        <attr name="bookmarkBarVisibility">
+            <enum name="visible" value="0"/>
+            <enum name="invisible" value="1"/>
+            <enum name="gone" value="2"/>
+        </attr>
+        <attr name="bookmarkBarGlyphs" format="reference"/>
+        <attr name="contentViewTopOffset" format="reference"/>
+        <attr name="successColor" format="reference"/>
+        <attr name="warningColor" format="reference"/>
+        <attr name="errorColor" format="reference"/>
+        <attr name="primaryAccentColor" format="reference"/>
+        <attr name="brandingLogoAnchor" format="reference"/>
+    </declare-styleable>
+</resources>

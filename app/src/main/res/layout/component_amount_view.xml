@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@android:color/white">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:id="@+id/amount_view_container"
+        android:background="@drawable/amount_view_currency_background">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/amount_view_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingRight="@dimen/padding_small"
+            android:gravity="center_vertical|center_horizontal"
+            android:minWidth="50dp"
+            tools:text="£"
+            android:textAppearance="@style/TextAppearance.Number"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/amount_view_calendar"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/ic_calendar"
+            android:gravity="center_vertical|center_horizontal"
+            android:visibility="visible"
+            android:elevation="100dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/amount_view_amount"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toEndOf="@+id/amount_view_currency"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="end"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small"
+        android:textAlignment="textEnd"
+        android:maxLines="1"
+        android:gravity="center_vertical|end"
+        tools:text="10,00"
+        android:textAppearance="@style/TextAppearance.Number"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

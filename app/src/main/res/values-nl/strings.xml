@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Navigation drawer texts -->
+    <string name="payment">Betaling</string>
+    <string name="day_totals">Dagtotalen</string>
+    <string name="financial_totals">Financiële totalen</string>
+    <string name="print_last_receipt">Druk laatste bon af</string>
+    <string name="refund">Terugbetaling</string>
+    <string name="settings">Instellingen</string>
+    <string name="update_parameters">Update parameters</string>
+    <string name="software_version">SW Versie: %1$s</string>
+    <string name="device_serial_number">Device S/N: %1$s</string>
+    <string name="statuses">Status</string>
+    <string name="request_info">Vraag info</string>
+
+    <!-- Amount/tip entry screen texts -->
+    <string name="enter_amount">Voer bedrag in</string>
+    <string name="enter_tip_amount">Voer fooi in</string>
+    <string name="tip_gratuity">Verkoop bedrag %1$s</string>
+
+    <!-- Refund information entry screens -->
+    <string name="enter_stan">Voer STAN in</string>
+    <string name="enter_date">Voer verkoopdatum in</string>
+
+    <!-- Payment method selection screen texts -->
+    <string name="select_payment_method">Selecteer methode van betalen</string>
+
+    <!-- QR code scanner screen texts -->
+    <string name="scan_qr_code">Scan QR code</string>
+
+    <!-- Popup texts -->
+    <string name="replace_paper">Vernieuw print papier</string>
+    <string name="tear_off_receipt">Scheur de bon af</string>
+    <string name="tear_off_and_take_signature">Scheur de bon af\n\n Vraag klant om handtekening</string>
+    <string name="take_signature">Vraag klant om handtekening</string>
+    <string name="sign_customer_receipt">Onderteken klant-bon</string>
+    <string name="enter_password">Voer wachtwoord in</string>
+    <string name="signature_alert">Onderteken de bon om verder te gaan</string>
+
+    <!-- Health check messages -->
+    <string name="pairing_failed_contact_sp">Het pin-apparaat is niet operationeel. Gelieve te controleren of het
+        apparaat met het netwerk is verbonden en probeer de parameters te updaten. Als het probleem blijft bestaan, neem
+        dan contact op met uw service provider.\nApparaat serienummer: %1$s\nError code: %2$d
+    </string>
+    <string name="configuration_error">Onherstelbare fout</string>
+    <string name="error_occurred" translatable="false">Er is een fout opgetreden.\nApparaat serienummer: %1$s\n%2$s
+    </string>
+    <string name="enable_button">Stel Automatische Tijdzone in</string>
+    <string name="change_button">Wijzig Tijdzone</string>
+    <string name="cancel_button">Annuleer</string>
+    <string name="auto_timezone_not_enabled">Het apparaat is niet ingesteld op automatische tijdzone. Om transacties uit
+        te kunnen voeren, klik op enable om instellingen te openen en de automatische tijdzone in te stellen.
+    </string>
+    <string name="incorrect_timezone">Dit apparaat is ingesteld op een onjuiste tijdzone. Om transacties uit te voeren,
+        klik op "wijzigen" om de instellingen te openen en de juiste tijdzone in te stellen
+    </string>
+
+    <!-- Electronic signature screen texts -->
+    <string name="carhdolder_signature_required">Handtekening van kaarthouder is vereist</string>
+    <string name="merchant_signature_required">Onderteken klantbon</string>
+    <string name="confirm_signature">Bevestig</string>
+    <string name="clear_signature">Wis</string>
+
+    <!-- Transaction result screen texts -->
+    <string name="retry_payment">Probeer betaling opnieuw</string>
+
+    <!-- On-screen receipt screen texts -->
+    <string name="print_receipt">Druk bon af</string>
+    <string name="close" translatable="false">Sluit af</string>
+    <string name="do_not_print_receipt">Druk geen bon af</string>
+    <string name="acknowledge">Bevestig</string>
+
+    <!-- Transaction complete screen texts -->
+    <string name="transaction_complete">Transactie afgerond</string>
+    <string name="start_new_payment">Start nieuwe betaling</string>
+
+    <!-- PaymentResultCode enum displayable labels -->
+    <string name="payment_result_success">Succes</string>
+    <string name="payment_result_authorization_failure">Autorisatie is mislukt</string>
+    <string name="payment_result_authorization_timeout">Autorisatie heeft te lang geduurd</string>
+    <string name="payment_result_canceled">Geannuleerd</string>
+    <string name="payment_result_card_blocked">Kaart is geblokkeerd</string>
+    <string name="payment_result_card_invalid">Kaart is ongeldig</string>
+    <string name="payment_result_declined_by_card">Afgewezen</string>
+    <string name="payment_result_insufficient_funds">Onvoldoende saldo</string>
+    <string name="payment_result_failed">Mislukt</string>
+    <string name="payment_result_amount_exceeded">Limiet overschreden</string>
+    <string name="payment_result_host_blocked_print_receipt">Bonnen van voorgaande transacties zijn niet geprint</string>
+    <string name="payment_result_blocked_configure_application">Geblokkeerd, configureer de applicatie</string>
+    <string name="payment_result_transaction_not_found">Transactie niet gevonden</string>
+
+    <!-- TransactionFlow enum displayable texts -->
+    <string name="transaction_flow_previous_receipt_request">Druk laatste bon opnieuw af</string>
+    <string name="transaction_flow_financial_totals_request">Vraag financiële totalen op</string>
+    <string name="transaction_flow_update_parameters">Update parameters</string>
+
+    <!-- Settings screen texts -->
+    <string name="settings_transaction_currency">Valuta van transactie</string>
+    <string name="settings_payments">Betalingen</string>
+    <string name="settings_general">Algemeen</string>
+    <string name="settings_beep_volume">Piep volume</string>
+    <string name="settings_on_screen_signature">Handtekening op het scherm</string>
+    <string name="settings_on_screen_signature_off">Klanten ontvangen bonnen op traditionele wijze als een handtekening
+        is vereist
+    </string>
+    <string name="settings_on_screen_signature_on">Klanten ondertekenen op het scherm als een handtekening is vereist
+    </string>
+    <string name="settings_use_printer">Gebruik printer</string>
+    <string name="settings_use_printer_off">Transactie-bonnen worden getoond op het scherm</string>
+    <string name="settings_use_printer_on">Transactie-bonnen worden afgedrukt op papier</string>
+    <string name="settings_receipts">Bonnen</string>
+    <string name="settings_ecr">ECR</string>
+    <string name="new_payment">Nieuwe betaling</string>
+
+    <string name="enable_wifi">Zet WIFI aan</string>
+    <string name="use_mobile_network">Gebruik mobiel netwerk</string>
+    <string name="mobile_network_text">Het apparaat heeft geen toegang tot een netwerk. Controleer netwerk
+        instellingen
+    </string>
+    <string name="wifi_enabled_text">Wifi staat aan</string>
+    <string name="no_network">Er is geen verbinding met een netwerk</string>
+    <string name="ok">OK</string>
+    <string name="cancel_payment">Annuleren</string>
+    <string name="configuration_version">Configuration version</string>
+    <string name="invalid_date">Ongeldige datum</string>
+    <string name="date_hint">dd/mm/jj</string>
+    <string name="password_error">Ongeldig wachtwoord. Probeer opnieuw a.u.b.</string>
+
+    <string name="tip_limit_exceeded">Tip amount cannot exceed %1$s%2$s%3$s %4$s</string>
+
+    <!-- Error codes -->
+    <string-array name="error_codes">
+        <item>-1:Onbekende fout.</item>
+        <item>-11:Terminal applicatie is niet geïnstalleerd.</item>
+        <item>-12:FTG autorisatie is mislukt.</item>
+        <item>-13:FTG parameter download is mislukt.</item>
+        <item>-14:Terminal applicatie check is mislukt.</item>
+        <item>-15:Malformed intent.</item>
+        <item>-16:Transactie-type is niet toegestaan.</item>
+        <item>-17:Installatie van printer is mislukt</item>
+        <item>-18:Er is nog geen contract ingesteld voor dit betaalapparaat. Gelieve contact op te nemen met uw service
+            provider.
+        </item>
+        <item>-23:Automatische tijdzone is niet ingesteld.</item>
+        <item>-24:Er is een verkeerde tijdzone ingesteld.</item>
+        <item>-25:Verbinding met de server is mislukt.</item>
+        <item>-26:Terminal parameters zijn niet gedownload.</item>
+        <item>-27:Terminal parameters zijn niet gedownload, ga verder met de oude parameters.</item>
+        <item>-28:Transactie afgewezen door server.</item>
+        <item>-34:Programma fout: Runtime Exception</item>
+    </string-array>
+
+    <!-- Component keypad -->
+    <string name="component_keypad_key_backspace">backspace</string>
+    <string name="component_keypad_key_confirm">bevestigen</string>
+
+    <!-- Error fragment -->
+    <string name="return_vending_machine">Breng de automaat terug</string>
+    <string name="bottom_button">Ga door</string>
+
+    <!-- Loader fragment -->
+    <string name="loading_header">Laden</string>
+    <string name="cancel_operation_dialog">Wilt u deze operatie annuleren?</string>
+
+    <!-- Statuses -->
+    <string name="statuses_amount">Bedrag: %1$s</string>
+    <string name="statuses_result">Resultaat: %1$s</string>
+    <string name="statuses_type">Type: %1$s</string>
+    <string name="row_receipt_button">Ontvangst</string>
+
+    <!-- Request info dialog -->
+    <string name="request_info_dialog">Geen info beschikbaar, probeer het opnieuw?</string>
+
+    <!-- UI strings -->
+    <!-- Bookmark bar labels -->
+    <string name="bookmark_amount">Bedrag</string>
+    <string name="bookmark_method">Methode</string>
+    <string name="bookmark_qr_transaction">QR-transactie</string>
+    <string name="bookmark_card_transaction">Kaarttransactie</string>
+    <string name="bookmark_other_transaction">Verwerking</string>
+    <string name="bookmark_result">Resultaat</string>
+    <string name="bookmark_receipt">Ontvangstbewijs</string>
+    <string name="bookmark_overflow">"Geselecteerde bladwijzer %d is groter dan aantal bladwijzers %d"</string>
+    <string name="bookmark_zero">Geselecteerde bladwijzer %d is minder dan 1"</string>
+    <string name="bookmark_page">Pagina %d</string>
+    <string name="bookmark_date">Datum</string>
+    <string name="bookmark_totals">Totalen</string>
+
+    <!-- Pinpad button labels -->
+    <string name="pinpad_cancel">Annuleren</string>
+    <string name="pinpad_delete">Delete</string>
+    <string name="pinpad_confirm">Ga naar</string>
+
+    <!-- Transaction information footer widget texts -->
+    <string name="transaction_footer_amount">Totaal bedrag %1$s</string>
+    <string name="transaction_footer_card_payment">Betaling met kaart</string>
+    <string name="transaction_footer_alipay_payment">Betaling met Alipay</string>
+    <string name="transaction_footer_wechatpay_payment">Betaling met WeChat Pay</string>
+    <string name="transaction_footer_card_refund">Terugbetaling met kaart</string>
+    <string name="transaction_footer_alipay_refund">Terugbetaling met Alipay</string>
+    <string name="transaction_footer_wechatpay_refund">Terugbetaling met WeChat Pay</string>
+    <string name="do_not_enter_pin">GEEN PIN INVOEREN</string>
+
+    <!-- Progress screen texts -->
+    <string name="transaction_processing">Verwerking van transacties</string>
+    <string name="printing_receipts">Afdrukken</string>
+
+    <!-- Popup widget texts -->
+    <string name="popup_confirm">Bevestig</string>
+    <string name="popup_cancel_transaction">Transactie annuleren?</string>
+
+    <!-- PaymentMethod enum displayable labels -->
+    <string name="payment_method_card">Kaart</string>
+    <string name="payment_method_alipay" translatable="false">Alipay</string>
+    <string name="payment_method_wechat_pay" translatable="false">WeChat Pay</string>
+
+    <!-- TransactionType enum displayable labels -->
+    <string name="transaction_type_purchase">Kopen</string>
+    <string name="transaction_type_refund">Terugbetaling</string>
+
+    <!-- Electronic signature screen texts -->
+    <string name="sign_here">TEKEN HIER</string>
+</resources>
