@@ -1,4 +1,4 @@
-## CM ECR app 2.0
+## PayPlaza ECR app 2.0
 
 Version 2.0.0
 
@@ -17,7 +17,7 @@ Release 2.0.0 includes a basic implementation of the [integration SDK](https://g
 
 ## Prerequisites
 
-* [Terminal](https://payplaza.com/terminals/) application must be installed in the device. Version 1.1.1 or higher.
+* Payplaza [Terminal](https://payplaza.com/terminals/) application must be installed in the device. Version 1.1.1 or higher.
 * Android 7 (api 25) or higher.
 * The device you'll use must have installed 'SunmiPayHardwareService'. Version v3.3.133 or higher.
 
@@ -67,7 +67,7 @@ Release 2.0.0 includes a basic implementation of the [integration SDK](https://g
   
     ````bash
     dependencies {
-        // CM Android POS Integration library
+        // CM|PayPlaza Android POS Integration library
         implementation 'com.github.cmdotcom.android-pos-integration-sdk-kotlin:androidposintegrationsdk-debug:<version-tag>'
     }
     ````
@@ -76,7 +76,7 @@ Release 2.0.0 includes a basic implementation of the [integration SDK](https://g
   
     ````bash
     dependencies {
-        // CM Android POS Integration library
+        // CM|PayPlaza Android POS Integration library
         implementation 'com.github.cmdotcom.android-pos-integration-sdk-kotlin:androidposintegrationsdk:<version-tag>'
     }
     ````
