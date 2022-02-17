@@ -1,4 +1,4 @@
-## PayPlaza ECR app 2.0
+## CM ECR app 2.0
 
 Version 2.0.0
 
@@ -17,7 +17,7 @@ Release 2.0.0 includes a basic implementation of the [integration SDK](https://g
 
 ## Prerequisites
 
-* Payplaza [Terminal](https://payplaza.com/terminals/) application must be installed in the device. Version 1.1.1 or higher.
+* [Terminal](https://payplaza.com/terminals/) application must be installed in the device. Version 1.1.1 or higher.
 * Android 7 (api 25) or higher.
 * The device you'll use must have installed 'SunmiPayHardwareService'. Version v3.3.133 or higher.
 
@@ -25,15 +25,11 @@ Release 2.0.0 includes a basic implementation of the [integration SDK](https://g
 
 * Check if Java 8 (for Android Studio) and Java 11 (for Gradle) are installed. It can be done through **Android Studio**.
 
-* Create access token for payplaza repositories in Gitlab.
-
-  Go to your propfile in Gitlab -> Access tokens (in left slide) -> Fill the form.
-
 * Then, save your global credentials (optional):
 
   ```bash
-  git config --global user.email "<your_user_name_here>@payplaza.com"
-  git config --global user.password "<your_access_token_here>"
+  git config --global user.email "<your_user_name_here>@<your_domain>.com"
+  git config --global user.password "<your_password_here>"
   ```
 
 * Clone this repository and import into **Android Studio**
@@ -58,7 +54,7 @@ Release 2.0.0 includes a basic implementation of the [integration SDK](https://g
 
     ````bash
     dependencies {
-        // CM|PayPlaza Android POS Integration library
+        // CM Android POS Integration library
         implementation 'com.github.cmdotcom.android-pos-integration-sdk-kotlin:androidposintegrationsdk-debug:<version-tag>'
     }
     ````
@@ -67,7 +63,7 @@ Release 2.0.0 includes a basic implementation of the [integration SDK](https://g
 
     ````bash
     dependencies {
-        // CM|PayPlaza Android POS Integration library
+        // CM Android POS Integration library
         implementation 'com.github.cmdotcom.android-pos-integration-sdk-kotlin:androidposintegrationsdk:<version-tag>'
     }
     ````
