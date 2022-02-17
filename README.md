@@ -50,17 +50,30 @@ Release 2.0.0 includes a basic implementation of the [integration SDK](https://g
 
 * Is up to development team configure build types. Debug build is available by default. The proper version of the [integration SDK](https://github.com/cmdotcom/android-pos-integration-sdk-kotlin) must be imported as a gradle dependency:
 
-  * Debug:
+  * Repository to import dependencies:
 
+    ````bash
+    dependencyResolutionManagement {
+        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+        repositories {
+            google()
+            mavenCentral()
+            maven { url 'https://jitpack.io' }
+        }
+    }
+    ````
+  
+  * Debug:
+  
     ````bash
     dependencies {
         // CM Android POS Integration library
         implementation 'com.github.cmdotcom.android-pos-integration-sdk-kotlin:androidposintegrationsdk-debug:<version-tag>'
     }
     ````
-
+  
   * Production:
-
+  
     ````bash
     dependencies {
         // CM Android POS Integration library
