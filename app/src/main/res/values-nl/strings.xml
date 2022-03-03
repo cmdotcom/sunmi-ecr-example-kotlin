@@ -45,7 +45,7 @@
     <string name="configuration_error">Onherstelbare fout</string>
     <string name="error_occurred" translatable="false">Er is een fout opgetreden.\nApparaat serienummer: %1$s\n%2$s
     </string>
-    <string name="enable_button">Stel Automatische Tijdzone in</string>
+    <string name="enable_button">Alsjeblieft, stel Automatische Tijdzone in</string>
     <string name="change_button">Wijzig Tijdzone</string>
     <string name="cancel_button">Annuleer</string>
     <string name="auto_timezone_not_enabled">Het apparaat is niet ingesteld op automatische tijdzone. Om transacties uit

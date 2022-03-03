@@ -10,7 +10,6 @@ import com.cm.payplaza.ecr_sdk_integration.entity.SDKError
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionError
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionResponse
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
-import java.math.BigDecimal
 
 class TotalsCallbackImpl(
     private val localDataRepository: LocalDataRepository,
@@ -18,7 +17,7 @@ class TotalsCallbackImpl(
 ): ReceiptCallback {
     override fun onCrash() {
         val errorStr = SDKError.map.getOrDefault(-1, "Error")
-        val transactionError = TransactionError(errorStr, BigDecimal(0))
+        val transactionError = TransactionError(errorStr, -1)
         localDataRepository.clearTransactionData()
         localDataRepository.setTransactionError(transactionError)
         integrationSDKCallback.returnResponse(SDKResponse.ON_CRASH)
@@ -26,9 +25,12 @@ class TotalsCallbackImpl(
 
     override fun onError(error: ErrorCode) {
         val errorStr = SDKError.map.getOrDefault(error.value, "Error")
-        val transactionError = TransactionError(errorStr, BigDecimal(0))
+        val transactionError = TransactionError(errorStr, -1)
         localDataRepository.clearTransactionData()
         localDataRepository.setTransactionError(transactionError)
+        if(ErrorCode.getByValue(error.value) == ErrorCode.AUTO_TIMEZONE_NOT_ENABLED) {
+            localDataRepository.setTimezoneEnabled(false)
+        }
         integrationSDKCallback.returnResponse(SDKResponse.ON_ERROR)
     }
 

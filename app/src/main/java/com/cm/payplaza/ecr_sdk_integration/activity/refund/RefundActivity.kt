@@ -22,8 +22,7 @@ import timber.log.Timber
 
 class RefundActivity: BaseEcrFragmentActivity<
         RefundViewModel,
-        ActivityRefundBinding>(),
-    BaseEcrDialog.ActionListener {
+        ActivityRefundBinding>() {
     override val viewModel: RefundViewModel by viewModel()
 
     override fun render(state: BaseEcrViewState) {
@@ -153,13 +152,14 @@ class RefundActivity: BaseEcrFragmentActivity<
 
     private fun showCancelDialog() {
         Timber.d("showCancelDialog")
-        CancelDialog(this).show(this.supportFragmentManager,"")
+        val currentContext = this.applicationContext
+        val listener = object : BaseEcrDialog.ActionListener {
+            override fun onOkPressed() {
+                Timber.d("onOkPressed")
+                EcrRouter.goToPaymentActivity(currentContext)
+            }
+            override fun onCancelPressed() = Timber.d("onCancelPressed")
+        }
+        CancelDialog(listener).show(this.supportFragmentManager,"")
     }
-
-    override fun onOkPressed() {
-        Timber.d("onOkPressed")
-        EcrRouter.goToPaymentActivity(this)
-    }
-
-    override fun onCancelPressed() = Timber.d("onCancelPressed")
 }

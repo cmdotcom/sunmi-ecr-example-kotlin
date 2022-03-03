@@ -11,7 +11,6 @@ import com.cm.payplaza.ecr_sdk_integration.entity.TransactionError
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionResponse
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
 import timber.log.Timber
-import java.math.BigDecimal
 
 class DoTransactionCallbackImpl(
     private val localDataRepository: LocalDataRepository,
@@ -35,10 +34,13 @@ class DoTransactionCallbackImpl(
         val transactionData = localDataRepository.getTransaction()
         transactionData?.let {
             val errorStr = SDKError.map.getOrDefault(error.value, "Error")
-            val transactionError = TransactionError(errorStr, transactionData.amount)
+            val transactionError = TransactionError(errorStr, error.value)
             localDataRepository.clearTransactionData()
             localDataRepository.setTransactionError(transactionError)
             Timber.e("onError - $error")
+        }
+        if(ErrorCode.getByValue(error.value) == ErrorCode.AUTO_TIMEZONE_NOT_ENABLED) {
+            localDataRepository.setTimezoneEnabled(false)
         }
         integrationSDKCallback.returnResponse(SDKResponse.ON_ERROR)
     }
@@ -90,8 +92,8 @@ class DoTransactionCallbackImpl(
 
     private fun setUpErrorResult(data: TransactionResultData) {
         val desc = data.transactionResult.description
-        val amount = data.amount ?: run { BigDecimal(0) }
-        val transactionError = TransactionError(desc, amount)
+        val transactionError = TransactionError(desc, ErrorCode.NO_ERROR.value)
+
         Timber.d("TransactionError - $desc")
         localDataRepository.clearTransactionData()
         localDataRepository.setTransactionError(transactionError)

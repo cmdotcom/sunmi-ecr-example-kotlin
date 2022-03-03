@@ -39,7 +39,7 @@ val testModule = module {
     factory(named("transactionError")) {
         TransactionError(
             "TestError",
-            BigDecimal(13.42))
+            -1)
     }
 
     factory(named("customerReceiptLines")) {

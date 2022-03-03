@@ -46,7 +46,7 @@
     <string name="error_occurred" translatable="false">Ha ocurrido un error. \nNúmero de serie del dispositivo:
         %1$s\n%2$s
     </string>
-    <string name="enable_button">Habilite la zona horaria automática</string>
+    <string name="enable_button">Por favor, habilite la zona horaria automática</string>
     <string name="change_button">Cambie la zona horaria del dispositivo</string>
     <string name="cancel_button">Cancelar</string>
     <string name="auto_timezone_not_enabled">La zona horaria automática no está habilitada. Por favor, para poder

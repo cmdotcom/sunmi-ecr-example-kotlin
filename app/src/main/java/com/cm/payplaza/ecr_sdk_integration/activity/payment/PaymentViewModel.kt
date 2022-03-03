@@ -2,7 +2,6 @@ package com.cm.payplaza.ecr_sdk_integration.activity.payment
 
 import com.cm.androidposintegration.enums.TransactionType
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivityViewModel
-import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.entity.Transaction
 import timber.log.Timber
 import java.util.*
@@ -19,5 +18,12 @@ class PaymentViewModel: BaseEcrFragmentActivityViewModel() {
         val transactionData = Transaction(amount, currency, TransactionType.PURCHASE, null, null)
         localDataRepository.setTransaction(transactionData)
         updateView(PaymentViewState.GoToTransactionResult)
+    }
+
+    fun checkAutoTimezone() {
+        if(!localDataRepository.isTimezoneEnabled()) {
+            localDataRepository.setTimezoneEnabled(true)
+            updateView(PaymentViewState.EnableAutoTimezone)
+        }
     }
 }

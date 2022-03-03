@@ -1,6 +1,9 @@
 package com.cm.payplaza.ecr_sdk_integration.activity.payment
 
+import android.content.Intent
+import android.provider.Settings
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -9,6 +12,8 @@ import com.cm.payplaza.ecr_sdk_integration.activity.base.BaseEcrViewState
 import com.cm.payplaza.ecr_sdk_integration.activity.base.EcrRouter
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivity
 import com.cm.payplaza.ecr_sdk_integration.databinding.ActivityPaymentBinding
+import com.cm.payplaza.ecr_sdk_integration.dialog.BaseEcrDialog
+import com.cm.payplaza.ecr_sdk_integration.dialog.EnableAutoTimezoneDialog
 import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.amountInsert.AmountInsertFragmentState
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
@@ -27,7 +32,9 @@ class PaymentActivity: BaseEcrFragmentActivity<
             is BaseEcrViewState.RequestInfo -> {
                 if(dataLoaded) { setUpVersions(state.terminalData) }
                 else { setUpTerminalData(state.terminalData) }
+                checkForAutoTimezone()
             }
+            PaymentViewState.EnableAutoTimezone -> askForEnableAutoTimezone()
             PaymentViewState.GoToTransactionResult -> EcrRouter.goToTransactionResultActivity(this)
         }
         super.render(state)
@@ -128,5 +135,26 @@ class PaymentActivity: BaseEcrFragmentActivity<
     private fun goToAmountInsertFragment() {
         Timber.d("goToAmountInsertFragment")
         navController.navigate(R.id.action_loaderFragment3_to_amountInsertFragment)
+    }
+
+    private fun askForEnableAutoTimezone() {
+        val currentContext = applicationContext
+        val listener = object : BaseEcrDialog.ActionListener {
+            override fun onOkPressed() = goToDataAndTimeSettings()
+            override fun onCancelPressed() {
+                Toast.makeText(currentContext, R.string.enable_button, Toast.LENGTH_LONG).show()
+                finish()
+            }
+        }
+        EnableAutoTimezoneDialog(listener).show(this.supportFragmentManager,"")
+    }
+
+    private fun goToDataAndTimeSettings() {
+        val intent = Intent(Settings.ACTION_DATE_SETTINGS)
+        startActivity(intent)
+    }
+
+    private fun checkForAutoTimezone() {
+        viewModel.checkAutoTimezone()
     }
 }

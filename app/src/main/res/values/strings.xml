@@ -43,7 +43,7 @@
     number: %1$s\nError code: %2$d</string>
     <string name="configuration_error">Fatal error</string>
     <string name="error_occurred">An error has occurred. \nDevice serial number: %1$s\n%2$s</string>
-    <string name="enable_button">Enable Auto Timezone</string>
+    <string name="enable_button">Please, enable Auto-Timezone</string>
     <string name="change_button">Change Timezone</string>
     <string name="cancel_button">Cancel</string>
     <string name="auto_timezone_not_enabled">Auto timezone is not enabled. Please, in order to perform transactions,

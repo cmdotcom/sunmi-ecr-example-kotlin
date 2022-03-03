@@ -7,7 +7,6 @@ import com.cm.androidposintegration.service.callback.beans.TransactionStatusesDa
 import com.cm.androidposintegration.service.callback.json.TransactionStatusData
 import com.cm.payplaza.ecr_sdk_integration.utils.FormatUtils
 import java.math.BigDecimal
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 
@@ -21,7 +20,7 @@ data class Transaction(
 ): Entity()
 data class TransactionError(
     val desc: String,
-    val value: BigDecimal
+    val value: Int
 ): Entity()
 data class Receipt(
     val receiptLines: Array<String>?,

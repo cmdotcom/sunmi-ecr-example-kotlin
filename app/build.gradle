@@ -12,7 +12,7 @@ android {
         minSdk 25
         targetSdk 29
         versionCode 1
-        versionName "2.0.0"
+        versionName "2.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders.launcherTheme = "@style/Base.Launcher"
         manifestPlaceholders.appIcon = "@mipmap/ic_launcher"
@@ -88,7 +88,8 @@ dependencies {
     implementation "io.insert-koin:koin-android:$rootProject.ext.koin_android"
 
     // Integration SDK for sunmi
-    implementation "com.github.cmdotcom.android-pos-integration-sdk-kotlin:androidposintegrationsdk-debug:$android_pos_integration"
+    debugImplementation "com.github.cmdotcom.android-pos-integration-sdk-kotlin:androidposintegrationsdk-debug:$android_pos_integration"
+    releaseImplementation "com.github.cmdotcom.android-pos-integration-sdk-kotlin:androidposintegrationsdk:$android_pos_integration"
 
     // Gif's
     implementation "pl.droidsonroids.gif:android-gif-drawable:$rootProject.ext.gif"

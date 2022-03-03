@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.databinding.FragmentReceiptViewBinding
-import com.cm.payplaza.ecr_sdk_integration.dialog.BaseEcrDialog
 import com.cm.payplaza.ecr_sdk_integration.entity.Receipt
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragment
 import org.koin.android.ext.android.inject
@@ -15,8 +14,7 @@ import timber.log.Timber
 
 class ReceiptViewFragment : BaseEcrFragment<ReceiptViewFragmentState,
         ReceiptViewFragmentViewModel,
-        FragmentReceiptViewBinding>(),
-    BaseEcrDialog.ActionListener {
+        FragmentReceiptViewBinding>() {
     override val viewModel: ReceiptViewFragmentViewModel by inject()
 
     override fun getViewBinding(
@@ -84,7 +82,4 @@ class ReceiptViewFragment : BaseEcrFragment<ReceiptViewFragmentState,
         binding.receiptViewResultIcon.background = AppCompatResources.getDrawable(activity as Context, R.drawable.icon_background_error)
         binding.receiptViewResultIcon.setImageResource(R.drawable.icon_exclamation_mark)
     }
-
-    override fun onOkPressed() { }
-    override fun onCancelPressed() { }
 }

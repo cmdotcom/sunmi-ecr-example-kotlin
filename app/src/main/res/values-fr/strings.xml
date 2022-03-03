@@ -45,7 +45,7 @@
     </string>
     <string name="configuration_error">Erreur fatale</string>
     <string name="error_occurred" translatable="false">Une erreur s\'est produite. \nNuméro de série de l\'appareil: %1$s\n%2$s </string>
-    <string name="enable_button">Sélectionner le fuseau horaire automatique</string>
+    <string name="enable_button">S\'il vous plaît, sélectionner le fuseau horaire automatique</string>
     <string name="change_button">Changer le fuseau horaire</string>
     <string name="cancel_button">Annuler</string>
     <string name="auto_timezone_not_enabled">L\'appareil n\'est pas réglé sur le fuseau horaire automatique. Pour effectuer des transactions, cliquez sur activer pour ouvrir les paramètres et définir le fuseau horaire automatique.</string>

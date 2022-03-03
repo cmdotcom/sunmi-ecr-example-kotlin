@@ -9,6 +9,7 @@ class SDKError {
             -17 to "Printer initialization failed",
             -18 to "Device is not configured in gateway",
             -24 to "Timezone on the device is not correct",
+            -23 to "Auto timezone is not enabled",
             -25 to "Cannot connect with the gateway",
             -30 to "Timeout reaching the gateway",
             -31 to "Transaction already in progress",

@@ -17,6 +17,9 @@ class TerminalInfoCallbackImpl(
     }
 
     override fun onError(error: ErrorCode) {
+        if(ErrorCode.getByValue(error.value) == ErrorCode.AUTO_TIMEZONE_NOT_ENABLED) {
+            localDataRepository.setTimezoneEnabled(false)
+        }
         integrationSDKCallback.returnResponse(SDKResponse.ON_ERROR)
     }
 

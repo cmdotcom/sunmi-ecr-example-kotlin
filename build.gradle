@@ -22,7 +22,7 @@ ext {
     koin_android = '3.1.3'
 
     // Integration SDK
-    android_pos_integration = '1.0.0'
+    android_pos_integration = '1.0.1'
 
     // Gif's
     gif = '1.2.23'

@@ -46,7 +46,7 @@
     <string name="configuration_error">nicht behebbarer Fehler</string>
     <string name="error_occurred" translatable="false">Ein Fehler ist aufgetreten. \nGarät seriennummer: %1$s\n%2$s
     </string>
-    <string name="enable_button">Stellen Sie die automatische Zeitzone ein</string>
+    <string name="enable_button">Bitte, stellen Sie die automatische Zeitzone ein</string>
     <string name="change_button">Zeitzone ändern</string>
     <string name="cancel_button">Stornieren</string>
     <string name="auto_timezone_not_enabled">Das Gerät ist nicht auf automatische Zeitzone eingestellt. Klicken Sie zum
