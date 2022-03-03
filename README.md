@@ -1,12 +1,29 @@
 ## PayPlaza ECR app 2.0
 
-Version 2.0.0
+Version 2.0.1
 
 The ECR application handles the merchant UI, QR-payments, and transaction result user guidance. The application is designated for Sunmi Android platform, but will work on other Android device and in the Android Emulator as well.
 
 # Release notes
 
 Release 2.0.0 includes a basic implementation of the [integration SDK](https://github.com/cmdotcom/android-pos-integration-sdk-kotlin) as an example.
+
+### Compatibility table
+
+| ECR   | SDK   | Terminal |
+| ----- | ----- | -------- |
+| 2.0.1 | 1.0.1 | 1.1.1    |
+| 2.0.0 | 1.0.0 | 1.1.1    |
+
+### Versions
+
+#### 2.0.1
+
+- Handles AUTO_TIMEZONE_NOT_ENABLED error
+
+#### 2.0.0
+
+Includes a basic implementation of the [SDK integration](https://gitlab.com/payplaza/pos-gateway/sunmi/integration-sdk).
 
 # Getting started
 
