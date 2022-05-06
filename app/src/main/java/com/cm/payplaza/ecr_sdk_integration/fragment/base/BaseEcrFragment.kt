@@ -40,19 +40,21 @@ abstract class BaseEcrFragment<
 
     override fun onAttach(context: Context) {
         Timber.d("onAttach")
-        if(context is BaseEcrFragmentActivity<*,*>) {
+        if(context is BaseEcrFragmentActivity<*>) {
             context.onAttachedFragment(this)
         }
         super.onAttach(context)
     }
+
     protected open fun init() {
-        viewModel.state.observe(viewLifecycleOwner, {
-            if(it is FVS) {
+        viewModel.state.observe(viewLifecycleOwner) {
+            if (it is FVS) {
                 render(it)
             }
-        })
+        }
         viewModel.init()
     }
+
     abstract val viewModel: FVM
     abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
     abstract fun render(state: FVS)

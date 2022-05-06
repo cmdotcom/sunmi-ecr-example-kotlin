@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/finish_preauth_graph"
+    app:startDestination="@id/amountInsertFragment4">
+
+    <fragment
+        android:id="@+id/amountInsertFragment4"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.amountInsert.AmountInsertFragment"
+        android:label="AmountInsertFragment" >
+        <action
+            android:id="@+id/action_amountInsertFragment4_to_stanInsertFragment2"
+            app:destination="@id/stanInsertFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/stanInsertFragment2"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.stanInsert.StanInsertFragment"
+        android:label="StanInsertFragment" >
+        <action
+            android:id="@+id/action_stanInsertFragment2_to_dateInsertFragment2"
+            app:destination="@id/dateInsertFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/dateInsertFragment2"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.dateInsert.DateInsertFragment"
+        android:label="DateInsertFragment" >
+        <action
+            android:id="@+id/action_dateInsertFragment2_to_loaderFragment5"
+            app:destination="@id/loaderFragment5" />
+    </fragment>
+    <fragment
+        android:id="@+id/loaderFragment5"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.loader.LoaderFragment"
+        android:label="LoaderFragment" >
+        <action
+            android:id="@+id/action_loaderFragment5_to_receiptViewFragment4"
+            app:destination="@id/receiptViewFragment4" />
+        <action
+            android:id="@+id/action_loaderFragment5_to_errorFragment4"
+            app:destination="@id/errorFragment4" />
+    </fragment>
+    <fragment
+        android:id="@+id/receiptViewFragment4"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewFragment"
+        android:label="ReceiptViewFragment" />
+    <fragment
+        android:id="@+id/errorFragment4"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragment"
+        android:label="ErrorFragment" />
+</navigation>

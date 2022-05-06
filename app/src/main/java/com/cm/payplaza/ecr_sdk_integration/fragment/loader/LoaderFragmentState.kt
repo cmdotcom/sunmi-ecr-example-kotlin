@@ -1,7 +1,7 @@
 package com.cm.payplaza.ecr_sdk_integration.fragment.loader
 
-import com.cm.androidposintegration.enums.TransactionType
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
+import com.cm.androidposintegration.enums.TransactionType
 import java.math.BigDecimal
 
 sealed class LoaderFragmentState: BaseEcrFragmentViewState() {

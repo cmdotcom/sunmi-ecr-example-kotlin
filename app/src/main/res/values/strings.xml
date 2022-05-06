@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Navigation drawer texts -->
+    <string name="drawer_default_company_name" translatable="false">Payplaza</string>
     <string name="payment">Payment</string>
     <string name="day_totals">Day totals</string>
     <string name="financial_totals">Financial totals</string>
@@ -10,8 +11,13 @@
     <string name="update_parameters">Update parameters</string>
     <string name="software_version">SW Version: %1$s</string>
     <string name="device_serial_number">Device S/N: %1$s</string>
+    <string name="payplaza_software_version">Payplaza SW version: %1$s</string>
     <string name="statuses">Statuses</string>
-    <string name="request_info">Request info</string>
+    <string name="request_info">Download parameters</string>
+    <string name="preauth">Pre authorization</string>
+    <string name="preauth_item_start">Start</string>
+    <string name="preauth_item_cancel">Cancel</string>
+    <string name="preauth_item_confirm">Confirm</string>
 
     <!-- Amount/tip entry screen texts -->
     <string name="enter_amount">Enter amount</string>
@@ -42,12 +48,9 @@
     the network and try updating parameters. If the problem persists contact your service provider.\nDevice serial
     number: %1$s\nError code: %2$d</string>
     <string name="configuration_error">Fatal error</string>
-    <string name="error_occurred">An error has occurred. \nDevice serial number: %1$s\n%2$s</string>
     <string name="enable_button">Please, enable Auto-Timezone</string>
     <string name="change_button">Change Timezone</string>
     <string name="cancel_button">Cancel</string>
-    <string name="auto_timezone_not_enabled">Auto timezone is not enabled. Please, in order to perform transactions,
-    click enable to open settings and enable auto timezone. Make sure that your timezone is correctly set</string>
     <string name="incorrect_timezone">Incorrect timezone in the device. Please, in order to perform transactions, click
     change to open settings and set the correct timezone</string>
 
@@ -112,7 +115,7 @@
     <string name="no_network">Network is not connected</string>
     <string name="ok">OK</string>
     <string name="cancel_payment">Cancel Payment</string>
-    <string name="configuration_version">Configuration version</string>
+        <string name="configuration_version">Configuration version</string>
     <string name="invalid_date">Invalid date</string>
     <string name="date_hint">dd/mm/yy</string>
     <string name="password_error">Invalid password. Please, try again</string>
@@ -146,6 +149,10 @@
     <!-- Error fragment -->
     <string name="return_vending_machine">Please return vending machine</string>
     <string name="bottom_button">Continue</string>
+    <string name="error_auto_timezone_not_enabled">Auto timezone is not enabled</string>
+    <string name="error_low_battery">Battery low</string>
+    <string name="error_low_battery_connect_device">Please connect the device to a power source</string>
+    <string name="error_occurred">An error has occurred</string>
 
     <!-- Loader fragment -->
     <string name="loading_header">Loading</string>
@@ -174,6 +181,7 @@
     <string name="bookmark_page">Page %d</string>
     <string name="bookmark_date">Date</string>
     <string name="bookmark_totals">Totals</string>
+    <string name="bookmark_preauth">Pre-auth</string>
 
     <!-- Pinpad button labels -->
     <string name="pinpad_cancel">Cancel</string>

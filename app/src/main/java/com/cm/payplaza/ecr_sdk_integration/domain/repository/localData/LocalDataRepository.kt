@@ -22,7 +22,4 @@ interface LocalDataRepository {
 
     fun getStatusesData(): StatusesData?
     fun setStatusesData(statusesData: StatusesData)
-
-    fun setTimezoneEnabled(isEnabled: Boolean)
-    fun isTimezoneEnabled(): Boolean
 }

@@ -10,8 +10,13 @@
     <string name="update_parameters">Actualizar parámetros</string>
     <string name="software_version">Versión del SW: %1$s</string>
     <string name="device_serial_number">Número de serie: %1$s</string>
+    <string name="payplaza_software_version">Version Payplaza SW: %1$s</string>
     <string name="statuses">Statuses</string>
-    <string name="request_info">Obtener información</string>
+    <string name="request_info">Descargar parámetros</string>
+    <string name="preauth">Autorización previa</string>
+    <string name="preauth_item_start">Iniciar</string>
+    <string name="preauth_item_cancel">Cancelar</string>
+    <string name="preauth_item_confirm">Confirmar</string>
 
     <!-- Amount/tip entry screen texts -->
     <string name="enter_amount">Introduzca importe</string>
@@ -43,16 +48,9 @@
         persiste, contacte con su proveedor de servicio.\nNúmero de serie del dispositivo: %1$s\nCódigo de error: %2$d
     </string>
     <string name="configuration_error">Error fatal</string>
-    <string name="error_occurred" translatable="false">Ha ocurrido un error. \nNúmero de serie del dispositivo:
-        %1$s\n%2$s
-    </string>
     <string name="enable_button">Por favor, habilite la zona horaria automática</string>
     <string name="change_button">Cambie la zona horaria del dispositivo</string>
     <string name="cancel_button">Cancelar</string>
-    <string name="auto_timezone_not_enabled">La zona horaria automática no está habilitada. Por favor, para poder
-        realizar transacciones, haga click en el botón habilitar para abrir ajustes del dispositivo y habilitar la zona
-        horaria automática. Asegúrese de que la zona horaria en el dispositivo es correcta
-    </string>
     <string name="incorrect_timezone">Zona horaria del dispositivo incorrecta. Por favor, para poder realizar
         transacciones, haga click en el botón cambiar para abrir los ajustes del dispositivo y configurar la zona
         horaria del dispositivo correctamente
@@ -70,7 +68,7 @@
     <!-- On-screen receipt screen texts -->
     <string name="close">Cerrar</string>
     <string name="print_receipt">Imprimir</string>
-    <string name="ok">Cerrar</string>
+    <string name="ok">OK</string>
     <string name="do_not_print_receipt">No imprimir recibo</string>
     <string name="acknowledge">Entendido</string>
 
@@ -156,8 +154,12 @@
     <string name="component_keypad_key_confirm">confirmar</string>
 
     <!-- Error fragment -->
-    <string name="return_vending_machine">Por favor\n devuelva el terminal al comerciante</string>
+    <string name="return_vending_machine">Por favor devuelva el terminal al comerciante</string>
     <string name="bottom_button">Continuar</string>
+    <string name="error_auto_timezone_not_enabled">La zona horaria automática no está habilitada</string>
+    <string name="error_low_battery">Nivel de batería bajo</string>
+    <string name="error_low_battery_connect_device">Conecte el dispositivo a una fuente de alimentación</string>
+    <string name="error_occurred" translatable="false">Ha ocurrido un error</string>
 
     <!-- Loader fragment -->
     <string name="loading_header">Cargando</string>
@@ -181,11 +183,12 @@
     <string name="bookmark_card_transaction">Transacción con tarjeta</string>
     <string name="bookmark_other_transaction">Procesando</string>
     <string name="bookmark_result">Resultado</string>
-    <string name="bookmark_receipt">Recibo de compra</string>
+    <string name="bookmark_receipt">Recibo</string>
     <string name="bookmark_overflow">"Bookmark seleccionado %d es mayor que el número de bookmarks permitido %d"</string>
     <string name="bookmark_zero">El bookmark seleccionado %d es menor que 1"</string>
     <string name="bookmark_totals">Totales</string>
     <string name="bookmark_date">Fecha</string>
+    <string name="bookmark_preauth">Pre-aut.</string>
 
     <!-- Pinpad button labels -->
     <string name="pinpad_cancel">Cancelar</string>

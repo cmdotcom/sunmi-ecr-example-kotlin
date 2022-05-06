@@ -3,11 +3,11 @@ package com.cm.payplaza.ecr_sdk_integration.fragment.statuses
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cm.androidposintegration.enums.TransactionResult
 import com.cm.payplaza.ecr_sdk_integration.databinding.FragmentStatusesBinding
 import com.cm.payplaza.ecr_sdk_integration.entity.StatusData
 import com.cm.payplaza.ecr_sdk_integration.entity.StatusesData
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragment
+import com.cm.androidposintegration.enums.TransactionResult
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 

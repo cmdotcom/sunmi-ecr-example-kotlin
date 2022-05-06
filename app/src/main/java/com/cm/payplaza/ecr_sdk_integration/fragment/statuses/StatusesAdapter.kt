@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.cm.androidposintegration.enums.TransactionResult
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.databinding.RowStatusesBinding
 import com.cm.payplaza.ecr_sdk_integration.entity.StatusData
+import com.cm.androidposintegration.enums.TransactionResult
 
 class StatusesAdapter(
     private val data: List<StatusData>,

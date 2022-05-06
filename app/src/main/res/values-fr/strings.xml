@@ -11,8 +11,13 @@
     <string name="update_parameters">Réviser les paramètres</string>
     <string name="software_version">Version de logiciel: %1$s</string>
     <string name="device_serial_number">NS de l\'appareil: %1$s</string>
+    <string name="payplaza_software_version">Version SW de Payplaza: %1$s</string>
     <string name="statuses">Statuts</string>
-    <string name="request_info">Demande d\'informations</string>
+    <string name="request_info">Télécharger les paramètres</string>
+    <string name="preauth">Pré-autorisation</string>
+    <string name="preauth_item_start">Début</string>
+    <string name="preauth_item_cancel">Annuler</string>
+    <string name="preauth_item_confirm">Confirmer</string>
 
     <!-- Amount/tip entry screen texts -->
     <string name="enter_amount">Entrer le montant</string>
@@ -44,11 +49,9 @@
         contacter votre fournisseur de services.\nNuméro de série de l\'appareil: %1$s\nCode d\'erreur: %2$d
     </string>
     <string name="configuration_error">Erreur fatale</string>
-    <string name="error_occurred" translatable="false">Une erreur s\'est produite. \nNuméro de série de l\'appareil: %1$s\n%2$s </string>
     <string name="enable_button">S\'il vous plaît, sélectionner le fuseau horaire automatique</string>
     <string name="change_button">Changer le fuseau horaire</string>
     <string name="cancel_button">Annuler</string>
-    <string name="auto_timezone_not_enabled">L\'appareil n\'est pas réglé sur le fuseau horaire automatique. Pour effectuer des transactions, cliquez sur activer pour ouvrir les paramètres et définir le fuseau horaire automatique.</string>
     <string name="incorrect_timezone">L\'appareil est défini sur un fuseau horaire incorrect. Pour effectuer des transactions, cliquez sur «modifier» pour ouvrir les paramètres et définir le bon fuseau horaire</string>
 
     <!-- Electronic signature screen texts -->
@@ -146,6 +149,10 @@
     <!-- Error fragment -->
     <string name="return_vending_machine">Veuillez retourner le distributeur automatique</string>
     <string name="bottom_button">Continuer</string>
+    <string name="error_auto_timezone_not_enabled">Le fuseau horaire automatique n\'est pas activé</string>
+    <string name="error_low_battery">Batterie faible</string>
+    <string name="error_low_battery_connect_device">Veuillez connecter l\'appareil à une source d\'alimentation</string>
+    <string name="error_occurred">Une erreur s\'est produite</string>
 
     <!-- Loader fragment -->
     <string name="loading_header">Chargement</string>
@@ -174,6 +181,7 @@
     <string name="bookmark_page">Page %d</string>
     <string name="bookmark_date">Data</string>
     <string name="bookmark_totals">Totaux</string>
+    <string name="bookmark_preauth">Pré-aut.</string>
 
     <!-- Pinpad button labels -->
     <string name="pinpad_cancel">Annuler</string>

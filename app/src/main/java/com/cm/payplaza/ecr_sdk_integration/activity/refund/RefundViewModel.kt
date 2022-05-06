@@ -1,12 +1,17 @@
 package com.cm.payplaza.ecr_sdk_integration.activity.refund
 
-import com.cm.androidposintegration.enums.TransactionType
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivityViewModel
 import com.cm.payplaza.ecr_sdk_integration.entity.Transaction
+import com.cm.androidposintegration.enums.TransactionType
+import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
+import org.koin.core.component.inject
 import timber.log.Timber
 import java.util.*
 
 class RefundViewModel: BaseEcrFragmentActivityViewModel() {
+
+    private val localDataRepository: LocalDataRepository by inject()
+
     private var _refundAmount = 0
     private var _refundStan: String? = null
     private var _date: Date? = null

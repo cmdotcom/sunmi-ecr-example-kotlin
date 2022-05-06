@@ -8,10 +8,12 @@ import java.util.*
 class AmountViewComponentViewModel(
         private val localDataRepository: LocalDataRepository
 ): BaseEcrComponentViewModel<AmountViewComponentViewState>() {
+    private var _currencyExponent = 0
+
     override fun init() = updateView(AmountViewComponentViewState.Init)
 
     fun formatAmount(newInsertedDigits: Int) {
-        val formattedAmount = FormatUtils.formatAmount(newInsertedDigits)
+        val formattedAmount = FormatUtils.formatAmount(newInsertedDigits, _currencyExponent)
         updateView(AmountViewComponentViewState.UpdateInsertedDigits(formattedAmount))
     }
 
@@ -26,5 +28,11 @@ class AmountViewComponentViewModel(
         updateView(AmountViewComponentViewState.UpdateInsertedDigits(formattedDate))
     }
 
-    fun setUpCurrency() = updateView(AmountViewComponentViewState.SetUpCurrency(localDataRepository.getTerminalData()))
+    fun setUpCurrency() {
+        val terminalData = localDataRepository.getTerminalData()
+        terminalData?.currency?.let {
+            _currencyExponent = it.defaultFractionDigits
+        }
+        updateView(AmountViewComponentViewState.SetUpCurrency(localDataRepository.getTerminalData()))
+    }
 }

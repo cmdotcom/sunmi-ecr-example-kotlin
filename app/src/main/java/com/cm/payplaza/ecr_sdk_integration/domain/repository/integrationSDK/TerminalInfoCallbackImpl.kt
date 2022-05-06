@@ -1,11 +1,11 @@
 package com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK
 
-import com.cm.androidposintegration.service.callback.TerminalInfoCallback
-import com.cm.androidposintegration.service.callback.beans.ErrorCode
-import com.cm.androidposintegration.service.callback.beans.TerminalInfoData
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
+import com.cm.androidposintegration.service.callback.TerminalInfoCallback
+import com.cm.androidposintegration.service.callback.beans.ErrorCode
+import com.cm.androidposintegration.service.callback.beans.TerminalInfoData
 import timber.log.Timber
 
 class TerminalInfoCallbackImpl(
@@ -17,9 +17,6 @@ class TerminalInfoCallbackImpl(
     }
 
     override fun onError(error: ErrorCode) {
-        if(ErrorCode.getByValue(error.value) == ErrorCode.AUTO_TIMEZONE_NOT_ENABLED) {
-            localDataRepository.setTimezoneEnabled(false)
-        }
         integrationSDKCallback.returnResponse(SDKResponse.ON_ERROR)
     }
 

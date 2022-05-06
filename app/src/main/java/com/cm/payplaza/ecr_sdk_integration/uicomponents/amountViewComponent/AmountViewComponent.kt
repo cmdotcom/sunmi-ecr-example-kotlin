@@ -46,7 +46,8 @@ class AmountViewComponent: BaseEcrComponment<AmountViewComponentViewState, Amoun
     private fun setUpCurrency(terminalData: TerminalData?) {
         terminalData?.let {
             terminalData.currency?.let {
-                binding.amountViewCurrency.text = terminalData.currency.symbol
+                binding.amountViewCurrency.text = it.symbol
+                binding.amountViewAmount.text = getAmountPlaceHolder(it)
             }
         }
     }
@@ -106,5 +107,18 @@ class AmountViewComponent: BaseEcrComponment<AmountViewComponentViewState, Amoun
     private fun addPinToken() {
         val text = binding.amountViewAmount.text
         "$text*".also { binding.amountViewAmount.text = it }
+    }
+
+    private fun getAmountPlaceHolder(currency: Currency): String {
+        var placeHolder = "0"
+
+        if(currency.defaultFractionDigits > 0) {
+            placeHolder = "0."
+        }
+        for(i in 0 until currency.defaultFractionDigits) {
+            placeHolder += "0"
+        }
+
+        return placeHolder
     }
 }

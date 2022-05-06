@@ -1,21 +1,20 @@
 package com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK
 
-import com.cm.androidposintegration.enums.TransactionResult
-import com.cm.androidposintegration.service.callback.TransactionCallback
-import com.cm.androidposintegration.service.callback.beans.ErrorCode
-import com.cm.androidposintegration.service.callback.beans.TransactionResultData
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import com.cm.payplaza.ecr_sdk_integration.entity.Receipt
 import com.cm.payplaza.ecr_sdk_integration.entity.SDKError
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionError
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionResponse
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
+import com.cm.androidposintegration.enums.TransactionResult
+import com.cm.androidposintegration.service.callback.TransactionCallback
+import com.cm.androidposintegration.service.callback.beans.ErrorCode
+import com.cm.androidposintegration.service.callback.beans.TransactionResultData
 import timber.log.Timber
 
 class DoTransactionCallbackImpl(
     private val localDataRepository: LocalDataRepository,
-    private val integrationSDKCallback: IntegrationSDKManager.IntegrationSDKCallback):
-    TransactionCallback {
+    private val integrationSDKCallback: IntegrationSDKManager.IntegrationSDKCallback): TransactionCallback {
     override fun onCrash() {
         val orderReference = localDataRepository.getOrderReference().toString()
         val transactionResponse = TransactionResponse(
@@ -39,18 +38,19 @@ class DoTransactionCallbackImpl(
             localDataRepository.setTransactionError(transactionError)
             Timber.e("onError - $error")
         }
-        if(ErrorCode.getByValue(error.value) == ErrorCode.AUTO_TIMEZONE_NOT_ENABLED) {
-            localDataRepository.setTimezoneEnabled(false)
-        }
         integrationSDKCallback.returnResponse(SDKResponse.ON_ERROR)
     }
 
     override fun onResult(data: TransactionResultData) {
         when(data.transactionResult) {
-            TransactionResult.SUCCESS,
-            TransactionResult.CANCELED -> setUpOkTransactionResult(data)
             TransactionResult.REQUEST_RECEIPT -> setUpRequestReceiptResult(data)
-            else -> setUpTransactionError(data)
+            else -> {
+                data.merchantReceipt?.let {
+                    setUpOkTransactionResult(data)
+                } ?: run {
+                    setUpTransactionError(data)
+                }
+            }
         }
     }
 

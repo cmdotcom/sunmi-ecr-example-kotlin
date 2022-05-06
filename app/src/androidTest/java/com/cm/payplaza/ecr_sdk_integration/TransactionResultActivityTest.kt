@@ -1,9 +1,9 @@
 package com.cm.payplaza.ecr_sdk_integration
 
-import android.view.WindowManager
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingPolicies
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -20,6 +20,7 @@ import org.junit.runner.RunWith
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class TransactionResultActivityTest: KoinComponent {
@@ -31,6 +32,8 @@ class TransactionResultActivityTest: KoinComponent {
 
     @Before
     fun initData() {
+        IdlingPolicies.setMasterPolicyTimeout(3, TimeUnit.MINUTES)
+        IdlingPolicies.setIdlingResourceTimeout(3, TimeUnit.MINUTES)
         localDataRepository.setTransaction(purchaseTransaction)
         localDataRepository.setTransactionError(transactionError)
         localDataRepository.setTransactionResponse(transactionResultSuccess)
@@ -44,14 +47,6 @@ class TransactionResultActivityTest: KoinComponent {
     @Test
     fun showReceiptFragment() {
         fragmentScenario = launchFragmentInContainer()
-        fragmentScenario.onFragment {
-            it.activity?.let { a ->
-                val window = a.window
-                window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD)
-                window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
-                window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
-            }
-        }
         onView(withId(R.id.receipt_view_close_button)).check(matches(isDisplayed()))
         onView(withId(R.id.receipt_view_close_button)).check(matches(isClickable()))
         onView(withId(R.id.receipt_view_button_print)).check(matches(isClickable()))

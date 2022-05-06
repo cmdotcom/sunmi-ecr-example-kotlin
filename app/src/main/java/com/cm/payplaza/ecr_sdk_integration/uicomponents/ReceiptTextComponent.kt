@@ -42,6 +42,12 @@ class ReceiptTextComponent: LinearLayoutCompat {
                 linesAfterSignature.forEach { line -> str.appendLine(line) }
                 binding.textviewReceiptFooter.visibility = View.VISIBLE
                 binding.textviewReceiptFooter.text = str.toString()
+            } ?: run {
+                val bitmapConfig =  Bitmap.Config.ARGB_8888
+                binding.imageviewSignature.setImageBitmap(Bitmap.createBitmap(1,1,bitmapConfig))
+                binding.imageviewSignature.visibility = View.INVISIBLE
+                binding.textviewReceiptFooter.visibility = View.INVISIBLE
+                binding.textviewReceiptFooter.text = ""
             }
         }
     }

@@ -2,6 +2,8 @@ package com.cm.payplaza.ecr_sdk_integration.koin
 
 import com.cm.payplaza.ecr_sdk_integration.activity.lastReceipt.LastReceiptViewModel
 import com.cm.payplaza.ecr_sdk_integration.activity.payment.PaymentViewModel
+import com.cm.payplaza.ecr_sdk_integration.activity.preauth.finish.FinishPreauthViewModel
+import com.cm.payplaza.ecr_sdk_integration.activity.preauth.start.PreAuthViewModel
 import com.cm.payplaza.ecr_sdk_integration.activity.refund.RefundViewModel
 import com.cm.payplaza.ecr_sdk_integration.activity.statuses.StatusesViewModel
 import com.cm.payplaza.ecr_sdk_integration.activity.totals.TotalsViewModel
@@ -27,6 +29,8 @@ val viewModelModule = module {
     viewModel { LastReceiptViewModel() }
     viewModel { TotalsViewModel() }
     viewModel { StatusesViewModel() }
+    viewModel { PreAuthViewModel() }
+    viewModel { FinishPreauthViewModel() }
 
     // Component view model
     viewModel { AmountViewComponentViewModel(get()) }

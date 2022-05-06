@@ -1,24 +1,21 @@
 package com.cm.payplaza.ecr_sdk_integration.utils
 
-import android.util.Log
-import com.cm.payplaza.ecr_sdk_integration.BuildConfig
 import com.cm.payplaza.ecr_sdk_integration.entity.Receipt
-import java.lang.StringBuilder
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.pow
 
 class FormatUtils {
     companion object {
-        fun formatAmount(amount: Int): String {
-            val doubleAmount: Double = (amount.toDouble()) / 100
-            return "%.2f".format(doubleAmount).replace(",", ".")
+        fun formatAmount(amount: Int, _currencyExponent: Int): String {
+                val doubleAmount: Double = (amount.toDouble()) / 10.0.pow(_currencyExponent.toDouble())
+                return ("%." + _currencyExponent + "f").format(doubleAmount).replace(",", ".")
         }
         fun formatDateForDateView(date: Date): String {
             val formatter = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
             return formatter.format(date)
         }
-        fun getDateFromLines(receiptLines: Array<String>): Date {
+        private fun getDateFromLines(receiptLines: Array<String>): Date {
             val formatter = SimpleDateFormat("dd-MM-yy__HH:mm:ss", Locale.getDefault())
             var date = Date()
             receiptLines.forEach {
@@ -38,7 +35,7 @@ class FormatUtils {
             var date = Date()
 
             receipt.receiptLines?.let {
-                val receiptDate = FormatUtils.getDateFromLines(it)
+                val receiptDate = getDateFromLines(it)
                 date = receiptDate
             }
 

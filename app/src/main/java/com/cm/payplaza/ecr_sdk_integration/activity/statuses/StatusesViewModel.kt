@@ -1,14 +1,19 @@
 package com.cm.payplaza.ecr_sdk_integration.activity.statuses
 
 import androidx.lifecycle.viewModelScope
-import com.cm.androidposintegration.beans.RequestStatusData
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivityViewModel
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK.IntegrationSDKManager
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
+import com.cm.androidposintegration.beans.RequestStatusData
+import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import kotlinx.coroutines.launch
+import org.koin.core.component.inject
 import timber.log.Timber
 
 class StatusesViewModel: BaseEcrFragmentActivityViewModel() {
+
+    private val localDataRepository: LocalDataRepository by inject()
+    private val integrationSDKManager: IntegrationSDKManager by inject()
 
     fun getStatuses() {
         Timber.d("getStatuses")

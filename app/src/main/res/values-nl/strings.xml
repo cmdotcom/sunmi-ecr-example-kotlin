@@ -10,8 +10,13 @@
     <string name="update_parameters">Update parameters</string>
     <string name="software_version">SW Versie: %1$s</string>
     <string name="device_serial_number">Device S/N: %1$s</string>
+    <string name="payplaza_software_version">Payplaza SW versie: %1$s</string>
     <string name="statuses">Status</string>
-    <string name="request_info">Vraag info</string>
+    <string name="request_info">Download parameters</string>
+    <string name="preauth">Pre-autorisatie</string>
+    <string name="preauth_item_start">Start</string>
+    <string name="preauth_item_cancel">Annuleren</string>
+    <string name="preauth_item_confirm">Bevestig</string>
 
     <!-- Amount/tip entry screen texts -->
     <string name="enter_amount">Voer bedrag in</string>
@@ -43,14 +48,9 @@
         dan contact op met uw service provider.\nApparaat serienummer: %1$s\nError code: %2$d
     </string>
     <string name="configuration_error">Onherstelbare fout</string>
-    <string name="error_occurred" translatable="false">Er is een fout opgetreden.\nApparaat serienummer: %1$s\n%2$s
-    </string>
     <string name="enable_button">Alsjeblieft, stel Automatische Tijdzone in</string>
     <string name="change_button">Wijzig Tijdzone</string>
     <string name="cancel_button">Annuleer</string>
-    <string name="auto_timezone_not_enabled">Het apparaat is niet ingesteld op automatische tijdzone. Om transacties uit
-        te kunnen voeren, klik op enable om instellingen te openen en de automatische tijdzone in te stellen.
-    </string>
     <string name="incorrect_timezone">Dit apparaat is ingesteld op een onjuiste tijdzone. Om transacties uit te voeren,
         klik op "wijzigen" om de instellingen te openen en de juiste tijdzone in te stellen
     </string>
@@ -157,6 +157,10 @@
     <!-- Error fragment -->
     <string name="return_vending_machine">Breng de automaat terug</string>
     <string name="bottom_button">Ga door</string>
+    <string name="error_auto_timezone_not_enabled">Automatische tijdzone is niet geactiveerd</string>
+    <string name="error_low_battery">Batterij bijna leeg</string>
+    <string name="error_low_battery_connect_device">Sluit het apparaat aan op een stroombron</string>
+    <string name="error_occurred">Er is een fout opgetreden</string>
 
     <!-- Loader fragment -->
     <string name="loading_header">Laden</string>
@@ -185,6 +189,7 @@
     <string name="bookmark_page">Pagina %d</string>
     <string name="bookmark_date">Datum</string>
     <string name="bookmark_totals">Totalen</string>
+    <string name="bookmark_preauth">Reserveer</string>
 
     <!-- Pinpad button labels -->
     <string name="pinpad_cancel">Annuleren</string>

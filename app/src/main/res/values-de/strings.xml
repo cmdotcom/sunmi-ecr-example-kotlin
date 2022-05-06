@@ -11,8 +11,13 @@
     <string name="update_parameters">Parameter aktualisieren</string>
     <string name="software_version">SW Version: %1$s</string>
     <string name="device_serial_number">Gerät S/N: %1$s</string>
+    <string name="payplaza_software_version">Payplaza SW-version: %1$s</string>
     <string name="statuses">Zustände</string>
-    <string name="request_info">Infos anfordern</string>
+    <string name="request_info">Parameter herunterladen</string>
+    <string name="preauth">Vorabgenehmigung</string>
+    <string name="preauth_item_start">Start</string>
+    <string name="preauth_item_cancel">Abbrechen</string>
+    <string name="preauth_item_confirm">Bestätigen Sie</string>
 
     <!-- Amount/tip entry screen texts -->
     <string name="enter_amount">Betrag eingeben</string>
@@ -44,15 +49,9 @@
         besteht, wenden Sie sich an Ihren Diensteanbieter. \nDevice-Seriennummer: %1$s\nFhelercode: %2$d
     </string>
     <string name="configuration_error">nicht behebbarer Fehler</string>
-    <string name="error_occurred" translatable="false">Ein Fehler ist aufgetreten. \nGarät seriennummer: %1$s\n%2$s
-    </string>
     <string name="enable_button">Bitte, stellen Sie die automatische Zeitzone ein</string>
     <string name="change_button">Zeitzone ändern</string>
     <string name="cancel_button">Stornieren</string>
-    <string name="auto_timezone_not_enabled">Das Gerät ist nicht auf automatische Zeitzone eingestellt. Klicken Sie zum
-        Ausführen von Transaktionen auf Aktivieren, um Einstellungen zu öffnen und die automatische Zeitzone
-        festzulegen.
-    </string>
     <string name="incorrect_timezone">Das Gerät ist auf eine falsche Zeitzone eingestellt. Um Transaktionen
         durchzuführen, klicken Sie auf "Ändern", um die Einstellungen zu öffnen und die richtige Zeitzone einzustellen.
     </string>
@@ -156,6 +155,10 @@
     <!-- Error fragment -->
     <string name="return_vending_machine">Bitte Automaten zurückgebene</string>
     <string name="bottom_button">Weiter</string>
+    <string name="error_auto_timezone_not_enabled">Automatische Zeitzone ist nicht aktiviert</string>
+    <string name="error_low_battery">Batterie schwach</string>
+    <string name="error_low_battery_connect_device">Bitte schließen Sie das Gerät an eine Stromquelle an</string>
+    <string name="error_occurred">Ein Fehler ist aufgetreten</string>
 
     <!-- Loader fragment -->
     <string name="loading_header">Laden</string>
@@ -184,6 +187,7 @@
     <string name="bookmark_page">Seite %d</string>
     <string name="bookmark_date">Datum</string>
     <string name="bookmark_totals">Summen</string>
+    <string name="bookmark_preauth">Vorautorisierung</string>
 
     <!-- Pinpad button labels -->
     <string name="pinpad_cancel">Abbrechen</string>

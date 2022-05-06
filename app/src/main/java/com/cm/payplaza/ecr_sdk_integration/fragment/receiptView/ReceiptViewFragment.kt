@@ -28,9 +28,9 @@ class ReceiptViewFragment : BaseEcrFragment<ReceiptViewFragmentState,
         when(state) {
             is ReceiptViewFragmentState.Init -> initializeView(state.isPrinterAvailable)
             is ReceiptViewFragmentState.Canceled -> setUpCanceled(state.receipt)
-            is ReceiptViewFragmentState.SuccessTwoReceipt -> setUpTwoReceipt(state.customerReceipt, state.merchantReceipt)
-            is ReceiptViewFragmentState.SuccessOneReceipt -> setUpOneReceipt(state.receipt)
-            is ReceiptViewFragmentState.MerchantReceiptShowed -> setUpOneReceipt(state.receipt)
+            is ReceiptViewFragmentState.SuccessTwoReceipt -> setUpTwoReceipt(state.customerReceipt, state.merchantReceipt, state.isSuccessful)
+            is ReceiptViewFragmentState.SuccessOneReceipt -> setUpOneReceipt(state.receipt, state.isSuccessful)
+            is ReceiptViewFragmentState.MerchantReceiptShowed -> setUpOneReceipt(state.receipt, state.isSuccessful)
             else -> { }
         }
     }
@@ -40,9 +40,9 @@ class ReceiptViewFragment : BaseEcrFragment<ReceiptViewFragmentState,
         viewModel.checkReceipt()
     }
 
-    private fun setUpOneReceipt(receipt: Receipt) {
+    private fun setUpOneReceipt(receipt: Receipt, isSuccesfull: Boolean) {
+        if(!isSuccesfull) { switchSuccessIconToWarning() }
         fillReceipt(receipt)
-        binding.receiptViewCloseButton.text = context?.getString(R.string.close)
         binding.receiptViewCloseButton.setOnClickListener {
             viewModel.finishTransaction()
         }
@@ -52,20 +52,20 @@ class ReceiptViewFragment : BaseEcrFragment<ReceiptViewFragmentState,
         }
     }
 
-    private fun setUpTwoReceipt(customerReceipt: Receipt, merchantReceipt: Receipt) {
+    private fun setUpTwoReceipt(customerReceipt: Receipt, merchantReceipt: Receipt, isSuccesfull: Boolean) {
+        if(!isSuccesfull) { switchSuccessIconToWarning() }
         fillReceipt(merchantReceipt)
-        binding.receiptViewCloseButton.text = context?.getString(R.string.acknowledge)
         binding.receiptViewCloseButton.setOnClickListener {
-            viewModel.merchantReceiptshowed(customerReceipt)
+            viewModel.merchantReceiptshowed(customerReceipt, isSuccesfull)
         }
         binding.receiptViewButtonPrint.setOnClickListener {
             viewModel.printReceipt(merchantReceipt)
-            viewModel.merchantReceiptshowed(customerReceipt)
+            viewModel.merchantReceiptshowed(customerReceipt, isSuccesfull)
         }
     }
 
     private fun setUpCanceled(receipt: Receipt) {
-        setUpOneReceipt(receipt)
+        setUpOneReceipt(receipt, isSuccesfull = false)
         switchSuccessIconToWarning()
     }
 

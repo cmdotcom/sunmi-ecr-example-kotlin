@@ -2,7 +2,8 @@ package com.cm.payplaza.ecr_sdk_integration.domain.repository.storedData
 
 import android.content.SharedPreferences
 
-class StoredDataRepositoryImpl(private val sharedPreferences: SharedPreferences): StoredDataRepository {
+class StoredDataRepositoryImpl(private val sharedPreferences: SharedPreferences):
+    StoredDataRepository {
     companion object {
         private const val ORDER_REFERENCE_KEY = "order_reference_key"
     }

@@ -25,6 +25,8 @@
         <activity android:name=".activity.lastReceipt.LastReceiptActivity"/>
         <activity android:name=".activity.totals.TotalsActivity"/>
         <activity android:name=".activity.statuses.StatusesActivity"/>
+        <activity android:name=".activity.preauth.start.PreAuthActivity"/>
+        <activity android:name=".activity.preauth.finish.FinishPreauthActivity"/>
     </application>
 
 </manifest>

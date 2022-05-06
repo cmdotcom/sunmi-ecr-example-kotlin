@@ -1,14 +1,17 @@
 package com.cm.payplaza.ecr_sdk_integration.activity.totals
 
 import androidx.lifecycle.viewModelScope
-import com.cm.androidposintegration.beans.DayTotalsOptions
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivityViewModel
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK.IntegrationSDKManager
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
+import com.cm.androidposintegration.beans.DayTotalsOptions
 import kotlinx.coroutines.launch
+import org.koin.core.component.inject
 import timber.log.Timber
 
 class TotalsViewModel: BaseEcrFragmentActivityViewModel() {
+
+    private val integrationSDKManager: IntegrationSDKManager by inject()
 
     fun getTotals() {
         Timber.d("getTotals")

@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cm.androidposintegration.enums.TransactionType
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.databinding.FragmentLoaderBinding
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragment
+import com.cm.androidposintegration.enums.TransactionType
 import org.koin.android.ext.android.inject
 import java.math.BigDecimal
 

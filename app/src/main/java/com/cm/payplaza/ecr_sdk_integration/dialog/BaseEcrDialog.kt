@@ -1,6 +1,7 @@
 package com.cm.payplaza.ecr_sdk_integration.dialog
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -10,6 +11,7 @@ abstract class BaseEcrDialog (private val listener: ActionListener): DialogFragm
     interface ActionListener {
         fun onOkPressed()
         fun onCancelPressed()
+        fun onDismiss()
     }
     override fun onCreateDialog( savedInstanceState: Bundle?): Dialog {
         return activity?.let {
@@ -25,6 +27,11 @@ abstract class BaseEcrDialog (private val listener: ActionListener): DialogFragm
             }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        listener.onDismiss()
     }
 
     abstract fun getDialogString(): Int

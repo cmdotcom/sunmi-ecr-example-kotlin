@@ -1,16 +1,15 @@
 package com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK
 
-import com.cm.androidposintegration.enums.TransactionResult
-import com.cm.androidposintegration.service.callback.ReceiptCallback
-import com.cm.androidposintegration.service.callback.beans.ErrorCode
-import com.cm.androidposintegration.service.callback.beans.LastReceiptResultData
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import com.cm.payplaza.ecr_sdk_integration.entity.Receipt
 import com.cm.payplaza.ecr_sdk_integration.entity.SDKError
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionError
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionResponse
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
-import java.math.BigDecimal
+import com.cm.androidposintegration.enums.TransactionResult
+import com.cm.androidposintegration.service.callback.ReceiptCallback
+import com.cm.androidposintegration.service.callback.beans.ErrorCode
+import com.cm.androidposintegration.service.callback.beans.LastReceiptResultData
 
 class LastReceiptCallbackImpl(
     private val localDataRepository: LocalDataRepository,
@@ -29,9 +28,6 @@ class LastReceiptCallbackImpl(
         val transactionError = TransactionError(errorStr, -1)
         localDataRepository.clearTransactionData()
         localDataRepository.setTransactionError(transactionError)
-        if(ErrorCode.getByValue(error.value) == ErrorCode.AUTO_TIMEZONE_NOT_ENABLED) {
-            localDataRepository.setTimezoneEnabled(false)
-        }
         integrationSDKCallback.returnResponse(SDKResponse.ON_ERROR)
     }
 

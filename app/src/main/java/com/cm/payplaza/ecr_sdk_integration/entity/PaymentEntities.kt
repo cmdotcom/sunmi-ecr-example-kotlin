@@ -1,11 +1,11 @@
 package com.cm.payplaza.ecr_sdk_integration.entity
 
+import com.cm.payplaza.ecr_sdk_integration.utils.FormatUtils
 import com.cm.androidposintegration.enums.TransactionResult
 import com.cm.androidposintegration.enums.TransactionType
 import com.cm.androidposintegration.service.callback.beans.TerminalInfoData
 import com.cm.androidposintegration.service.callback.beans.TransactionStatusesData
 import com.cm.androidposintegration.service.callback.json.TransactionStatusData
-import com.cm.payplaza.ecr_sdk_integration.utils.FormatUtils
 import java.math.BigDecimal
 import java.util.*
 import java.util.regex.Pattern

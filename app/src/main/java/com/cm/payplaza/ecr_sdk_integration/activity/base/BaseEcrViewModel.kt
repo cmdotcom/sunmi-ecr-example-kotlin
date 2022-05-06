@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK.IntegrationSDKManager
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
+import com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK.IntegrationSDKManager
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -15,8 +15,8 @@ import timber.log.Timber
 abstract class BaseEcrViewModel: ViewModel(),
     KoinComponent {
 
-    protected val integrationSDKManager: IntegrationSDKManager by inject()
-    protected val localDataRepository: LocalDataRepository by inject()
+    private val integrationSDKManager: IntegrationSDKManager by inject()
+    private val localDataRepository: LocalDataRepository by inject()
 
     private val _state = MutableLiveData<BaseEcrViewState>()
     val state : LiveData<BaseEcrViewState> get() = _state
@@ -26,6 +26,7 @@ abstract class BaseEcrViewModel: ViewModel(),
     }
 
     fun requestInfo() {
+        updateView(BaseEcrViewState.RequestInfoLoader)
         Timber.d("requestInfo")
         val callback = object: IntegrationSDKManager.IntegrationSDKCallback {
             override fun returnResponse(sdkResponse: SDKResponse) {

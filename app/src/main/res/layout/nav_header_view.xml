@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_header"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="top"
+        android:layout_weight="10" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/nav_header_company_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:gravity="start"
+        android:paddingBottom="@dimen/padding_small"
+        android:scaleType="fitStart"
+        app:srcCompat="?brandingLogo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nav_header_device_serial_nr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:ellipsize="end"
+        android:paddingTop="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_small"
+        android:singleLine="true"
+        android:text="@string/drawer_default_company_name"
+        android:textColor="@color/mediumShadeColor"
+        android:textSize="@dimen/text_size_normal" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nav_header_device_configuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/padding_small"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/configuration_version"
+        android:textColor="@color/mediumShadeColor"
+        android:textSize="@dimen/text_size_normal" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nav_header_sw_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/padding_small"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/software_version"
+        android:textColor="@color/mediumShadeColor"
+        android:textSize="@dimen/text_size_normal" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="@color/mediumShadeColor"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

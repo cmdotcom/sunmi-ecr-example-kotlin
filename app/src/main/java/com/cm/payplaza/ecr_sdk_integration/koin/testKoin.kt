@@ -1,8 +1,8 @@
 package com.cm.payplaza.ecr_sdk_integration.koin
 
+import com.cm.payplaza.ecr_sdk_integration.entity.*
 import com.cm.androidposintegration.enums.TransactionResult
 import com.cm.androidposintegration.enums.TransactionType
-import com.cm.payplaza.ecr_sdk_integration.entity.*
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import java.math.BigDecimal

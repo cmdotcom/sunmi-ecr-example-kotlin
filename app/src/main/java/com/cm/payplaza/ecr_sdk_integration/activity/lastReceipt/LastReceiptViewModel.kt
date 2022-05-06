@@ -6,9 +6,12 @@ import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFra
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK.IntegrationSDKManager
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
 import kotlinx.coroutines.launch
+import org.koin.core.component.inject
 import timber.log.Timber
 
 class LastReceiptViewModel: BaseEcrFragmentActivityViewModel() {
+
+    private val integrationSDKManager: IntegrationSDKManager by inject()
 
     fun getLastReceipt() {
         Timber.d("getLastReceipt")

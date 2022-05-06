@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/windowBackgroundColor">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/expandible_list_item_indent"
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:visibility="visible"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/expandible_list_item_icon"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@android:color/white"
+        android:src="@drawable/bookmark_bar_bullet_bg"
+        android:visibility="visible"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/expandible_list_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="36dp"
+        android:gravity="start|center"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
