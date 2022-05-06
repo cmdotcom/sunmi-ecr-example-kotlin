@@ -11,7 +11,7 @@ android {
         minSdk 25
         targetSdk 29
         versionCode 1
-        versionName "2.0.1"
+        versionName "2.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders.launcherTheme = "@style/Base.Launcher"
         manifestPlaceholders.appIcon = "@mipmap/ic_launcher"
