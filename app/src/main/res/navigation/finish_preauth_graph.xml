@@ -41,8 +41,13 @@
     </fragment>
     <fragment
         android:id="@+id/receiptViewFragment4"
-        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewFragment"
-        android:label="ReceiptViewFragment" />
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptFragment"
+        android:label="ReceiptViewFragment" >
+        <argument
+            android:name="dayTotals"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
     <fragment
         android:id="@+id/errorFragment4"
         android:name="com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragment"

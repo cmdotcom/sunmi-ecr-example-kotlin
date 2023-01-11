@@ -1,5 +1,6 @@
 package com.cm.payplaza.ecr_sdk_integration.activity.preauth.finish
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.view.View
@@ -7,26 +8,29 @@ import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.activity.base.BaseEcrViewState
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivity
 import com.cm.payplaza.ecr_sdk_integration.activity.payment.PaymentActivity
-import com.cm.payplaza.ecr_sdk_integration.activity.preauth.navigationMenu.PreauthExpandibleListData
+import com.cm.payplaza.ecr_sdk_integration.activity.preauth.navigationMenu.MenuItemsDataHolder
 import com.cm.payplaza.ecr_sdk_integration.activity.preauth.navigationMenu.PreauthType
 import com.cm.payplaza.ecr_sdk_integration.activity.statuses.StatusesActivity
+import com.cm.payplaza.ecr_sdk_integration.dialog.DialogLauncher
 import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.amountInsert.AmountInsertFragmentState
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
-import com.cm.payplaza.ecr_sdk_integration.fragment.dateInsert.DateInsertFramentState
+import com.cm.payplaza.ecr_sdk_integration.fragment.dateInsert.DateInsertState
 import com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragmentState
-import com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewFragmentState
+import com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptState
 import com.cm.payplaza.ecr_sdk_integration.fragment.stanInsert.StanInsertState
+import com.cm.payplaza.ecr_sdk_integration.uicomponents.bottomAppBarComponent.BottomAppBarComponent
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import timber.log.Timber
 import java.util.*
 
-class FinishPreauthActivity: BaseEcrFragmentActivity<FinishPreauthViewModel>(),
-KoinComponent {
+class FinishPreauthActivity : BaseEcrFragmentActivity<FinishPreauthViewModel>(),
+    KoinComponent {
 
     companion object {
         private const val PREAUTH_TYPE_EXTRA = "PREAUTH_TYPE_EXTRA"
+
         fun start(context: Context, type: PreauthType) {
             Timber.d("goToFinishPreauthActivity")
             val intent = Intent(context, FinishPreauthActivity::class.java)
@@ -36,38 +40,46 @@ KoinComponent {
         }
     }
 
+    private var preAuthType: PreauthType? = null
+
     override val viewModel: FinishPreauthViewModel by inject()
-
-    override fun setUpBookmark() {
-        Timber.d("setUpBookmark")
-        binding.ecrBookmarkBar.setSelectedBookmark(1, R.string.bookmark_preauth)
-    }
-
-    override fun setUpMenu() {
-        super.setUpMenu()
-        val menu = binding.ecrNavigation.menu
-        menu.findItem(R.id.nav_cancel_payment).isEnabled = true
-    }
 
     override fun initializeView(terminalData: TerminalData?) {
         super.initializeView(terminalData)
-        val preauthType =  intent.getSerializableExtra(PREAUTH_TYPE_EXTRA) as PreauthType
-        viewModel.savePreauthType(preauthType)
-        binding.ecrPreauthExpandibleList.apply {
-            val adapter = PreauthExpandibleListData.getPreauthListAdapter(context, preauthType)
-            setOnChildClickListener(adapter.getItemListener())
-            setOnGroupClickListener(adapter.getGroupListener())
+
+        preAuthType = intent.getSerializableExtra(PREAUTH_TYPE_EXTRA) as PreauthType
+        viewModel.savePreauthType(preAuthType ?: PreauthType.NONE)
+
+        with(binding.navigationLayout.ecrPreauthExpandibleList) {
+            val adapter = MenuItemsDataHolder.getListAdapter(
+                context,
+                preAuthType ?: PreauthType.NONE
+            )
+            setOnGroupClickListener { parent, itemView, groupPosition, groupId ->
+                menuGroupItemClickListener(parent, itemView, groupPosition, groupId)
+            }
+            setOnChildClickListener { parent, itemView, groupPosition, childPosition, childId ->
+                menuChildItemClickHandler(
+                    parent,
+                    itemView,
+                    groupPosition,
+                    childPosition,
+                    childId,
+                    preAuthType ?: PreauthType.NONE
+                )
+            }
             setAdapter(adapter)
             visibility = View.VISIBLE
         }
-        if(preauthType == PreauthType.CANCEL) {
+        initializeCloseButton(preAuthType)
+        if (preAuthType == PreauthType.CANCEL) {
             skipAmountInsert()
         }
     }
 
     override fun render(state: BaseEcrViewState) {
         super.render(state)
-        when(state) {
+        when (state) {
             FinishPreauthViewState.OnResult -> goToReceipt()
             FinishPreauthViewState.OnCrash -> StatusesActivity.start(this)
             FinishPreauthViewState.OnError -> goToError()
@@ -75,12 +87,25 @@ KoinComponent {
     }
 
     override fun renderFragment(state: BaseEcrFragmentViewState) {
-        when(state) {
+        when (state) {
             is AmountInsertFragmentState.NextStep -> goToStanInsert(state.amount)
+            is AmountInsertFragmentState.SetupBottomAppBar -> initializeBottomAppbar(state.listener)
+            is AmountInsertFragmentState.AddDigitToAmountView -> binding.bottomAppView.enableActionButton()
+            AmountInsertFragmentState.ClearAmount -> binding.bottomAppView.disableActionButton()
             is StanInsertState.SaveStand -> goToDateInsert(state.stand)
-            is DateInsertFramentState.ConfirmDate -> goToLoader(state.date)
+            is StanInsertState.SetupBottomAppBar -> initializeBottomAppbar(state.listener)
+            StanInsertState.ClearStan -> binding.bottomAppView.disableActionButton()
+            is StanInsertState.StanInserted -> binding.bottomAppView.enableActionButton()
+            is DateInsertState.ConfirmDate -> goToLoader(state.date)
+            DateInsertState.ClearDate -> binding.bottomAppView.disableActionButton()
+            is DateInsertState.ShowDatePickerDialog -> showDatePickerDialog(state.listener)
+            is DateInsertState.UpdateDateView -> dateInserted()
+            is DateInsertState.SetupBottomAppBar -> initializeBottomAppbar(state.listener)
             ErrorFragmentState.Dismiss -> PaymentActivity.start(this)
-            ReceiptViewFragmentState.FinishTransaction -> PaymentActivity.start(this)
+            ReceiptState.FinishTransaction -> PaymentActivity.start(this)
+            is ReceiptState.SetUpBottomAppBar -> setUpBottomBarForReceipt(state.listener)
+            is ReceiptState.Init -> setUpPrinterButton(state.isPrinterAvailable)
+            is ErrorFragmentState.SetUpBottomAppBar -> setUpBottomBarForError(state.listener)
             else -> {}
         }
     }
@@ -89,43 +114,88 @@ KoinComponent {
         return R.navigation.finish_preauth_graph
     }
 
+    private fun setUpPrinterButton(printerAvailable: Boolean) {
+        binding.bottomAppView.setupPrinterButtonVisibility(printerAvailable)
+    }
+
+    private fun setUpBottomBarForError(listener: BottomAppBarComponent.ClickListener) {
+        binding.bottomAppView.enableActionButton()
+        binding.bottomAppView.setActionButtonText(R.string.bottom_app_bar_card_payment_continue)
+        binding.bottomAppView.setButtonsListeners(listener)
+    }
+
+    private fun dateInserted() {
+        binding.bottomAppView.enableActionButton()
+        hideNavigationBar()
+    }
+
+    private fun showDatePickerDialog(listener: DatePickerDialog.OnDateSetListener) {
+        val actionListener = object : DialogLauncher.ActionListener {
+            override fun onOkPressed() {}
+            override fun onCancelPressed() {
+                hideNavigationBar()
+            }
+
+            override fun onDismiss() {
+                hideNavigationBar()
+            }
+        }
+        val cal = Calendar.getInstance()
+        DialogLauncher(this).showDatePickerDialog(
+            listener,
+            actionListener,
+            cal.timeInMillis
+        )
+    }
+
+    private fun initializeBottomAppbar(listener: BottomAppBarComponent.ClickListener) {
+        binding.bottomAppView.disableActionButton()
+        binding.bottomAppView.setActionButtonText(R.string.bottom_app_bar_card_payment_continue)
+        binding.bottomAppView.setButtonsListeners(listener)
+    }
+
+    private fun initializeCloseButton(preauthType: PreauthType?) {
+        val preauthTypeString =
+            if (preauthType == PreauthType.CANCEL) R.string.bottom_app_bar_cancel_pre_auth else R.string.bottom_app_bar_confirm_pre_auth
+        binding.bottomAppView.setTransactionTypeText(preauthTypeString)
+    }
+
+    private fun setUpBottomBarForReceipt(listener: BottomAppBarComponent.ClickListener) {
+        binding.bottomAppView.setActionButtonText(R.string.bottom_button)
+        binding.bottomAppView.setPrintButtonText(R.string.print_receipt)
+        binding.bottomAppView.setButtonsListeners(listener)
+        binding.bottomAppView.enableActionButton()
+        binding.bottomAppView.setIconsForPrint()
+    }
+
     private fun goToStanInsert(amount: Int) {
         viewModel.saveAmount(amount)
-        Timber.d("goToStanInsert")
-        binding.ecrBookmarkBar.setSelectedBookmark(1, R.string.enter_stan)
         navController.navigate(R.id.action_amountInsertFragment4_to_stanInsertFragment2)
     }
 
     private fun goToDateInsert(stan: String) {
         viewModel.saveStan(stan)
-        Timber.d("goToDateInsert")
-        binding.ecrBookmarkBar.setSelectedBookmark(1, R.string.bookmark_date)
         navController.navigate(R.id.action_stanInsertFragment2_to_dateInsertFragment2)
     }
 
     private fun goToLoader(date: Date) {
         viewModel.saveDate(date)
-        Timber.d("goToLoader")
-        binding.ecrBookmarkBar.setSelectedBookmark(1, R.string.bookmark_card_transaction)
+        binding.progressLoader.visibility = View.VISIBLE
         navController.navigate(R.id.action_dateInsertFragment2_to_loaderFragment5)
         viewModel.doPreauth()
     }
 
     private fun goToReceipt() {
-        Timber.d("goToReceipt")
-        binding.ecrBookmarkBar.setSelectedBookmark(5, R.string.bookmark_receipt)
+        binding.progressLoader.visibility = View.GONE
         navController.navigate(R.id.action_loaderFragment5_to_receiptViewFragment4)
     }
 
     private fun goToError() {
-        Timber.d("goToError")
-        binding.ecrBookmarkBar.setSelectedBookmark(1, R.string.bookmark_date)
+        binding.progressLoader.visibility = View.GONE
         navController.navigate(R.id.action_loaderFragment5_to_errorFragment4)
     }
 
     private fun skipAmountInsert() {
-        Timber.d("skipAmountInsert")
-        binding.ecrBookmarkBar.setSelectedBookmark(1, R.string.enter_stan)
         navController.navigate(R.id.action_amountInsertFragment4_to_stanInsertFragment2)
     }
 }

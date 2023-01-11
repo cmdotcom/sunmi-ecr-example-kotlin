@@ -3,55 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:paddingTop="@dimen/padding_default">
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/amount_view_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/keypad_layout"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/amount_view_layout">
+        android:paddingBottom="50dp">
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:text="@string/new_payment"
-            android:textAppearance="@style/TextAppearance.Header"
-            android:visibility="invisible"/>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/header_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="6dp"
             android:text="@string/enter_amount"
-            android:textAppearance="@style/TextAppearance.Body" />
-
+            android:textAlignment="center"
+            style="@style/TextAppearance.Header" />
         <com.cm.payplaza.ecr_sdk_integration.uicomponents.amountViewComponent.AmountViewComponent
             android:id="@+id/component_amount_view"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:background="@drawable/border_with_rounded_corners"
-            android:divider="@drawable/amount_view_currency_separator"
+            android:layout_width="250dp"
+            android:layout_height="68dp"
             android:elevation="@dimen/elevation"
             android:minWidth="200dp"
-            android:padding="@dimen/border_thickness"
-            android:showDividers="middle"
-            android:weightSum="1" />
+            android:padding="@dimen/border_thickness"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/pin_warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/do_not_enter_pin"
-            android:paddingTop="20dp"
+            android:paddingTop="6dp"
             android:textAppearance="@style/TextAppearance.ExtraInformation" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/store_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textAppearance="@style/TextAppearance.ExtraInformation"
-            android:textAlignment="center"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -59,11 +44,12 @@
         android:orientation="vertical"
         android:gravity="bottom|center"
         android:id="@+id/keypad_layout"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp">
         <com.cm.payplaza.ecr_sdk_integration.uicomponents.numericKeypadComponent.NumericKeypadComponent
             android:id="@+id/component_numeric_keypad"
             android:layout_width="match_parent"
-            android:layout_height="214dp"
+            android:layout_height="wrap_content"
             android:visibility="visible"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,31 +1,25 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         minSdk 25
-        targetSdk 29
+        targetSdk 33
         versionCode 1
         versionName "2.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders.launcherTheme = "@style/Base.Launcher"
         manifestPlaceholders.appIcon = "@mipmap/ic_launcher"
-
-        setProperty("archivesBaseName", "ecr-$versionName")
     }
 
     buildTypes {
-        debug {
-            // minifyEnabled true
-            // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders.appIcon = "@mipmap/ic_launcher_dev"
-            applicationIdSuffix = ".debug"
-        }
+        debug { }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -78,8 +72,9 @@ dependencies {
     debugImplementation "androidx.test.ext:junit:$rootProject.ext.androidx_junit"
     debugImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espresso_core"
     debugImplementation "androidx.test:runner:$rootProject.ext.espresso"
-    debugImplementation "androidx.test:rules:$rootProject.ext.espresso"
-    debugImplementation "androidx.test:core-ktx:$rootProject.ext.espresso"
+    debugImplementation "androidx.test:rules:$rootProject.ext.test_rules"
+    debugImplementation "androidx.test:core-ktx:$rootProject.ext.test_rules"
+    implementation "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espresso"
     debugImplementation "androidx.fragment:fragment-testing:$rootProject.ext.fragment_testing"
     debugImplementation "androidx.navigation:navigation-testing:$rootProject.ext.nav_version"
 
@@ -95,4 +90,7 @@ dependencies {
 
     // Sunmi
     implementation "com.sunmi:printerlibrary:$rootProject.ext.printer"
+
+    // Lottie animation
+    implementation "com.airbnb.android:lottie:$lottie_version"
 }

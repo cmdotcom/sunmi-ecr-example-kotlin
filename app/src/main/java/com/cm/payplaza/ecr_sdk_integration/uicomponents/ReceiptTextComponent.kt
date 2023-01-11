@@ -10,14 +10,13 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.databinding.ComponentReceiptTextBinding
 import com.cm.payplaza.ecr_sdk_integration.entity.Receipt
-import timber.log.Timber
 
 class ReceiptTextComponent: LinearLayoutCompat {
     constructor(context: Context): super(context)
     constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet)
     constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int): super(context, attributeSet, defStyleAttr)
 
-    private var binding :ComponentReceiptTextBinding
+    private var binding: ComponentReceiptTextBinding
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.component_receipt_text, this, true)
@@ -25,7 +24,9 @@ class ReceiptTextComponent: LinearLayoutCompat {
         orientation = VERTICAL
     }
 
-    fun setReceiptData(receipt: Receipt?) {
+    fun setReceiptData(receipt: Receipt?, showDayTotalReceipt: Boolean) {
+        setPadding(showDayTotalReceipt)
+
         val str = StringBuilder()
         receipt?.let {
             // Setup text info
@@ -50,5 +51,14 @@ class ReceiptTextComponent: LinearLayoutCompat {
                 binding.textviewReceiptFooter.text = ""
             }
         }
+    }
+
+    private fun setPadding(showDayTotalReceipt: Boolean) {
+        val padding: Int = if (showDayTotalReceipt) {
+            resources.getDimensionPixelSize(R.dimen.padding_extra_small)
+        } else {
+            resources.getDimensionPixelSize(R.dimen.padding_extra_large)
+        }
+        binding.layoutReceipt.setPadding(padding, padding, padding, padding)
     }
 }

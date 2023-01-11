@@ -30,8 +30,4 @@ class NumericKeypadComponentViewModel: BaseEcrComponentViewModel<NumericKeypadCo
     fun enableBackspace() {
         updateView(NumericKeypadComponentState.EnableBackspace)
     }
-
-    fun enableContinue() {
-        updateView(NumericKeypadComponentState.EnableContinue)
-    }
 }

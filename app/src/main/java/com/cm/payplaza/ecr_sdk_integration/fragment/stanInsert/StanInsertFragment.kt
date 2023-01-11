@@ -30,7 +30,7 @@ class StanInsertFragment: BaseEcrFragment<
 
     override fun render(state: StanInsertState) {
         when(state) {
-            is StanInsertState.Init -> initializeView(state.merchantData)
+            is StanInsertState.Init -> initializeView()
             StanInsertState.ClearStan -> clearStan()
             is StanInsertState.EnableClean -> enableClean(state.stanDigits)
             is StanInsertState.StanInserted -> stanInserted(state.stanDigits)
@@ -41,9 +41,9 @@ class StanInsertFragment: BaseEcrFragment<
 
     private fun stanInserted(stanDigits: Int) {
         Timber.d("stanInserted - $stanDigits")
-        binding.stanComponentNumericKeypad.enableContinue()
         binding.stanComponentNumericKeypad.disableNumericKeypad()
         binding.stanComponentView.addStanDigit(stanDigits)
+        binding.stanComponentView.enableAmountViewShape()
     }
 
     private fun enableClean(stanDigits: Int) {
@@ -56,15 +56,14 @@ class StanInsertFragment: BaseEcrFragment<
         Timber.d("clearStan")
         binding.stanComponentNumericKeypad.clearKeypad()
         binding.stanComponentView.clearView()
+        binding.stanComponentView.disableAmountViewShape()
     }
 
-    private fun initializeView(terminalData: TerminalData?) {
+    private fun initializeView() {
         Timber.d("initializeView")
         binding.stanComponentView.configureForStanInsert()
         binding.stanComponentNumericKeypad.setKeypadListener(this)
-        terminalData?.let {
-            (terminalData.storeName + "\n" + terminalData.storeAddress + "\n" + terminalData.storeZipCode + " " + terminalData.storeCity).also { binding.stanStoreInfo.text = it }
-        }
+        viewModel.setupBottomAppBar()
     }
 
     override fun onKeypadDigitPressed(digit: Int) {
@@ -75,10 +74,5 @@ class StanInsertFragment: BaseEcrFragment<
     override fun onKeypadBackspacePressed() {
         Timber.d("onKeypadBackspacePressed")
         viewModel.clearStan()
-    }
-
-    override fun onKeypadConfirmPressed() {
-        Timber.d("onKeypadConfirmPressed")
-        viewModel.confirmStan()
     }
 }

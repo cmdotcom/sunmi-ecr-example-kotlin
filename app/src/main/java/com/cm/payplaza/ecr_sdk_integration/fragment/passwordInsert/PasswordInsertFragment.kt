@@ -3,8 +3,6 @@ package com.cm.payplaza.ecr_sdk_integration.fragment.passwordInsert
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.cm.payplaza.ecr_sdk_integration.databinding.FragmentPasswordInsertBinding
-import com.cm.payplaza.ecr_sdk_integration.dialog.WrongPasswordDialog
-import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragment
 import com.cm.payplaza.ecr_sdk_integration.uicomponents.numericKeypadComponent.NumericKeypadComponent
 import org.koin.android.ext.android.inject
@@ -31,7 +29,7 @@ class PasswordInsertFragment: BaseEcrFragment<
 
     override fun render(state: PasswordInsertFragmentState) {
         when(state) {
-            is PasswordInsertFragmentState.Init -> initializeView(state.merchantData)
+            is PasswordInsertFragmentState.Init -> initializeView()
             PasswordInsertFragmentState.AddPinToken -> binding.componentPinView.addPasswordToken()
             PasswordInsertFragmentState.ClearPinTokens -> clearComponents()
             PasswordInsertFragmentState.DisableKeyNumbers -> disableKeyNumbers()
@@ -47,7 +45,6 @@ class PasswordInsertFragment: BaseEcrFragment<
 
     private fun enableContinue() {
         Timber.d("enableContinue")
-        binding.componentNumericKeypad.enableContinue()
         binding.componentPinView.addPasswordToken()
     }
 
@@ -55,6 +52,7 @@ class PasswordInsertFragment: BaseEcrFragment<
         Timber.d("enableClean")
         binding.componentNumericKeypad.enableBackspace()
         binding.componentPinView.addPasswordToken()
+        binding.componentPinView.enableAmountViewShape()
     }
 
     private fun disableKeyNumbers() {
@@ -63,26 +61,23 @@ class PasswordInsertFragment: BaseEcrFragment<
         binding.componentPinView.addPasswordToken()
     }
 
-    private fun initializeView(terminalData: TerminalData?) {
+    private fun initializeView() {
         Timber.d("initializeView")
         binding.componentPinView.configureForPasswordInsert()
         binding.componentNumericKeypad.setKeypadListener(this)
-        terminalData?.let {
-            (terminalData.storeName + "\n" + terminalData.storeAddress + "\n" + terminalData.storeZipCode + " " + terminalData.storeCity).also { binding.storeInfo.text = it }
-        }
+        viewModel.setupBottomAppBar()
     }
 
     private fun clearComponents() {
         Timber.d("clearComponents")
         binding.componentPinView.clearView()
         binding.componentNumericKeypad.clearKeypad()
+        binding.componentPinView.disableAmountViewShape()
     }
 
     private fun showWrongPinSnackbar() {
         Timber.d("showWrongPinSnackbar")
-        activity?.let {
-            WrongPasswordDialog().show(it.supportFragmentManager,"")
-        }
+        viewModel.showWrongPasswordDialog()
     }
 
     override fun onKeypadDigitPressed(digit: Int) {
@@ -93,10 +88,5 @@ class PasswordInsertFragment: BaseEcrFragment<
     override fun onKeypadBackspacePressed() {
         Timber.d("onKeypadBackspacePressed")
         viewModel.clearPinTokens()
-    }
-
-    override fun onKeypadConfirmPressed() {
-        Timber.d("onKeypadConfirmPressed")
-        viewModel.checkPin()
     }
 }

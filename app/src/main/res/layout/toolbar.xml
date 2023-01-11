@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:backgroundTint="@android:color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentInsetStart="0dp"
+        app:contentInsetStart="0dp">
+
+        <ImageButton
+            android:id="@+id/buttonHamburger"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@null"
+            android:src="@drawable/ic_menu_black_24dp"
+            android:visibility="?bookmarkBarVisibility"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/brandingLogo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="70dp"
+            android:src="@drawable/app_bar_logo_pos"
+            tools:ignore="ContentDescription" />
+    </androidx.appcompat.widget.Toolbar>
+</com.google.android.material.appbar.AppBarLayout>

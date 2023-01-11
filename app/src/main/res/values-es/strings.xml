@@ -3,15 +3,12 @@
     <!-- Navigation drawer texts -->
     <string name="payment">Pago</string>
     <string name="day_totals">Totales del día</string>
-    <string name="financial_totals">Totales financieros</string>
     <string name="print_last_receipt">Imprimir último recibo</string>
     <string name="refund">Reembolso</string>
-    <string name="settings">Ajustes</string>
-    <string name="update_parameters">Actualizar parámetros</string>
     <string name="software_version">Versión del SW: %1$s</string>
     <string name="device_serial_number">Número de serie: %1$s</string>
-    <string name="payplaza_software_version">Version Payplaza SW: %1$s</string>
-    <string name="statuses">Statuses</string>
+    <string name="payplaza_software_version">Version SW: %1$s</string>
+    <string name="statuses">Estado de transacción</string>
     <string name="request_info">Descargar parámetros</string>
     <string name="preauth">Autorización previa</string>
     <string name="preauth_item_start">Iniciar</string>
@@ -21,145 +18,64 @@
     <!-- Amount/tip entry screen texts -->
     <string name="enter_amount">Introduzca importe</string>
     <string name="enter_tip_amount">Introduzca importe para propina</string>
-    <string name="tip_gratuity">Importe de Venta %1$s</string>
 
     <!-- Refund information entry screens -->
     <string name="enter_stan">Introduzca STAN de venta</string>
     <string name="enter_date">Introduzca la fecha de venta</string>
-
-    <!-- Payment method selection screen texts -->
-    <string name="select_payment_method">Seleccione el método de pago</string>
-
-    <!-- QR code scanner screen texts -->
-    <string name="scan_qr_code">Escanee el código QR</string>
+    <string name="tear_off_receipt">Arranque el recibo</string>
+    <string name="enter_password">Introduzca contraseña</string>
+    <string name="cancel_button">Cancelar</string>
 
     <!-- Popup texts -->
-    <string name="replace_paper">Reponga papel en la impresora</string>
-    <string name="tear_off_receipt">Retire el recibo</string>
-    <string name="tear_off_and_take_signature">Retire el recibo\n\nFirma del cliente</string>
-    <string name="take_signature">Firma del cliente</string>
-    <string name="sign_customer_receipt">Firme recibo del cliente</string>
-    <string name="enter_password">Introduzca contraseña</string>
-    <string name="signature_alert">Por favor, firme el recibo para continuar</string>
-
-    <!-- Health check messages -->
-    <string name="pairing_failed_contact_sp">El terminal no está operativo. Por favor, compruebe si el dispositivo está
-        conectado a la red y trate de actualizar la configuración desde el menú de la aplicación. Si el problema
-        persiste, contacte con su proveedor de servicio.\nNúmero de serie del dispositivo: %1$s\nCódigo de error: %2$d
-    </string>
-    <string name="configuration_error">Error fatal</string>
-    <string name="enable_button">Por favor, habilite la zona horaria automática</string>
-    <string name="change_button">Cambie la zona horaria del dispositivo</string>
-    <string name="cancel_button">Cancelar</string>
-    <string name="incorrect_timezone">Zona horaria del dispositivo incorrecta. Por favor, para poder realizar
-        transacciones, haga click en el botón cambiar para abrir los ajustes del dispositivo y configurar la zona
-        horaria del dispositivo correctamente
-    </string>
-
-    <!-- Electronic signature screen texts -->
-    <string name="carhdolder_signature_required">Firma del cliente necesaria</string>
-    <string name="merchant_signature_required">Firme recibo del cliente</string>
-    <string name="confirm_signature">Confirmar firma</string>
-    <string name="clear_signature">Borrar firma</string>
-
-    <!-- Transaction result screen texts -->
-    <string name="retry_payment">Reintentar pago</string>
+    <string name="popup_confirm">Confirmar</string>
 
     <!-- On-screen receipt screen texts -->
     <string name="close">Cerrar</string>
     <string name="print_receipt">Imprimir</string>
-    <string name="ok">OK</string>
-    <string name="do_not_print_receipt">No imprimir recibo</string>
-    <string name="acknowledge">Entendido</string>
+    <string name="receipt_cardholder">RECIBO CLIENTE</string>
+    <string name="receipt_merchant">RECIBO COMERCIANTE</string>
 
-    <!-- Transaction complete screen texts -->
-    <string name="transaction_complete">Transacción completada</string>
-    <string name="start_new_payment">Empezar un nuevo pago</string>
+    <!-- amount appbar-->
+    <string name="amount_appbar_title">Importe Total %1$s</string>
 
-    <!-- PaymentResultCode enum displayable labels -->
-    <string name="payment_result_success">Éxito</string>
-    <string name="payment_result_authorization_failure">Fallo de autorización</string>
-    <string name="payment_result_authorization_timeout">Timeout de autorización</string>
     <string name="payment_result_canceled">Cancelado</string>
-    <string name="payment_result_card_blocked">Tarjeta bloqueada</string>
-    <string name="payment_result_card_invalid">Tarjeta inválida</string>
-    <string name="payment_result_declined_by_card">Rechazada</string>
-    <string name="payment_result_insufficient_funds">Fondos insuficientes</string>
-    <string name="payment_result_failed">Errónea</string>
-    <string name="payment_result_amount_exceeded">Importe límite excedido</string>
-    <string name="payment_result_host_blocked_print_receipt">Los recibos de la última transacción no han sido impresos
-    </string>
-    <string name="payment_result_blocked_configure_application">Bloqueada, configure aplicación</string>
-    <string name="payment_result_transaction_not_found">Transacción no encontrada</string>
 
-    <!-- TransactionFlow enum displayable texts -->
-    <string name="transaction_flow_previous_receipt_request">Reimprimir último recibo</string>
-    <string name="transaction_flow_financial_totals_request">Solicitar totales</string>
-    <string name="transaction_flow_update_parameters">Actualizar configuración</string>
-
-    <!-- Settings screen texts -->
-    <string name="settings_transaction_currency">Moneda de la transacción</string>
-    <string name="settings_payments">Pagos</string>
-    <string name="settings_general">General</string>
-    <string name="settings_beep_volume">Volumen de pitido</string>
-    <string name="settings_on_screen_signature">Firma en pantalla</string>
-    <string name="settings_on_screen_signature_off">Los clientes firmarán los recibos de manera tradicional cuando se
-        requiera firma en una transacción
-    </string>
-    <string name="settings_on_screen_signature_on">Los clientes firmarán en pantalla cuando la firma se requiera en una
-        transacción
-    </string>
-    <string name="settings_use_printer">Utilice la impresora</string>
-    <string name="settings_use_printer_off">Los recibos de la transacción se mostrarán en pantalla</string>
-    <string name="settings_use_printer_on">Los recibos de la transacción se imprimirán en papel</string>
     <string name="settings_receipts">Recibos</string>
-    <string name="settings_ecr">ECR</string>
     <string name="new_payment">Nuevo Pago</string>
 
-    <string name="enable_wifi">Habilite el adaptador WIFI</string>
-    <string name="use_mobile_network">Utilice la red de datos móbiles</string>
-    <string name="mobile_network_text">El dispositivo no tiene acceso a la red. Compruebe los ajustes de red.</string>
-    <string name="wifi_enabled_text">El adaptador Wifi está habilitado</string>
-    <string name="no_network">No hay conexión de red</string>
-    <string name="invalid_date">Fecha invalida</string>
     <string name="cancel_payment">Cancelar pago</string>
     <string name="configuration_version">Versión de configuración</string>
     <string name="date_hint">dd/mm/aa</string>
     <string name="password_error">Contraseña incorrecta. Por favor, inténtelo de nuevo</string>
-
-    <string name="tip_limit_exceeded">El importe de la propina no puede ser mayor de %1$s%2$s%3$s %4$s</string>
-
-    <!-- Error codes -->
-    <string-array name="error_codes">
-        <item>-1:Error desconocido</item>
-        <item>-11:La aplicación Terminal no está instalada en este dispositivo.</item>
-        <item>-12:Fallo de autorización.</item>
-        <item>-13:Fallo descargando la configuración.</item>
-        <item>-14:Fallo comprobando el estado de la aplicación Terminal.</item>
-        <item>-15:Intent mal construido.</item>
-        <item>-16:El tipo de transacción utilizado no está permitido.</item>
-        <item>-17:Fallo de instalación de impresora.</item>
-        <item>-18:El contrato para este terminal no ha sido configurado todavía. Por favor, contacte con su proveedor de servicio.</item>
-        <item>-23:La zona horaria automática no está habilitada.</item>
-        <item>-24:Zona horaria incorrecta en el dispositivo.</item>
-        <item>-25:Fallo de conexión con el servidor.</item>
-        <item>-26:La configuración del terminal no se pudo descargar.</item>
-        <item>-27:La configuración del terminal no se pudo descargar, se utilizará la configuración anterior.</item>
-        <item>-28:Transacción rechazada por el servidor.</item>
-        <item>-34:Internal programm exception.</item>
-    </string-array>
 
     <!-- Component keypad -->
     <string name="component_keypad_key_backspace">atrás</string>
     <string name="component_keypad_key_confirm">confirmar</string>
 
     <!-- Error fragment -->
-    <string name="return_vending_machine">Por favor devuelva el terminal al comerciante</string>
     <string name="bottom_button">Continuar</string>
+    <string name="error_no_error">Sin error</string>
     <string name="error_auto_timezone_not_enabled">La zona horaria automática no está habilitada</string>
+    <string name="error_auto_timezone_not_enabled_button">Por favor, habilite la zona horaria automática</string>
     <string name="error_low_battery">Nivel de batería bajo</string>
     <string name="error_low_battery_connect_device">Conecte el dispositivo a una fuente de alimentación</string>
-    <string name="error_occurred" translatable="false">Ha ocurrido un error</string>
+    <string name="error_occurred">Ha ocurrido un error</string>
+    <string name="error_amount_invalid">Cantidad incorrecta</string>
+    <string name="error_amount_limit_exceeded">Límite de cantidad excedido</string>
+    <string name="error_transaction_status_error">Estado de la transacción erróneo</string>
+    <string name="error_timeout">Timeout</string>
+    <string name="error_repeated_operation">Operación en curso</string>
+    <string name="error_printer_init_fail">La inicialización de la impresora ha fallado</string>
+    <string name="error_pos_not_configured">El dispositivo no está configurado en el Gateway</string>
+    <string name="error_no_internet">Internet no está disponible, por favor compruebe la conexión</string>
+    <string name="error_merchant_order_ref_too_long">El "order reference" es muy largo</string>
+    <string name="error_invalid_original_data">Datos originales inválidos</string>
+    <string name="error_info_request_fail">La petición de información ha fallado</string>
+    <string name="error_host_not_connected">El host no está disponible, por favor inténtelo más tarde</string>
+    <string name="error_bad_timezone">Zona horaria errónea, por favor configure la zona horaria y pruebe de nuevo</string>
+    <string name="error_bad_timezone_dialog">Zona horaria errónea, por favor configure la zona horaria y pruebe de nuevo.</string>
+    <string name="error_bad_timezone_toast">Por favor, configure la zona horaria</string>
+    <string name="error_null_receipt">El recibo no está disponible, por favor compruebe el \'último recibo\'</string>
 
     <!-- Loader fragment -->
     <string name="loading_header">Cargando</string>
@@ -178,11 +94,7 @@
 
     <!-- Bookmark bar labels -->
     <string name="bookmark_amount">Importe</string>
-    <string name="bookmark_method">Método</string>
-    <string name="bookmark_qr_transaction">Transacción QR</string>
     <string name="bookmark_card_transaction">Transacción con tarjeta</string>
-    <string name="bookmark_other_transaction">Procesando</string>
-    <string name="bookmark_result">Resultado</string>
     <string name="bookmark_receipt">Recibo</string>
     <string name="bookmark_overflow">"Bookmark seleccionado %d es mayor que el número de bookmarks permitido %d"</string>
     <string name="bookmark_zero">El bookmark seleccionado %d es menor que 1"</string>
@@ -196,33 +108,18 @@
     <string name="pinpad_confirm">Enter</string>
 
     <!-- Transaction information footer widget texts -->
-    <string name="transaction_footer_amount">Importe Total %1$s</string>
-    <string name="transaction_footer_card_payment">Pago con tarjeta</string>
-    <string name="transaction_footer_alipay_payment">Pago con Alipay</string>
-    <string name="transaction_footer_wechatpay_payment">Pago con WeChat Pay</string>
-    <string name="transaction_footer_card_refund">Reembolso con tarjeta</string>
-    <string name="transaction_footer_alipay_refund">Reembolso con Alipay</string>
-    <string name="transaction_footer_wechatpay_refund">Reembolso con WeChat Pay</string>
-    <string name="do_not_enter_pin">NO INTRODUZCA EL PIN</string>
-
-    <!-- Progress screen texts -->
-    <string name="transaction_processing">Procesando transacción</string>
-    <string name="printing_receipts">Imprimiendo</string>
-
-    <!-- Popup widget texts -->
-    <string name="popup_confirm">Confirmar</string>
-    <string name="popup_cancel_transaction">¿Desea cancelar la transacción?</string>
-
-    <!-- PaymentMethod enum displayable labels -->
-    <string name="payment_method_card">Tarjeta</string>
-    <string name="payment_method_alipay" translatable="false">Alipay</string>
-    <string name="payment_method_wechat_pay" translatable="false">WeChat Pay</string>
-
-    <!-- TransactionType enum displayable labels -->
-    <string name="transaction_type_purchase">Compra</string>
-    <string name="transaction_type_refund">Reembolso</string>
-
-    <!-- Electronic signature screen texts -->
-    <string name="sign_here">FIRME AQUÍ</string>
+    <string name="do_not_enter_pin">NO introduzca el código PIN</string>
+    
     <string name="bookmark_page">"Página "</string>
+
+    <!-- Bottom app bar -->
+    <string name="bottom_app_bar_card_payment">Pago con tarjeta</string>
+    <string name="bottom_app_bar_refund">Reembolso</string>
+    <string name="bottom_app_bar_start_pre_auth">Preautorización</string>
+    <string name="bottom_app_bar_confirm_pre_auth">Confirm</string>
+    <string name="bottom_app_bar_cancel_pre_auth">Cancelar</string>
+    <string name="bottom_app_bar_last_receipt">Último recibo</string>
+    <string name="bottom_app_bar_day_totals">Totales</string>
+    <string name="bottom_app_bar_card_payment_continue">Continuar</string>
+    <string name="bottom_app_bar_statuses">Statuses</string>
 </resources>

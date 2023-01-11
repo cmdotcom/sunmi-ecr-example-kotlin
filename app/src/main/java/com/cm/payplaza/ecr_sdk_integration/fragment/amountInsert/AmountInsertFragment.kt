@@ -1,7 +1,11 @@
 package com.cm.payplaza.ecr_sdk_integration.fragment.amountInsert
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import com.cm.payplaza.ecr_sdk_integration.R
+import com.cm.payplaza.ecr_sdk_integration.activity.preauth.start.PreAuthActivity
 import com.cm.payplaza.ecr_sdk_integration.databinding.FragmentAmountInsertBinding
 import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragment
@@ -22,6 +26,15 @@ class AmountInsertFragment: BaseEcrFragment<AmountInsertFragmentState,
         return FragmentAmountInsertBinding.inflate(inflater, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (activity is PreAuthActivity) {
+            (activity as PreAuthActivity).setUpMenu()
+            (activity as PreAuthActivity).setMenuStatuses(listOf(Pair(getString(R.string.cancel_payment), true)))
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         viewModel.clearAmount()
@@ -38,8 +51,10 @@ class AmountInsertFragment: BaseEcrFragment<AmountInsertFragmentState,
 
     private fun addDigitToAmountView(newInsertedDigits: Int) {
         Timber.d("addDigitToAmountView")
+        binding.componentAmountView.enableAmountViewShape()
         binding.componentAmountView.setAmount(newInsertedDigits)
         binding.componentNumericKeypad.enableBackspaceAndConfirm()
+        viewModel.enableNextButton()
         if(newInsertedDigits.toString().length == 7) {
             binding.componentNumericKeypad.disableNumericKeypad()
         } else {
@@ -51,13 +66,12 @@ class AmountInsertFragment: BaseEcrFragment<AmountInsertFragmentState,
         Timber.d("initializeView")
         binding.componentAmountView.configureForAmountInsert()
         binding.componentNumericKeypad.setKeypadListener(this)
-        data?.let {
-            (data.storeName + "\n" + data.storeAddress + "\n" + data.storeZipCode + " " + data.storeCity).also { binding.storeInfo.text = it }
-        }
+        viewModel.setupBottomAppBar()
     }
 
     private fun clearView() {
         Timber.d("clearView")
+        binding.componentAmountView.disableAmountViewShape()
         binding.componentAmountView.setAmount(0)
         binding.componentNumericKeypad.clearKeypad()
     }
@@ -70,9 +84,5 @@ class AmountInsertFragment: BaseEcrFragment<AmountInsertFragmentState,
     override fun onKeypadBackspacePressed() {
         Timber.d("onKeypadBackspacePressed")
         viewModel.clearAmount()
-    }
-    override fun onKeypadConfirmPressed() {
-        Timber.d("onKeypadConfirmPressed")
-        viewModel.doPayment()
     }
 }

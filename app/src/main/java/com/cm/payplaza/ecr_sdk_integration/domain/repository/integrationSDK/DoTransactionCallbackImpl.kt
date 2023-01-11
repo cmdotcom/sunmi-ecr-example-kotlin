@@ -10,18 +10,24 @@ import com.cm.androidposintegration.enums.TransactionResult
 import com.cm.androidposintegration.service.callback.TransactionCallback
 import com.cm.androidposintegration.service.callback.beans.ErrorCode
 import com.cm.androidposintegration.service.callback.beans.TransactionResultData
+import com.cm.payplaza.ecr_sdk_integration.R
 import timber.log.Timber
+import java.math.BigDecimal
 
 class DoTransactionCallbackImpl(
     private val localDataRepository: LocalDataRepository,
-    private val integrationSDKCallback: IntegrationSDKManager.IntegrationSDKCallback): TransactionCallback {
+    private val integrationSDKCallback: IntegrationSDKManager.IntegrationSDKCallback
+) : TransactionCallback {
     override fun onCrash() {
         val orderReference = localDataRepository.getOrderReference().toString()
         val transactionResponse = TransactionResponse(
             TransactionResult.REQUEST_RECEIPT,
             orderReference,
             Receipt.empty(),
-            Receipt.empty())
+            Receipt.empty(),
+            BigDecimal.ZERO,
+            BigDecimal.ZERO
+        )
         Timber.d("TransactionResponse - $transactionResponse")
         localDataRepository.increaseOrderReference()
         localDataRepository.clearTransactionData()
@@ -30,19 +36,16 @@ class DoTransactionCallbackImpl(
     }
 
     override fun onError(error: ErrorCode) {
-        val transactionData = localDataRepository.getTransaction()
-        transactionData?.let {
-            val errorStr = SDKError.map.getOrDefault(error.value, "Error")
-            val transactionError = TransactionError(errorStr, error.value)
-            localDataRepository.clearTransactionData()
-            localDataRepository.setTransactionError(transactionError)
-            Timber.e("onError - $error")
-        }
+        val errorStr = SDKError.map.getOrDefault(error.value, R.string.error_occurred)
+        val transactionError = TransactionError(errorStr, error.value)
+        localDataRepository.clearTransactionData()
+        localDataRepository.setTransactionError(transactionError)
+        Timber.e("onError - $error")
         integrationSDKCallback.returnResponse(SDKResponse.ON_ERROR)
     }
 
     override fun onResult(data: TransactionResultData) {
-        when(data.transactionResult) {
+        when (data.transactionResult) {
             TransactionResult.REQUEST_RECEIPT -> setUpRequestReceiptResult(data)
             else -> {
                 data.merchantReceipt?.let {
@@ -72,18 +75,23 @@ class DoTransactionCallbackImpl(
     private fun setUpTransactionResult(data: TransactionResultData) {
         val customerReceipt = Receipt(
             data.customerReceipt?.receiptLines,
-            data.customerReceipt?.signature)
+            data.customerReceipt?.signature
+        )
         var merchantReceipt: Receipt? = null
         data.merchantReceipt?.let {
             merchantReceipt = Receipt(
                 it.receiptLines,
-                it.signature)
+                it.signature
+            )
         }
         val transactionResponse = TransactionResponse(
             data.transactionResult,
             data.orderReference,
             customerReceipt,
-            merchantReceipt)
+            merchantReceipt,
+            data.amount ?: BigDecimal.ZERO,
+            data.tipAmount ?: BigDecimal.ZERO,
+        )
         Timber.d("TransactionResponse - $transactionResponse")
         localDataRepository.increaseOrderReference()
         localDataRepository.clearTransactionData()
@@ -91,10 +99,14 @@ class DoTransactionCallbackImpl(
     }
 
     private fun setUpErrorResult(data: TransactionResultData) {
-        val desc = data.transactionResult.description
-        val transactionError = TransactionError(desc, ErrorCode.NO_ERROR.value)
+        val transactionError = if (data.transactionResult != TransactionResult.SUCCESS) {
+            val desc = data.transactionResult.description
+            TransactionError(R.string.error_occurred, -1, desc)
+        } else {
+            TransactionError(R.string.error_null_receipt, -1, null)
+        }
 
-        Timber.d("TransactionError - $desc")
+        Timber.d("TransactionError - No receipt available")
         localDataRepository.clearTransactionData()
         localDataRepository.setTransactionError(transactionError)
     }

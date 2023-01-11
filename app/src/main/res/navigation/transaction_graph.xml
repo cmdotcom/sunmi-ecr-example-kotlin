@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/transaction_graph"
     app:startDestination="@id/loaderFragment3">
 
     <fragment
         android:id="@+id/amountInsertFragment"
         android:name="com.cm.payplaza.ecr_sdk_integration.fragment.amountInsert.AmountInsertFragment"
-        android:label="AmountInsertFragment" />
+        android:label="AmountInsertFragment"
+        tools:layout="@layout/fragment_amount_insert"/>
     <fragment
         android:id="@+id/loaderFragment3"
         android:name="com.cm.payplaza.ecr_sdk_integration.fragment.loader.LoaderFragment"
-        android:label="LoaderFragment" >
+        android:label="LoaderFragment"
+        tools:layout="@layout/fragment_loader">
         <action
             android:id="@+id/action_loaderFragment3_to_amountInsertFragment"
             app:destination="@id/amountInsertFragment" />
+        <action
+            android:id="@+id/action_loaderFragment3_to_errorFragment5"
+            app:destination="@id/errorFragment5" />
     </fragment>
+    <fragment
+        android:id="@+id/errorFragment5"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragment"
+        android:label="ErrorFragment"
+        tools:layout="@layout/fragment_error"/>
 </navigation>

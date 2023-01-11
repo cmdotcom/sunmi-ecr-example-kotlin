@@ -10,5 +10,4 @@ sealed class NumericKeypadComponentState: BaseEcrComponentViewState() {
     object EnableNumericKeypad: NumericKeypadComponentState()
     object ClearKeypad: NumericKeypadComponentState()
     object EnableBackspace: NumericKeypadComponentState()
-    object EnableContinue: NumericKeypadComponentState()
 }

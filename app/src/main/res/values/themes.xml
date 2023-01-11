@@ -1,47 +1,54 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.ECR_SDK_Integration" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorPrimary">@color/blue_100</item>
+        <item name="colorPrimaryVariant">@color/yellow</item>
+        <item name="colorOnPrimary">@color/primaryFontColor</item>
+
+        <item name="android:statusBarColor">@color/black_100</item>
+
+        <!-- This is for the divider line in the drawer layout navigationView.-->
+        <item name="colorOutline">@color/mediumShadeColor</item>
+
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
+        <!-- colorSecondary is also the color of the date picker. -->
+        <item name="colorSecondary">@color/blue_100</item>
+        <item name="colorSecondaryVariant">@color/red</item>
+        <item name="colorOnSecondary">@color/yellow</item>
 
-    <style name="Widget.Button.Payplaza.Keypad.Confirm" parent="Widget.Button.Payplaza.Keypad">
-        <item name="android:background">?successColor</item>
-        <item name="android:textAppearance">@style/TextAppearance.Button.Pinpad</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
-    </style>
+        <!-- color of active menu item in navigation drawer -->
+        <item name="colorSecondaryContainer">@color/lightShadeColor</item>
 
-    <style name="BaseStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:textColor">@color/primaryFontColor</item>
         <item name="android:colorBackground">@color/windowBackgroundColor</item>
-        <item name="successColor">@color/successGreen</item>
-        <item name="warningColor">@color/warningYellow</item>
-        <item name="errorColor">@color/errorRed</item>
+
+        <item name="successColor">@color/green</item>
+        <item name="warningColor">@color/yellow</item>
+        <item name="errorColor">@color/red</item>
+
         <item name="primaryAccentColor">@color/primaryColor</item>
-        <item name="brandingLogo">@drawable/branding</item>
-        <item name="progressAnimation">@drawable/loading_animation</item>
-        <item name="regularFont">@font/sourcesanspro</item>
-        <item name="mediumFont">@font/sourcesanspro_medium</item>
-        <item name="lightFont">@font/sourcesanspro_light</item>
+        <item name="regularFont">@font/notosans_regular</item>
+        <item name="mediumFont">@font/notosans_medium</item>
+        <item name="lightFont">@font/notosans_light</item>
         <item name="bookmarkBarVisibility">visible</item>
         <item name="bookmarkBarGlyphs">@array/sourcesanspro_glyphs</item>
         <item name="contentViewTopOffset">@dimen/content_offset_bookmarkbar</item>
+
+        <!-- Branded items -->
+        <item name="background">@color/windowBackgroundColor</item>
+        <item name="itemBackground">@drawable/background_keypad_button</item>
+        <item name="number">@color/blue_120</item>
+        <item name="numberBookmarks">@color/black_140</item>
+        <item name="textFillColor">@color/blue_110</item>
+        <item name="divider">@color/black_10</item>
+        <item name="materialAlertDialogTheme">@style/AppTheme.MaterialAlertDialog</item>
     </style>
 
     <!-- The launcher theme, showing a static background to avoid the "white screen" issue -->
-    <style name="Base.Launcher" parent="BaseStyle">
+    <style name="Base.Launcher" parent="AppTheme">
         <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:windowBackground">@drawable/background_launcher</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 </resources>

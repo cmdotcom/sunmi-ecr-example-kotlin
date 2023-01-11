@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Keypad.BackspaceButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:background">@null</item>
+        <item name="srcCompat">@drawable/ic_backspace</item>
+        <item name="iconTint">@color/blue_100</item>
+        <item name="iconSize">25dp</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+</resources>

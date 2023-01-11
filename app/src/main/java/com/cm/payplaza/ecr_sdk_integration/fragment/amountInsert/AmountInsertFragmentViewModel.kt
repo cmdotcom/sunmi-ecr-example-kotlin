@@ -1,7 +1,9 @@
 package com.cm.payplaza.ecr_sdk_integration.fragment.amountInsert
 
+import android.view.View
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewModel
+import com.cm.payplaza.ecr_sdk_integration.uicomponents.bottomAppBarComponent.BottomAppBarComponent
 
 class AmountInsertFragmentViewModel(
     private val localDataRepository: LocalDataRepository
@@ -29,5 +31,21 @@ class AmountInsertFragmentViewModel(
 
     fun doPayment() {
         updateView(AmountInsertFragmentState.NextStep(_insertedDigits))
+    }
+
+    fun setupBottomAppBar() {
+        val listener = object: BottomAppBarComponent.ClickListener {
+            override fun onActionButtonPressed() {
+                doPayment()
+            }
+
+            override fun onPrintButtonPressed() {}
+
+        }
+        updateView(AmountInsertFragmentState.SetupBottomAppBar(listener))
+    }
+
+    fun enableNextButton() {
+        updateView(AmountInsertFragmentState.EnableNextButton)
     }
 }

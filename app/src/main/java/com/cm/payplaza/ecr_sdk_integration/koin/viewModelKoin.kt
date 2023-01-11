@@ -13,7 +13,7 @@ import com.cm.payplaza.ecr_sdk_integration.fragment.dateInsert.DateInsertFragmen
 import com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragmentViewModel
 import com.cm.payplaza.ecr_sdk_integration.fragment.loader.LoaderFragmentViewModel
 import com.cm.payplaza.ecr_sdk_integration.fragment.passwordInsert.PasswordInsertFragmentViewModel
-import com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewFragmentViewModel
+import com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewModel
 import com.cm.payplaza.ecr_sdk_integration.fragment.stanInsert.StanInsertViewModel
 import com.cm.payplaza.ecr_sdk_integration.fragment.statuses.StatusesFragmentViewModel
 import com.cm.payplaza.ecr_sdk_integration.uicomponents.amountViewComponent.AmountViewComponentViewModel
@@ -37,7 +37,7 @@ val viewModelModule = module {
     viewModel { NumericKeypadComponentViewModel() }
 
     // Fragment view model
-    viewModel { ReceiptViewFragmentViewModel(get(), get()) }
+    viewModel { ReceiptViewModel(get(), get()) }
     viewModel { LoaderFragmentViewModel(get()) }
     viewModel { AmountInsertFragmentViewModel(get()) }
     viewModel { ErrorFragmentViewModel(get()) }

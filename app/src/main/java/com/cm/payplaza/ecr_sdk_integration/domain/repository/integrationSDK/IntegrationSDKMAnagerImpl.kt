@@ -2,7 +2,9 @@ package com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK
 
 import com.cm.androidposintegration.beans.*
 import com.cm.androidposintegration.service.PosIntegrationService
+import com.cm.payplaza.ecr_sdk_integration.BuildConfig
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
+import timber.log.Timber
 
 class IntegrationSDKMAnagerImpl(
     private val localDataRepository: LocalDataRepository,

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.databinding.ComponentAmountViewBinding
 import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
@@ -12,11 +13,16 @@ import org.koin.core.component.inject
 import timber.log.Timber
 import java.util.*
 
-class AmountViewComponent: BaseEcrComponment<AmountViewComponentViewState, AmountViewComponentViewModel> {
+class AmountViewComponent :
+    BaseEcrComponment<AmountViewComponentViewState, AmountViewComponentViewModel> {
 
-    constructor(context: Context): super(context)
-    constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet)
-    constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int): super(context, attributeSet, defStyleAttr)
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
+    constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attributeSet,
+        defStyleAttr
+    )
 
     override val viewModel: AmountViewComponentViewModel by inject()
     private val binding: ComponentAmountViewBinding
@@ -34,21 +40,12 @@ class AmountViewComponent: BaseEcrComponment<AmountViewComponentViewState, Amoun
     }
 
     override fun render(state: AmountViewComponentViewState) {
-        when(state) {
-            is AmountViewComponentViewState.Init -> { }
-            is AmountViewComponentViewState.UpdateInsertedDigits -> binding.amountViewAmount.text = state.newInsertedDigits
+        when (state) {
+            is AmountViewComponentViewState.Init -> {}
+            is AmountViewComponentViewState.UpdateInsertedDigits -> updateInsertedDigits(state.newInsertedDigits)
             AmountViewComponentViewState.AddPinToken -> addPinToken()
-            AmountViewComponentViewState.ClearView -> binding.amountViewAmount.text = ""
+            AmountViewComponentViewState.ClearView -> clearAmountView()
             is AmountViewComponentViewState.SetUpCurrency -> setUpCurrency(state.merchantData)
-        }
-    }
-
-    private fun setUpCurrency(terminalData: TerminalData?) {
-        terminalData?.let {
-            terminalData.currency?.let {
-                binding.amountViewCurrency.text = it.symbol
-                binding.amountViewAmount.text = getAmountPlaceHolder(it)
-            }
         }
     }
 
@@ -57,7 +54,8 @@ class AmountViewComponent: BaseEcrComponment<AmountViewComponentViewState, Amoun
         binding.amountViewContainer.visibility = View.VISIBLE
         binding.amountViewCurrency.visibility = View.VISIBLE
         binding.amountViewCalendar.visibility = View.INVISIBLE
-        binding.amountViewAmount.text = context.getString(R.string.component_amount_view_initial_amount)
+        binding.amountViewAmount.text =
+            context.getString(R.string.component_amount_view_initial_amount)
         viewModel.setUpCurrency()
     }
 
@@ -69,8 +67,13 @@ class AmountViewComponent: BaseEcrComponment<AmountViewComponentViewState, Amoun
     // Password insert
     fun configureForPasswordInsert() {
         Timber.d("configureForPasswordInsert")
-        binding.amountViewContainer.visibility = View.GONE
+        binding.amountViewCurrencyContainer.visibility = View.GONE
+        binding.amountViewDivider.visibility = View.GONE
+        binding.amountViewCalendar.visibility = View.GONE
+        binding.amountViewCurrency.visibility = View.GONE
         binding.amountViewAmount.textAlignment = TEXT_ALIGNMENT_CENTER
+        binding.amountViewContainer.visibility = View.VISIBLE
+        disableAmountViewShape()
     }
 
     fun addPasswordToken() {
@@ -81,9 +84,15 @@ class AmountViewComponent: BaseEcrComponment<AmountViewComponentViewState, Amoun
     // Stan insert
     fun configureForStanInsert() {
         Timber.d("configureForStanInsert")
-        binding.amountViewContainer.visibility = View.GONE
+        binding.amountViewCurrencyContainer.visibility = View.GONE
+        binding.amountViewDivider.visibility = View.GONE
+        binding.amountViewCalendar.visibility = View.GONE
+        binding.amountViewCurrency.visibility = View.GONE
         binding.amountViewAmount.textAlignment = TEXT_ALIGNMENT_CENTER
+        binding.amountViewContainer.visibility = View.VISIBLE
+        disableAmountViewShape()
     }
+
     fun addStanDigit(stanDigits: Int) {
         Timber.d("addStanDigit - $stanDigits")
         viewModel.addStanDigits(stanDigits)
@@ -109,13 +118,38 @@ class AmountViewComponent: BaseEcrComponment<AmountViewComponentViewState, Amoun
         "$text*".also { binding.amountViewAmount.text = it }
     }
 
+    private fun clearAmountView() {
+        binding.amountViewAmount.text = ""
+    }
+
+    private fun updateInsertedDigits(newInsertedDigits: String) {
+        binding.amountViewAmount.text = newInsertedDigits
+    }
+
+    fun enableAmountViewShape() {
+        binding.amountViewContainer.background =
+            AppCompatResources.getDrawable(context, R.drawable.shape_selected_amount_view)
+    }
+
+    fun disableAmountViewShape() {
+        binding.amountViewContainer.background =
+            AppCompatResources.getDrawable(context, R.drawable.shape_amount_view)
+    }
+
+    private fun setUpCurrency(terminalData: TerminalData?) {
+        terminalData?.currency?.let {
+            binding.amountViewCurrency.text = it.symbol
+            binding.amountViewAmount.text = getAmountPlaceHolder(it)
+        }
+    }
+
     private fun getAmountPlaceHolder(currency: Currency): String {
         var placeHolder = "0"
 
-        if(currency.defaultFractionDigits > 0) {
+        if (currency.defaultFractionDigits > 0) {
             placeHolder = "0."
         }
-        for(i in 0 until currency.defaultFractionDigits) {
+        for (i in 0 until currency.defaultFractionDigits) {
             placeHolder += "0"
         }
 

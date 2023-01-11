@@ -12,21 +12,46 @@
         android:theme="${launcherTheme}"
         android:fullBackupContent="true"
         android:extractNativeLibs="true">
+
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+
         <activity
             android:name=".activity.payment.PaymentActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.transactionResult.TransactionResultActivity"/>
-        <activity android:name=".activity.refund.RefundActivity"/>
-        <activity android:name=".activity.lastReceipt.LastReceiptActivity"/>
-        <activity android:name=".activity.totals.TotalsActivity"/>
-        <activity android:name=".activity.statuses.StatusesActivity"/>
-        <activity android:name=".activity.preauth.start.PreAuthActivity"/>
-        <activity android:name=".activity.preauth.finish.FinishPreauthActivity"/>
+        <activity
+            android:name=".activity.transactionResult.TransactionResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.refund.RefundActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.lastReceipt.LastReceiptActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.totals.TotalsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.statuses.StatusesActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.preauth.start.PreAuthActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.preauth.finish.FinishPreauthActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

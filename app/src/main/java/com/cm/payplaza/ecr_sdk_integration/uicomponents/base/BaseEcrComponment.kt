@@ -13,6 +13,7 @@ abstract class BaseEcrComponment<CS: BaseEcrComponentViewState, CVM: BaseEcrComp
     constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int): super(context, attributeSet, defStyleAttr)
 
     protected fun init() {
+        if (isInEditMode) return
         viewModel.state.observe(context as AppCompatActivity, {
             if(it is CS) {
                 render(it)

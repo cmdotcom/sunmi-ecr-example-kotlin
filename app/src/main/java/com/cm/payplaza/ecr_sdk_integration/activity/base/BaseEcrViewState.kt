@@ -9,4 +9,5 @@ open class BaseEcrViewState: Any() {
     data class RequestInfo(val terminalData: TerminalData?): BaseEcrViewState()
     object RequestInfoFailed: BaseEcrViewState()
     object RequestInfoLoader: BaseEcrViewState()
+    object Error: BaseEcrViewState()
 }

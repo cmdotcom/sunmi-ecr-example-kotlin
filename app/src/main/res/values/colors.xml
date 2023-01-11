@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
     <color name="fragment_bg">@android:color/white</color>
 
+    <color name="white">@android:color/white</color>
+
     <!-- Default window background -->
-    <color name="windowBackgroundColor">#FFFFFF</color>
+    <color name="windowBackgroundColor">@android:color/white</color>
 
     <!-- Winow background color during refund transactions -->
     <color name="refundBackgroundColor">#FFEBEE</color>
@@ -25,4 +21,32 @@
 
     <!-- Inactive breadcrumb bullet -->
     <color name="darkShadeColor">#727372</color>
+
+    <color name="blue_10">#e5f2ff</color>
+    <color name="blue_80">#3399ff</color>
+    <color name="blue_100">#007FFF</color>
+    <color name="blue_110">#0074E8</color>
+    <color name="blue_120">#036BD2</color>
+
+    <color name="black_5">#F5F5F6</color>
+    <color name="black_10">#EAEBEE</color>
+    <color name="black_20">#D6D9DD</color>
+    <color name="black_40">#AEB3BB</color>
+    <color name="black_71">#6f7786</color>
+    <color name="black_100">#344055</color>
+    <color name="black_140">#101E1E</color>
+
+    <color name="red_100">#FF495C</color>
+    <color name="red_118">#D44050</color>
+
+    <color name="company_primary">@color/blue_80</color>
+    <color name="primary_half_transparent">#0074E8</color>
+    <color name="half_transparent_grey">#8C000000</color>
+
+    <color name="green_10">#eaf4d8</color>
+    <color name="green_100">#95c93d</color>
+    <color name="green_140">#2A9066</color>
+
+    <color name="purple_100">#57068c</color>
+
 </resources>

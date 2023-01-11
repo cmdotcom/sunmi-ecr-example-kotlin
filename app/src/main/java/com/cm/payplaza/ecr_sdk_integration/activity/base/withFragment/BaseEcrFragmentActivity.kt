@@ -10,8 +10,8 @@ import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragment
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
 import timber.log.Timber
 
-abstract class BaseEcrFragmentActivity<
-        VM: BaseEcrFragmentActivityViewModel>: BaseEcrActivity<VM>() {
+abstract class BaseEcrFragmentActivity<VM : BaseEcrFragmentActivityViewModel> :
+    BaseEcrActivity<VM>() {
     protected lateinit var navController: NavController
 
     fun onAttachedFragment(fragment: Fragment?) {
@@ -30,9 +30,9 @@ abstract class BaseEcrFragmentActivity<
     }
 
     override fun onBackPressed() {
-        if (binding.ecrDrawer.isDrawerOpen(GravityCompat.START)) {
+        if (binding.drawer.isDrawerOpen(GravityCompat.START)) {
             Timber.d("getActivityNavController")
-            binding.ecrDrawer.closeDrawer(GravityCompat.START)
+            binding.drawer.closeDrawer(GravityCompat.START)
         } else {
             Timber.d("getActivityNavController")
             super.onBackPressed()

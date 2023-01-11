@@ -2,6 +2,7 @@ package com.cm.payplaza.ecr_sdk_integration.fragment.stanInsert
 
 import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
+import com.cm.payplaza.ecr_sdk_integration.uicomponents.bottomAppBarComponent.BottomAppBarComponent
 
 sealed class StanInsertState: BaseEcrFragmentViewState() {
     data class Init(val merchantData: TerminalData?): StanInsertState()
@@ -10,4 +11,5 @@ sealed class StanInsertState: BaseEcrFragmentViewState() {
     data class StanInserted(val stanDigits: Int): StanInsertState()
     data class AddStanDigit(val stanDigits: Int): StanInsertState()
     data class SaveStand(val stand: String): StanInsertState()
+    data class SetupBottomAppBar(val listener: BottomAppBarComponent.ClickListener): StanInsertState()
 }

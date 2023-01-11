@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primaryColor">#0077BA</color>
-    <color name="successGreen">#509ED8</color>
-    <color name="warningYellow">#F1E435</color>
-    <color name="errorRed">#DA420F</color>
+    <color name="green">#509ED8</color>
+    <color name="yellow">#F1E435</color>
+    <color name="red">#DA420F</color>
+
+    <color name="backspace_button">@color/blue_100</color>
+    <color name="progress_bar">@color/blue_100</color>
 </resources>

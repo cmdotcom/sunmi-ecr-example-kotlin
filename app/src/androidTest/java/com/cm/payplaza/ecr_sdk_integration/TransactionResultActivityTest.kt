@@ -1,10 +1,9 @@
 package com.cm.payplaza.ecr_sdk_integration
 
-import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.lifecycle.Lifecycle
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingPolicies
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -12,7 +11,7 @@ import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalData
 import com.cm.payplaza.ecr_sdk_integration.entity.Transaction
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionError
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionResponse
-import com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewFragment
+import com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptFragment
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -24,7 +23,7 @@ import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class TransactionResultActivityTest: KoinComponent {
-    private lateinit var fragmentScenario: FragmentScenario<ReceiptViewFragment>
+
     private val localDataRepository: LocalDataRepository by inject()
     private val purchaseTransaction: Transaction by inject(qualifier = named("purchaseTransaction"))
     private val transactionResultSuccess: TransactionResponse by inject(qualifier = named("transactionResultSuccess"))
@@ -46,13 +45,10 @@ class TransactionResultActivityTest: KoinComponent {
 
     @Test
     fun showReceiptFragment() {
-        fragmentScenario = launchFragmentInContainer()
-        onView(withId(R.id.receipt_view_close_button)).check(matches(isDisplayed()))
-        onView(withId(R.id.receipt_view_close_button)).check(matches(isClickable()))
-        onView(withId(R.id.receipt_view_button_print)).check(matches(isClickable()))
-        onView(withId(R.id.textview_receipt)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
-        onView(withId(R.id.receipt_view_close_button)).perform(ViewActions.click())
+        val fragmentScenario = launchFragmentInContainer<ReceiptFragment>(
+            initialState = Lifecycle.State.RESUMED, themeResId = R.style.AppTheme
+        )
+        
         onView(withId(R.id.textview_receipt)).check(matches(isDisplayed()))
         Thread.sleep(2000)
     }

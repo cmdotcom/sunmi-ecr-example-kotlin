@@ -37,7 +37,6 @@
 
     <!-- Custom theme attributes -->
     <declare-styleable name="BrandingAttributes">
-        <attr name="brandingLogo" format="reference"/>
         <attr name="progressAnimation" format="reference"/>
         <attr name="transactionCompleteAnimation" format="reference"/>
         <attr name="regularFont" format="reference"/>

@@ -36,7 +36,7 @@ StatusesAdapter.ItemClickedListener {
         val adapter = StatusesAdapter(data.data, this)
         binding.statusesRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.statusesRecyclerView.adapter = adapter
-        binding.statusesBackButton.setOnClickListener { viewModel.continueToNewPayment() }
+        viewModel.setupBottomAppBar()
     }
 
     override fun onClick(status: StatusData) {

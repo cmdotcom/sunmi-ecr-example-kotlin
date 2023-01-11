@@ -10,13 +10,15 @@ import com.cm.androidposintegration.enums.TransactionResult
 import com.cm.androidposintegration.service.callback.ReceiptCallback
 import com.cm.androidposintegration.service.callback.beans.ErrorCode
 import com.cm.androidposintegration.service.callback.beans.LastReceiptResultData
+import com.cm.payplaza.ecr_sdk_integration.R
+import java.math.BigDecimal
 
 class TotalsCallbackImpl(
     private val localDataRepository: LocalDataRepository,
     private val integrationSDKCallback: IntegrationSDKManager.IntegrationSDKCallback
-): ReceiptCallback {
+) : ReceiptCallback {
     override fun onCrash() {
-        val errorStr = SDKError.map.getOrDefault(-1, "Error")
+        val errorStr = SDKError.map.getOrDefault(-1, R.string.error_occurred)
         val transactionError = TransactionError(errorStr, -1)
         localDataRepository.clearTransactionData()
         localDataRepository.setTransactionError(transactionError)
@@ -24,8 +26,8 @@ class TotalsCallbackImpl(
     }
 
     override fun onError(error: ErrorCode) {
-        val errorStr = SDKError.map.getOrDefault(error.value, "Error")
-        val transactionError = TransactionError(errorStr, -1)
+        val errorStr = SDKError.map.getOrDefault(error.value, R.string.error_occurred)
+        val transactionError = TransactionError(errorStr, error.value)
         localDataRepository.clearTransactionData()
         localDataRepository.setTransactionError(transactionError)
         integrationSDKCallback.returnResponse(SDKResponse.ON_ERROR)
@@ -35,12 +37,16 @@ class TotalsCallbackImpl(
         data.receiptData?.let {
             val receipt = Receipt(
                 it.receiptLines,
-                it.signature)
+                it.signature
+            )
             val transactionResponse = TransactionResponse(
                 TransactionResult.SUCCESS,
                 "",
                 receipt,
-                null)
+                null,
+                BigDecimal.ZERO,
+                BigDecimal.ZERO
+            )
             localDataRepository.increaseOrderReference()
             localDataRepository.clearTransactionData()
             localDataRepository.setTransactionResponse(transactionResponse)

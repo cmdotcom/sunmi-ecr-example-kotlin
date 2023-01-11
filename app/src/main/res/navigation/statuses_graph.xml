@@ -32,10 +32,14 @@
     </fragment>
     <fragment
         android:id="@+id/receiptViewFragment3"
-        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewFragment"
+        android:name="com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptFragment"
         android:label="ReceiptViewFragment" >
         <action
             android:id="@+id/action_receiptViewFragment3_to_statusesFragment4"
             app:destination="@id/statusesFragment" />
+        <argument
+            android:name="dayTotals"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
 </navigation>

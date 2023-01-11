@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK.IntegrationSDKManager
+import com.cm.payplaza.ecr_sdk_integration.entity.TransactionError
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -26,8 +28,8 @@ abstract class BaseEcrViewModel: ViewModel(),
     }
 
     fun requestInfo() {
+        Timber.d("requestInfo()")
         updateView(BaseEcrViewState.RequestInfoLoader)
-        Timber.d("requestInfo")
         val callback = object: IntegrationSDKManager.IntegrationSDKCallback {
             override fun returnResponse(sdkResponse: SDKResponse) {
                 when(sdkResponse) {
@@ -43,8 +45,14 @@ abstract class BaseEcrViewModel: ViewModel(),
     }
 
     open fun init() = updateView(BaseEcrViewState.Init(localDataRepository.getTerminalData()))
+
     protected open fun setUpData() {
         val terminalData = localDataRepository.getTerminalData()
         updateView(BaseEcrViewState.RequestInfo(terminalData))
+    }
+
+    fun error() {
+        val transactionError = TransactionError(R.string.error_occurred, -1)
+        localDataRepository.setTransactionError(transactionError)
     }
 }

@@ -33,9 +33,10 @@ class EcrApplication: Application() {
 
         // Set language
         val current = LocaleHelper.getLocale()
+        val location = LocaleHelper.getLocation()
         val savedLang = LocaleHelper.getPersistedData(this@EcrApplication)
         if(current != savedLang) {
-            LocaleHelper.setLocale(this@EcrApplication, savedLang)
+            LocaleHelper.setLocale(this@EcrApplication, savedLang, location)
         }
     }
 }

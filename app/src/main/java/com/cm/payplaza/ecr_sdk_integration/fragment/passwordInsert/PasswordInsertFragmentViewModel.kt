@@ -2,6 +2,7 @@ package com.cm.payplaza.ecr_sdk_integration.fragment.passwordInsert
 
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewModel
+import com.cm.payplaza.ecr_sdk_integration.uicomponents.bottomAppBarComponent.BottomAppBarComponent
 import com.cm.payplaza.ecr_sdk_integration.utils.Configuration
 import timber.log.Timber
 
@@ -27,12 +28,28 @@ class PasswordInsertFragmentViewModel(
         updateView(PasswordInsertFragmentState.ClearPinTokens)
     }
 
-    fun checkPin() {
+    fun showWrongPasswordDialog() {
+        updateView(PasswordInsertFragmentState.ShowWrongPasswordDialog)
+    }
+
+    private fun checkPin() {
         if(Configuration.REFUND_PIN == _password.toString()) {
             updateView(PasswordInsertFragmentState.OkPin)
         } else {
             _password = 0
             updateView(PasswordInsertFragmentState.WrongPin)
         }
+    }
+
+    fun setupBottomAppBar() {
+        val listener = object: BottomAppBarComponent.ClickListener {
+            override fun onActionButtonPressed() {
+                Timber.d("onKeypadConfirmPressed")
+                checkPin()
+            }
+            override fun onPrintButtonPressed() {}
+
+        }
+        updateView(PasswordInsertFragmentState.SetupBottomAppBar(listener))
     }
 }

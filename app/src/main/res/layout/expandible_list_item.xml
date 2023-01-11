@@ -3,25 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/windowBackgroundColor">
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/expandible_list_item_indent"
         android:layout_width="30dp"
         android:layout_height="48dp"
         android:background="@android:color/transparent"
-        android:visibility="visible"/>
+        android:visibility="visible" />
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/expandible_list_item_icon"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/white"
         android:src="@drawable/bookmark_bar_bullet_bg"
-        android:visibility="visible"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp"/>
+        android:visibility="visible" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/expandible_list_item_text"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginStart="36dp"
-        android:gravity="start|center"/>
+        android:layout_marginStart="16dp"
+        android:gravity="start|center"
+        android:textColor="@color/darkShadeColor" />
 </androidx.appcompat.widget.LinearLayoutCompat>

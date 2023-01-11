@@ -9,42 +9,45 @@ import com.cm.payplaza.ecr_sdk_integration.uicomponents.base.BaseEcrComponment
 import org.koin.core.component.inject
 import timber.log.Timber
 
-class NumericKeypadComponent: BaseEcrComponment<NumericKeypadComponentState, NumericKeypadComponentViewModel> {
+class NumericKeypadComponent :
+    BaseEcrComponment<NumericKeypadComponentState, NumericKeypadComponentViewModel> {
 
-    constructor(context: Context): super(context)
-    constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet)
-    constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int): super(context, attributeSet, defStyleAttr)
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
+    constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attributeSet,
+        defStyleAttr
+    )
 
     interface ClickListener {
         fun onKeypadDigitPressed(digit: Int)
         fun onKeypadBackspacePressed()
-        fun onKeypadConfirmPressed()
     }
 
     override val viewModel: NumericKeypadComponentViewModel by inject()
     private val binding: ComponentNumericKeypadBinding
     private var listener: ClickListener = object : ClickListener {
-        override fun onKeypadDigitPressed(digit: Int) { }
-        override fun onKeypadBackspacePressed() { }
-        override fun onKeypadConfirmPressed() { }
+        override fun onKeypadDigitPressed(digit: Int) {}
+        override fun onKeypadBackspacePressed() {}
     }
 
     init {
-        val view = LayoutInflater.from(context).inflate(R.layout.component_numeric_keypad, this, true)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.component_numeric_keypad, this, true)
         binding = ComponentNumericKeypadBinding.bind(view)
         orientation = VERTICAL
         super.init()
     }
 
     override fun render(state: NumericKeypadComponentState) {
-        when(state) {
+        when (state) {
             NumericKeypadComponentState.Init -> setUpKeyPad()
             NumericKeypadComponentState.DisableBackSpaceAndConfirm -> disableBackSpaceAndConfirm()
             NumericKeypadComponentState.EnableBackSpaceAndConfirm -> enableBackSpaceAndConfirm()
             NumericKeypadComponentState.EnableNumericKeypad -> setIsEnableKeypad(true)
             NumericKeypadComponentState.DisableNumericKeypad -> setIsEnableKeypad(false)
             NumericKeypadComponentState.EnableBackspace -> setIsEnableBackspaceButton(true)
-            NumericKeypadComponentState.EnableContinue -> setIsEnableConfirmButton(true)
             NumericKeypadComponentState.ClearKeypad -> {
                 setIsEnableKeypad(true)
                 disableBackspaceAndConfirm()
@@ -55,13 +58,11 @@ class NumericKeypadComponent: BaseEcrComponment<NumericKeypadComponentState, Num
     private fun enableBackSpaceAndConfirm() {
         Timber.d("enableBackSpaceAndConfirm")
         setIsEnableBackspaceButton(true)
-        setIsEnableConfirmButton(true)
     }
 
     private fun disableBackSpaceAndConfirm() {
         Timber.d("disableBackSpaceAndConfirm")
         setIsEnableBackspaceButton(false)
-        setIsEnableConfirmButton(false)
     }
 
     fun setKeypadListener(newListener: ClickListener) {
@@ -99,17 +100,11 @@ class NumericKeypadComponent: BaseEcrComponment<NumericKeypadComponentState, Num
         viewModel.enableBackspace()
     }
 
-    fun enableContinue() {
-        Timber.d("enableContinue")
-        viewModel.enableContinue()
-    }
-
     private fun setUpKeyPad() {
         Timber.d("setUpKeyPad")
         setIsEnableKeypad(true)
         addClickListenersToKeypad()
         setIsEnableBackspaceButton(false)
-        setIsEnableConfirmButton(false)
         updateButtonsAlpha()
     }
 
@@ -140,7 +135,6 @@ class NumericKeypadComponent: BaseEcrComponment<NumericKeypadComponentState, Num
         binding.keypadButton7.setOnClickListener { listener.onKeypadDigitPressed(7) }
         binding.keypadButton8.setOnClickListener { listener.onKeypadDigitPressed(8) }
         binding.keypadButton9.setOnClickListener { listener.onKeypadDigitPressed(9) }
-        binding.keypadButtonConfirm.setOnClickListener { listener.onKeypadConfirmPressed() }
         binding.keypadButtonBackspace.setOnClickListener { listener.onKeypadBackspacePressed() }
     }
 
@@ -150,16 +144,10 @@ class NumericKeypadComponent: BaseEcrComponment<NumericKeypadComponentState, Num
         updateButtonsAlpha()
     }
 
-    private fun setIsEnableConfirmButton(isEnable: Boolean) {
-        Timber.d("setIsEnableConfirmButton - $isEnable")
-        binding.keypadButtonConfirm.isEnabled = isEnable
-        updateButtonsAlpha()
-    }
-
     private fun updateButtonsAlpha() {
         Timber.d("updateButtonsAlpha")
-        binding.keypadButtonBackspace.alpha = if (binding.keypadButtonBackspace.isEnabled) 1f else .25f
-        binding.keypadButtonConfirm.alpha = if (binding.keypadButtonConfirm.isEnabled) 1f else .25f
+        binding.keypadButtonBackspace.alpha =
+            if (binding.keypadButtonBackspace.isEnabled) 1f else .25f
         binding.keypadButton0.alpha = if (binding.keypadButton0.isEnabled) 1f else .25f
         binding.keypadButton1.alpha = if (binding.keypadButton1.isEnabled) 1f else .25f
         binding.keypadButton2.alpha = if (binding.keypadButton2.isEnabled) 1f else .25f

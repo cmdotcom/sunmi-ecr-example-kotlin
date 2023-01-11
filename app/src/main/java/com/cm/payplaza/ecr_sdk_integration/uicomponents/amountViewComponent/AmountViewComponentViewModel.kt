@@ -13,7 +13,7 @@ class AmountViewComponentViewModel(
     override fun init() = updateView(AmountViewComponentViewState.Init)
 
     fun formatAmount(newInsertedDigits: Int) {
-        val formattedAmount = FormatUtils.formatAmount(newInsertedDigits, _currencyExponent)
+        val formattedAmount = FormatUtils().formatAmount(newInsertedDigits, _currencyExponent)
         updateView(AmountViewComponentViewState.UpdateInsertedDigits(formattedAmount))
     }
 
@@ -24,7 +24,7 @@ class AmountViewComponentViewModel(
     fun addStanDigits(stanDigits: Int) = updateView(AmountViewComponentViewState.UpdateInsertedDigits(stanDigits.toString()))
 
     fun formatDate(date: Date) {
-        val formattedDate = FormatUtils.formatDateForDateView(date)
+        val formattedDate = FormatUtils().formatDateForDateView(date)
         updateView(AmountViewComponentViewState.UpdateInsertedDigits(formattedDate))
     }
 

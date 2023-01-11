@@ -19,9 +19,13 @@ data class Transaction(
     val refundStan: String?
 ): Entity()
 data class TransactionError(
-    val desc: String,
-    val value: Int
-): Entity()
+    val stringId: Int,
+    val value: Int,
+    val transactionMessage: String?
+): Entity() {
+    constructor(stringId: Int,
+                value: Int): this(stringId, value, null)
+}
 data class Receipt(
     val receiptLines: Array<String>?,
     val signature: ByteArray?
@@ -68,7 +72,9 @@ data class TransactionResponse(
     val result: TransactionResult,
     val orderReference: String,
     val customerReceipt: Receipt,
-    val merchantReceipt: Receipt?
+    val merchantReceipt: Receipt?,
+    val transactionAmount: BigDecimal,
+    val tippingAmount: BigDecimal,
 ): Entity()
 data class TerminalData(
     val deviceSerialNumber: String?,
@@ -134,7 +140,7 @@ data class StatusData(
             val receipt: Receipt = data.receipt?.let {
                 Receipt(it.receiptLines, it.signature)
             } ?: run { Receipt.empty() }
-            val date = FormatUtils.getDateFromReceipt(receipt)
+            val date = FormatUtils().getDateFromReceipt(receipt)
             return StatusData(
                 data.amount,
                 data.currency,

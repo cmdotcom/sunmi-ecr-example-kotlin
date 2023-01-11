@@ -114,7 +114,7 @@ class PaymentActivityTest: KoinComponent {
         activityRule.scenario.onActivity { a ->
             a.onSupportNavigateUp()
         }
-        onView(withId(R.id.ecr_drawer)).check(matches(isDisplayed()))
-        onView(withId(R.id.ecr_navigation)).check(matches(isDisplayed()))
+        onView(withId(R.id.drawer)).check(matches(isDisplayed()))
+        onView(withId(R.id.ecr_preauth_expandible_list)).check(matches(isDisplayed()))
     }
 }

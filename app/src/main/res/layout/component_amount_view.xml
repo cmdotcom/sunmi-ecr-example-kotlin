@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/amount_view_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:background="@android:color/white">
+    android:layout_width="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical|center_horizontal"
-        android:id="@+id/amount_view_container"
-        android:background="@drawable/amount_view_currency_background">
+        android:id="@+id/amount_view_currency_container">
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/amount_view_currency"
             android:layout_width="wrap_content"
@@ -21,21 +20,32 @@
             android:paddingRight="@dimen/padding_small"
             android:gravity="center_vertical|center_horizontal"
             android:minWidth="50dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="6dp"
             tools:text="£"
-            android:textAppearance="@style/TextAppearance.Number"/>
+            android:textAppearance="@style/TextAppearance.Currency"/>
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/amount_view_calendar"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@drawable/ic_calendar"
             android:gravity="center_vertical|center_horizontal"
             android:visibility="visible"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="0dp"
             android:elevation="100dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/amount_view_divider"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/black_10"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/amount_view_amount"
@@ -48,6 +58,8 @@
         android:paddingLeft="@dimen/padding_small"
         android:paddingRight="@dimen/padding_small"
         android:textAlignment="textEnd"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="6dp"
         android:maxLines="1"
         android:gravity="center_vertical|end"
         tools:text="10,00"

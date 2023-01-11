@@ -1,22 +1,26 @@
 * PayPlaza ECR app 2.0
 
   Version 2.0.1
-  
-  The ECR application handles the merchant UI, QR-payments, and transaction result user guidance. The application is designated for Sunmi Android platform, but will work on other Android device and in the Android Emulator as well.
+
+  The ECR application handles the merchant UI, card payments and transaction result user guidance. The application is designated for Sunmi Android platform, but will work on other Android device and in the Android Emulator as well.
   
   # Release notes
   
   Release 2.0.0 includes a basic implementation of the [integration SDK](https://github.com/cmdotcom/android-pos-integration-sdk-kotlin) as an example.
   
   ### Compatibility table
-  
-  | ECR   | SDK   | Terminal |
+
+  | ECR   | SDK   | Terminal | 
   | ----- | ----- | -------- |
+  | 3.0.0 | 1.1.2 | 2.0.0    |
   | 2.1.0 | 1.1.0 | 1.2.0    |
   | 2.0.1 | 1.0.1 | 1.1.1    |
   | 2.0.0 | 1.0.0 | 1.1.1    |
   
   ### Versions
+  #### 3.0.0
+  - Rebrand from generic brand to CM brand
+  - Bug fixes
   
   #### 2.1.0
   
@@ -40,13 +44,13 @@
   ## Hardware devices
   
   * This app is designed and tested for Sunmi devices.
-  * This app has been tested in Sunmi P2 lite and Sunmi P2 Pro.
+  * This app has been tested in Sunmi P2 lite, Sunmi P2 Pro and Sunmi P2 mini.
   
   ## Prerequisites
   
-  * Payplaza [Terminal](https://payplaza.com/terminals/) application must be installed in the device. Version 1.1.1 or higher.
+  * Payplaza [Terminal](https://www.cm.com/payments/pos-payments/smartpos/) application must be installed in the device. Version 1.1.1 or higher.
   * Android 7 (api 25) or higher.
-  * The device you'll use must have installed 'SunmiPayHardwareService'. Version v3.3.133 or higher.
+  * The device you'll use must have installed 'SunmiPayHardwareService'. Version v3.3.140 or higher.
   
   ## Installation
   

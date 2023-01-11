@@ -2,6 +2,7 @@ package com.cm.payplaza.ecr_sdk_integration.activity.statuses
 
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import androidx.core.view.GravityCompat
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.activity.base.BaseEcrViewState
@@ -11,12 +12,13 @@ import com.cm.payplaza.ecr_sdk_integration.activity.payment.PaymentActivity
 import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
 import com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragmentState
-import com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptViewFragmentState
+import com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptState
 import com.cm.payplaza.ecr_sdk_integration.fragment.statuses.StatusesFragmentState
+import com.cm.payplaza.ecr_sdk_integration.uicomponents.bottomAppBarComponent.BottomAppBarComponent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class StatusesActivity: BaseEcrFragmentActivity<StatusesViewModel>() {
+class StatusesActivity : BaseEcrFragmentActivity<StatusesViewModel>() {
 
     companion object {
         fun start(context: Context) {
@@ -31,7 +33,7 @@ class StatusesActivity: BaseEcrFragmentActivity<StatusesViewModel>() {
 
     override fun render(state: BaseEcrViewState) {
         super.render(state)
-        when(state) {
+        when (state) {
             StatusesState.OnResult -> goToStatusesFragment()
             StatusesState.OnCrash -> goToErrorFragment()
             StatusesState.OnError -> goToErrorFragment()
@@ -39,68 +41,99 @@ class StatusesActivity: BaseEcrFragmentActivity<StatusesViewModel>() {
     }
 
     override fun renderFragment(state: BaseEcrFragmentViewState) {
-        when(state) {
+        when (state) {
             StatusesFragmentState.NoDataAvailable -> goToErrorFromStatuses()
             StatusesFragmentState.GoToReceiptView -> goToReceiptView()
             StatusesFragmentState.GoToLastReceipt -> LastReceiptActivity.start(this)
             StatusesFragmentState.GoToPayment -> PaymentActivity.start(this)
+            is StatusesFragmentState.SetupBottomAppBar -> setupBottomAppBar(state.listener)
             ErrorFragmentState.Dismiss -> PaymentActivity.start(this)
-            ReceiptViewFragmentState.FinishTransaction -> goToStatusesFromReceipt()
-            ReceiptViewFragmentState.ControlledTransactionError -> goToStatusesFromReceipt()
+            ReceiptState.FinishTransaction -> goToStatusesFromReceipt()
+            ReceiptState.ControlledTransactionError -> goToStatusesFromReceipt()
+            is ErrorFragmentState.SetUpBottomAppBar -> setUpBottomBarForError(state.listener)
             else -> { }
         }
     }
 
+    private fun setupBottomAppBar(listener: BottomAppBarComponent.ClickListener) {
+        binding.bottomAppView.setActionButtonText(R.string.bottom_button)
+        binding.bottomAppView.enableActionButton()
+        binding.bottomAppView.setButtonsListeners(listener)
+        binding.bottomAppView.hidePrintButton()
+        binding.bottomAppView.hideTransactionTypeText()
+    }
+
+    private fun setUpBottomBarForError(listener: BottomAppBarComponent.ClickListener) {
+        binding.bottomAppView.enableActionButton()
+        binding.bottomAppView.setActionButtonText(R.string.bottom_app_bar_card_payment_continue)
+        binding.bottomAppView.setTransactionTypeText(R.string.bottom_app_bar_statuses)
+        binding.bottomAppView.setButtonsListeners(listener)
+    }
+
     override fun setUpMenu() {
         super.setUpMenu()
-        binding.ecrNavigation.setNavigationItemSelectedListener {
-            binding.ecrDrawer.closeDrawer(GravityCompat.START)
+        binding.navigationLayout.navView.setNavigationItemSelectedListener {
+            binding.drawer.closeDrawer(GravityCompat.START)
             false
         }
-        val menu = binding.ecrNavigation.menu
-        menu.findItem(R.id.nav_cancel_payment).isEnabled = false
-        menu.findItem(R.id.nav_print_last_receipt).isEnabled = false
-        menu.findItem(R.id.nav_day_totals).isEnabled = false
-        menu.findItem(R.id.nav_new_payment).isEnabled = false
-        menu.findItem(R.id.nav_refund).isEnabled = false
+        setMenuStatuses(
+            listOf(
+                Pair(getString(R.string.cancel_payment), false),
+                Pair(getString(R.string.print_last_receipt), false),
+                Pair(getString(R.string.day_totals), false),
+                Pair(getString(R.string.payment), false),
+                Pair(getString(R.string.refund), false)
+            )
+        )
     }
 
     override fun initializeView(terminalData: TerminalData?) {
         super.initializeView(terminalData)
-        viewModel.getStatuses()
-    }
-
-    override fun setUpBookmark() {
-        Timber.d("setUpBookmark")
-        binding.ecrBookmarkBar.setSelectedBookmark(5, R.string.statuses)
+        if (isActivityRestored) {
+            restoreActivity()
+        } else {
+            viewModel.getStatuses()
+        }
     }
 
     override fun getNavigationGraph(): Int {
         return R.navigation.statuses_graph
     }
 
+    override fun restoreActivity() {
+        viewModel.error()
+        goToErrorFromStatuses()
+    }
+
     private fun goToErrorFragment() {
-        Timber.d("goToErrorFragment")
+        binding.progressLoader.visibility = View.GONE
         navController.navigate(R.id.action_loaderFragment4_to_errorFragment3)
     }
 
     private fun goToErrorFromStatuses() {
-        Timber.d("goToErrorFragment")
         navController.navigate(R.id.action_statusesFragment_to_errorFragment3)
     }
 
     private fun goToStatusesFragment() {
-        Timber.d("goToStatusesFragment")
+        binding.progressLoader.visibility = View.GONE
         navController.navigate(R.id.action_loaderFragment4_to_statusesFragment)
     }
 
     private fun goToReceiptView() {
+        val listener = object: BottomAppBarComponent.ClickListener {
+            override fun onActionButtonPressed() {
+                goToStatusesFromReceipt()
+            }
+
+            override fun onPrintButtonPressed() {}
+
+        }
+        setupBottomAppBar(listener)
         Timber.d("goToReceiptView")
         navController.navigate(R.id.action_statusesFragment_to_receiptViewFragment3)
     }
 
     private fun goToStatusesFromReceipt() {
-        Timber.d("goToStatusesFromReceipt")
         navController.navigate(R.id.action_receiptViewFragment3_to_statusesFragment4)
     }
 }

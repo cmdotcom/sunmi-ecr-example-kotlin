@@ -1,10 +1,11 @@
 package com.cm.payplaza.ecr_sdk_integration.activity.lastReceipt
 
 import androidx.lifecycle.viewModelScope
-import com.cm.androidposintegration.beans.LastReceiptOptions
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivityViewModel
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK.IntegrationSDKManager
 import com.cm.payplaza.ecr_sdk_integration.entity.sdkEntity.SDKResponse
+import com.cm.androidposintegration.beans.LastReceiptOptions
+import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import kotlinx.coroutines.launch
 import org.koin.core.component.inject
 import timber.log.Timber

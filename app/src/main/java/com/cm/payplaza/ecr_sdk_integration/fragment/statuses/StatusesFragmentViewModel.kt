@@ -4,14 +4,16 @@ import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalData
 import com.cm.payplaza.ecr_sdk_integration.entity.StatusData
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionResponse
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewModel
+import java.math.BigDecimal
+import com.cm.payplaza.ecr_sdk_integration.uicomponents.bottomAppBarComponent.BottomAppBarComponent
 
 class StatusesFragmentViewModel(
     private val localDataRepository: LocalDataRepository
-): BaseEcrFragmentViewModel<StatusesFragmentState>() {
+) : BaseEcrFragmentViewModel<StatusesFragmentState>() {
     override fun init() {
         val statusesData = localDataRepository.getStatusesData()
         statusesData?.let {
-            if(statusesData.count > 0) {
+            if (statusesData.count > 0) {
                 updateView(StatusesFragmentState.Init(it))
             } else {
                 updateView(StatusesFragmentState.NoDataAvailable)
@@ -26,9 +28,21 @@ class StatusesFragmentViewModel(
             status.result,
             (localDataRepository.getOrderReference() - 1).toString(),
             status.receipt,
-            null
+            null,
+            BigDecimal.ZERO,
+            BigDecimal.ZERO,
         )
         localDataRepository.setTransactionResponse(transactionResponse)
         updateView(StatusesFragmentState.GoToReceiptView)
+    }
+    fun setupBottomAppBar() {
+        val listener = object: BottomAppBarComponent.ClickListener {
+            override fun onActionButtonPressed() {
+                continueToNewPayment()
+            }
+
+            override fun onPrintButtonPressed() {}
+        }
+        updateView(StatusesFragmentState.SetupBottomAppBar(listener))
     }
 }
