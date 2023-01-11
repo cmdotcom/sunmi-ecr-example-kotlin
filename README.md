@@ -1,6 +1,6 @@
 * PayPlaza ECR app 2.0
 
-  Version 2.0.1
+  Version 3.0.0
 
   The ECR application handles the merchant UI, card payments and transaction result user guidance. The application is designated for Sunmi Android platform, but will work on other Android device and in the Android Emulator as well.
   
