@@ -1,4 +1,4 @@
-* PayPlaza ECR app 2.0
+* Cm POS Payments ECR app
 
   Version 3.0.0
 
@@ -6,7 +6,7 @@
   
   # Release notes
   
-  Release 2.0.0 includes a basic implementation of the [integration SDK](https://github.com/cmdotcom/android-pos-integration-sdk-kotlin) as an example.
+  This app includes a basic implementation of the [Cm POS payments Android POS integration library (a.k.a SDK)](https://github.com/cmdotcom/android-pos-integration-sdk-kotlin) as an example. The complete functionality included in the library is used in this example.
   
   ### Compatibility table
 
@@ -37,7 +37,7 @@
   
   #### 2.0.0
   
-  Includes a basic implementation of the [SDK integration](https://gitlab.com/payplaza/pos-gateway/sunmi/integration-sdk).
+  Includes a basic implementation of the [SDK integration](https://github.com/cmdotcom/android-pos-integration-sdk-kotlin).
   
   # Getting started
   
@@ -48,7 +48,7 @@
   
   ## Prerequisites
   
-  * Payplaza [Terminal](https://www.cm.com/payments/pos-payments/smartpos/) application must be installed in the device. Version 1.1.1 or higher.
+  * Cm POS Payments [Terminal](https://www.cm.com/payments/pos-payments/smartpos/) application must be installed in the device. Version 1.1.1 or higher.
   * Android 7 (api 25) or higher.
   * The device you'll use must have installed 'SunmiPayHardwareService'. Version v3.3.140 or higher.
   
@@ -127,7 +127,7 @@
   
   * Day totals. Shows the operations done during the current day.
   
-  * Pre-authorization. Saves an amount of money that can be canceled or confirmed in the future. To cancel or confirm a transaction is necessary the STAN code of the transaction. The STAN code is in the receipt showed after start a pre-authorization. Confirm pre-authorization also needs the amount. This amount can't be higher than the amount of start pre-authorization but it can be lower.
+  * Pre-authorization. Saves an amount of money that can be canceled or confirmed in the future. To cancel or confirm a transaction is necessary the STAN code of the transaction. The STAN code is in the receipt showed after start a pre-authorization. Confirm pre-authorization also needs the amount. This amount can't be higher than the amount of start pre-authorization but it can be lower. It is also necesary to indicate the date of the previous pre authorized transaction in order to confirm or cancel the first pre authorization transaction.
   
     * Start pre-authorization.
     * Cancel pre-authorization.
