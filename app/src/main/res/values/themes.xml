@@ -46,9 +46,13 @@
         <item name="materialAlertDialogTheme">@style/AppTheme.MaterialAlertDialog</item>
     </style>
 
-    <!-- The launcher theme, showing a static background to avoid the "white screen" issue -->
-    <style name="Base.Launcher" parent="AppTheme">
-        <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:windowBackground">@color/white</item>
+    <style name="TranslucentActivity" parent="AppTheme">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
     </style>
 </resources>

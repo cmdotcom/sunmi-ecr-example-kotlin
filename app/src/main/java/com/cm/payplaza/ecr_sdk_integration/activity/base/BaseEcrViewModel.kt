@@ -1,9 +1,6 @@
 package com.cm.payplaza.ecr_sdk_integration.activity.base
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.integrationSDK.IntegrationSDKManager
@@ -27,9 +24,12 @@ abstract class BaseEcrViewModel: ViewModel(),
         _state.value =  vs
     }
 
+    fun loadTerminalData() {
+        updateView(BaseEcrViewState.Init(localDataRepository.getTerminalData()))
+    }
+
     fun requestInfo() {
         Timber.d("requestInfo()")
-        updateView(BaseEcrViewState.RequestInfoLoader)
         val callback = object: IntegrationSDKManager.IntegrationSDKCallback {
             override fun returnResponse(sdkResponse: SDKResponse) {
                 when(sdkResponse) {
@@ -43,8 +43,6 @@ abstract class BaseEcrViewModel: ViewModel(),
             integrationSDKManager.doRequireInfo(callback)
         }
     }
-
-    open fun init() = updateView(BaseEcrViewState.Init(localDataRepository.getTerminalData()))
 
     protected open fun setUpData() {
         val terminalData = localDataRepository.getTerminalData()

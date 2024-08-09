@@ -1,11 +1,12 @@
 package com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment
 
+import android.os.Bundle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.activity.base.BaseEcrActivity
-import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragment
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
 import timber.log.Timber
@@ -23,9 +24,10 @@ abstract class BaseEcrFragmentActivity<VM : BaseEcrFragmentActivityViewModel> :
         }
     }
 
-    override fun initializeView(terminalData: TerminalData?) {
-        super.initializeView(terminalData)
-        navController = binding.ecrViewFragment.findNavController()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.ecr_view_fragment) as NavHostFragment
+        navController = navHostFragment.navController
         navController.setGraph(getNavigationGraph())
     }
 

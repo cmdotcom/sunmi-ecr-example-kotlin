@@ -29,6 +29,7 @@
     <string name="enter_password">Entrez le mot de passe</string>
     <string name="cancel_button">Bouton d\'annulation</string>
     <string name="popup_confirm">Confirmer</string>
+    <string name="printer_out_of_paper_popup">Plus de papier, veuillez remplacer le rouleau de papier</string>
 
     <!-- On-screen receipt screen texts -->
     <string name="print_receipt">Imprimer</string>

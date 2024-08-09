@@ -1,5 +1,6 @@
 package com.cm.payplaza.ecr_sdk_integration.fragment.receiptView
 
+import com.cm.payplaza.ecr_sdk_integration.dialog.DialogLauncher
 import com.cm.payplaza.ecr_sdk_integration.entity.Receipt
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
 import com.cm.payplaza.ecr_sdk_integration.uicomponents.bottomAppBarComponent.BottomAppBarComponent
@@ -25,7 +26,8 @@ sealed class ReceiptState : BaseEcrFragmentViewState() {
         ReceiptState()
 
     data class Canceled(val receipt: Receipt, val isPrinterAvailable: Boolean) : ReceiptState()
-    data class SetUpBottomAppBar(val listener: BottomAppBarComponent.ClickListener) : ReceiptState()
+    data class SetUpBottomAppBar(val listener: BottomAppBarComponent.ClickListener, val isPrinterAvailable: Boolean) : ReceiptState()
     object ControlledTransactionError : ReceiptState()
     object FinishTransaction : ReceiptState()
+    data class PrinterOutOfPaper(val listener: DialogLauncher.ActionListener): ReceiptState()
 }

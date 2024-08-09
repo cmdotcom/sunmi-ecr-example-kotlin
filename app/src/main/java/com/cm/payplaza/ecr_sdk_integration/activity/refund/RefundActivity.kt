@@ -3,6 +3,8 @@ package com.cm.payplaza.ecr_sdk_integration.activity.refund
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import android.view.View
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.activity.base.BaseEcrViewState
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivity
@@ -30,6 +32,11 @@ class RefundActivity : BaseEcrFragmentActivity<RefundViewModel>() {
     }
 
     override val viewModel: RefundViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding.progressLoader.visibility = View.GONE
+    }
 
     override fun render(state: BaseEcrViewState) {
         super.render(state)
@@ -86,6 +93,10 @@ class RefundActivity : BaseEcrFragmentActivity<RefundViewModel>() {
         return R.navigation.refund_graph
     }
 
+    override fun getTransactionTypeStringId(): Int {
+        return R.string.bottom_app_bar_refund
+    }
+
     private fun dateInserted() {
         binding.bottomAppView.enableActionButton()
         hideNavigationBar()
@@ -133,7 +144,6 @@ class RefundActivity : BaseEcrFragmentActivity<RefundViewModel>() {
     private fun setupBottomAppBar(listener: BottomAppBarComponent.ClickListener) {
         binding.bottomAppView.setButtonsListeners(listener)
         binding.bottomAppView.setActionButtonText(R.string.bottom_button)
-        binding.bottomAppView.setTransactionTypeText(R.string.bottom_app_bar_refund)
         binding.bottomAppView.disableActionButton()
     }
 

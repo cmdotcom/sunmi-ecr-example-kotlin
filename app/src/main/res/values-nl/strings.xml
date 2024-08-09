@@ -27,6 +27,7 @@
     <string name="tear_off_receipt">Scheur de bon af</string>
     <string name="enter_password">Voer wachtwoord in</string>
     <string name="popup_confirm">Bevestig</string>
+    <string name="printer_out_of_paper_popup">Geen papier meer, vervang de papierrol</string>
 
     <!-- Health check messages -->
     <string name="cancel_button">Annuleer</string>

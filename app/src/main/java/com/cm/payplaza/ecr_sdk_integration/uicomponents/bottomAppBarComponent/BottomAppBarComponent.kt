@@ -37,6 +37,7 @@ class BottomAppBarComponent : LinearLayoutCompat, KoinComponent {
 
     fun setActionButtonText(textId: Int) {
         binding.actionButton.text = context.getString(textId)
+        binding.actionButton.visibility = View.VISIBLE
     }
 
     fun setTransactionTypeText(textId: Int) {
@@ -71,6 +72,10 @@ class BottomAppBarComponent : LinearLayoutCompat, KoinComponent {
 
     fun hidePrintButton() {
         binding.printButton.visibility = View.GONE
+    }
+
+    fun hideActionButton() {
+        binding.actionButton.visibility = View.GONE
     }
 
     fun setButtonsListeners(listeners: ClickListener) {

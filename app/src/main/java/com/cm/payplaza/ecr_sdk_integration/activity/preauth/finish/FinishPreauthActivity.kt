@@ -3,6 +3,7 @@ package com.cm.payplaza.ecr_sdk_integration.activity.preauth.finish
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.activity.base.BaseEcrViewState
@@ -12,7 +13,6 @@ import com.cm.payplaza.ecr_sdk_integration.activity.preauth.navigationMenu.MenuI
 import com.cm.payplaza.ecr_sdk_integration.activity.preauth.navigationMenu.PreauthType
 import com.cm.payplaza.ecr_sdk_integration.activity.statuses.StatusesActivity
 import com.cm.payplaza.ecr_sdk_integration.dialog.DialogLauncher
-import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.amountInsert.AmountInsertFragmentState
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
 import com.cm.payplaza.ecr_sdk_integration.fragment.dateInsert.DateInsertState
@@ -44,9 +44,8 @@ class FinishPreauthActivity : BaseEcrFragmentActivity<FinishPreauthViewModel>(),
 
     override val viewModel: FinishPreauthViewModel by inject()
 
-    override fun initializeView(terminalData: TerminalData?) {
-        super.initializeView(terminalData)
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         preAuthType = intent.getSerializableExtra(PREAUTH_TYPE_EXTRA) as PreauthType
         viewModel.savePreauthType(preAuthType ?: PreauthType.NONE)
 
@@ -75,6 +74,16 @@ class FinishPreauthActivity : BaseEcrFragmentActivity<FinishPreauthViewModel>(),
         if (preAuthType == PreauthType.CANCEL) {
             skipAmountInsert()
         }
+        if (isActivityRestored) {
+            StatusesActivity.start(this)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Checks if user called for dowload parameters.
+        // If that's the case app must restore print button if receipt is being shown.
+        restorePrintButton()
     }
 
     override fun render(state: BaseEcrViewState) {
@@ -148,6 +157,15 @@ class FinishPreauthActivity : BaseEcrFragmentActivity<FinishPreauthViewModel>(),
         )
     }
 
+    private fun restorePrintButton() {
+        navController.currentDestination?.let {
+            // Check if activity is showing receipt fragment
+            if (it.id == R.id.receiptViewFragment4) {
+                binding.bottomAppView.setPrintButtonText(R.string.print_receipt)
+            }
+        }
+    }
+
     private fun initializeBottomAppbar(listener: BottomAppBarComponent.ClickListener) {
         binding.bottomAppView.disableActionButton()
         binding.bottomAppView.setActionButtonText(R.string.bottom_app_bar_card_payment_continue)
@@ -197,5 +215,9 @@ class FinishPreauthActivity : BaseEcrFragmentActivity<FinishPreauthViewModel>(),
 
     private fun skipAmountInsert() {
         navController.navigate(R.id.action_amountInsertFragment4_to_stanInsertFragment2)
+    }
+
+    override fun getTransactionTypeStringId(): Int {
+        return R.string.bottom_app_bar_confirm_pre_auth
     }
 }

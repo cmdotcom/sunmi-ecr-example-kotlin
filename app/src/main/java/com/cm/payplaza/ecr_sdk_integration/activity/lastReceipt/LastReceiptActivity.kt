@@ -2,12 +2,12 @@ package com.cm.payplaza.ecr_sdk_integration.activity.lastReceipt
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.activity.base.BaseEcrViewState
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivity
 import com.cm.payplaza.ecr_sdk_integration.activity.payment.PaymentActivity
-import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
 import com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragmentState
 import com.cm.payplaza.ecr_sdk_integration.fragment.receiptView.ReceiptState
@@ -27,6 +27,20 @@ class LastReceiptActivity : BaseEcrFragmentActivity<LastReceiptViewModel>() {
     }
 
     override val viewModel: LastReceiptViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (!isActivityRestored) {
+            viewModel.getLastReceipt()
+        } else {
+            goToErrorFragment()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.bottomAppView.setPrintButtonText(R.string.print_receipt)
+    }
 
     override fun render(state: BaseEcrViewState) {
         super.render(state)
@@ -58,22 +72,12 @@ class LastReceiptActivity : BaseEcrFragmentActivity<LastReceiptViewModel>() {
         )
     }
 
-    override fun initializeView(terminalData: TerminalData?) {
-        super.initializeView(terminalData)
-        if (isActivityRestored) {
-            restoreActivity()
-        } else {
-            viewModel.getLastReceipt()
-        }
-    }
-
     override fun getNavigationGraph(): Int {
         return R.navigation.last_receipt_graph
     }
 
-    override fun restoreActivity() {
-        viewModel.error()
-        goToErrorFragment()
+    override fun getTransactionTypeStringId(): Int {
+        return R.string.bottom_app_bar_last_receipt
     }
 
     private fun setUpPrinterButton(printerAvailable: Boolean) {
@@ -83,7 +87,6 @@ class LastReceiptActivity : BaseEcrFragmentActivity<LastReceiptViewModel>() {
     private fun setUpBottomBarForError(listener: BottomAppBarComponent.ClickListener) {
         binding.bottomAppView.enableActionButton()
         binding.bottomAppView.setActionButtonText(R.string.bottom_app_bar_card_payment_continue)
-        binding.bottomAppView.setTransactionTypeText(R.string.bottom_app_bar_last_receipt)
         binding.bottomAppView.setButtonsListeners(listener)
     }
 

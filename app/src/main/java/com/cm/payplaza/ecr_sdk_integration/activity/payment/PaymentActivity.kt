@@ -2,12 +2,12 @@ package com.cm.payplaza.ecr_sdk_integration.activity.payment
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.activity.base.BaseEcrViewState
 import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFragmentActivity
 import com.cm.payplaza.ecr_sdk_integration.activity.transactionResult.TransactionResultActivity
-import com.cm.payplaza.ecr_sdk_integration.entity.TerminalData
 import com.cm.payplaza.ecr_sdk_integration.fragment.amountInsert.AmountInsertFragmentState
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewState
 import com.cm.payplaza.ecr_sdk_integration.fragment.error.ErrorFragmentState
@@ -26,19 +26,20 @@ class PaymentActivity : BaseEcrFragmentActivity<PaymentViewModel>() {
         }
     }
 
-    private var dataLoaded = false
     override val viewModel: PaymentViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (!isActivityRestored) {
+            viewModel.requestInfo()
+        }
+    }
 
     override fun render(state: BaseEcrViewState) {
         when (state) {
-            is BaseEcrViewState.RequestInfo -> {
-                if (dataLoaded) {
-                    setUpVersions(state.terminalData)
-                } else {
-                    setUpTerminalData(state.terminalData)
-                }
-            }
+            is BaseEcrViewState.RequestInfo -> goToAmountInsertFragment()
             PaymentViewState.GoToTransactionResult -> TransactionResultActivity.start(this)
+            BaseEcrViewState.Error -> goToErrorFragment()
         }
         super.render(state)
     }
@@ -46,12 +47,16 @@ class PaymentActivity : BaseEcrFragmentActivity<PaymentViewModel>() {
     override fun renderFragment(state: BaseEcrFragmentViewState) {
         when (state) {
             is AmountInsertFragmentState.NextStep -> savePayment(state.amount)
-            is AmountInsertFragmentState.SetupBottomAppBar -> initializeActionButtonForAmountInsert(state.listener)
+            is AmountInsertFragmentState.SetupBottomAppBar -> initializeActionButtonForAmountInsert(
+                state.listener
+            )
             is AmountInsertFragmentState.AddDigitToAmountView -> binding.bottomAppView.enableActionButton()
             AmountInsertFragmentState.ClearAmount -> binding.bottomAppView.disableActionButton()
             ErrorFragmentState.Dismiss -> supportFragmentManager.popBackStack()
             is ErrorFragmentState.SetUpBottomAppBar -> setUpBottomBarForError(state.listener)
-            else -> {Timber.d("$state cached. Do nothing.")}
+            else -> {
+                Timber.d("$state cached. Do nothing.")
+            }
         }
     }
 
@@ -63,12 +68,6 @@ class PaymentActivity : BaseEcrFragmentActivity<PaymentViewModel>() {
                 Pair(getString(R.string.payment), false)
             )
         )
-    }
-
-    override fun initializeView(terminalData: TerminalData?) {
-        super.initializeView(terminalData)
-        requestInfo()
-        initializeTransactionType()
         setDefaultMenuItemSelected()
     }
 
@@ -84,27 +83,16 @@ class PaymentActivity : BaseEcrFragmentActivity<PaymentViewModel>() {
         binding.bottomAppView.setButtonsListeners(listener)
     }
 
-    private fun initializeTransactionType() {
-        binding.bottomAppView.setTransactionTypeText(R.string.bottom_app_bar_card_payment)
-    }
-
     private fun savePayment(amount: Int) {
         viewModel.savePayment(amount)
-    }
-
-    private fun setUpTerminalData(terminalData: TerminalData?) {
-        setUpVersions(terminalData)
-        goToAmountInsertFragment()
-        dataLoaded = true
     }
 
     override fun getNavigationGraph(): Int {
         return R.navigation.transaction_graph
     }
 
-    override fun restoreActivity() {
-        viewModel.error()
-        goToErrorFragment()
+    override fun getTransactionTypeStringId(): Int {
+        return R.string.bottom_app_bar_card_payment
     }
 
     private fun goToErrorFragment() {
@@ -112,7 +100,10 @@ class PaymentActivity : BaseEcrFragmentActivity<PaymentViewModel>() {
     }
 
     private fun goToAmountInsertFragment() {
+        Timber.d("goToAmountInsertFragment() called")
         binding.progressLoader.visibility = View.GONE
-        navController.navigate(R.id.action_loaderFragment3_to_amountInsertFragment)
+        if (navController.currentDestination?.id == R.id.loaderFragment3) {
+            navController.navigate(R.id.action_loaderFragment3_to_amountInsertFragment)
+        }
     }
 }

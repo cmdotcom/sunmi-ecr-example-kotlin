@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.os.LocaleListCompat
 import androidx.core.view.GravityCompat
-import androidx.test.espresso.idling.CountingIdlingResource
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import com.cm.payplaza.ecr_sdk_integration.BuildConfig
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.activity.lastReceipt.LastReceiptActivity
 import com.cm.payplaza.ecr_sdk_integration.activity.payment.PaymentActivity
@@ -30,39 +32,31 @@ import timber.log.Timber
 
 abstract class BaseEcrActivity<VM : BaseEcrViewModel> : AppCompatActivity() {
 
-    lateinit var binding: ActivityEcrBinding
+    protected lateinit var binding: ActivityEcrBinding
     private var dialog: AlertDialog? = null
-    val mIdlingRes = CountingIdlingResource(BaseEcrActivity<*>::javaClass.toString())
-    protected var isActivityRestored = false
     private var menuItemsAdapter: MenuItemsAdapter? = null
+    protected var isActivityRestored: Boolean = false
+    protected var downloadingParameters: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEcrBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
         isActivityRestored = savedInstanceState != null
-        init()
+        viewModel.state.observe(this) {
+            render(it)
+        }
+        viewModel.loadTerminalData()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.bottomAppView.setTransactionTypeText(getTransactionTypeStringId())
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
-    }
-
-    protected open fun init() {
-        viewModel.state.observe(this) {
-            render(it)
-        }
-        mIdlingRes.increment()
-        viewModel.init()
-    }
-
-    fun hideNavigationBar() {
-        Timber.d("hideNavigationBar()")
-        val decorView: View = window.decorView
-        decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -76,36 +70,32 @@ abstract class BaseEcrActivity<VM : BaseEcrViewModel> : AppCompatActivity() {
         return true
     }
 
+    fun hideNavigationBar() {
+        Timber.d("hideNavigationBar()")
+        WindowInsetsControllerCompat(
+            window,
+            window.decorView.findViewById(android.R.id.content)
+        ).let { controller ->
+            controller.hide(WindowInsetsCompat.Type.navigationBars())
+            controller.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+    }
+
     protected open fun render(state: BaseEcrViewState) {
         when (state) {
             is BaseEcrViewState.Init -> {
-                mIdlingRes.decrement()
-                initializeView(state.terminalData)
+                showTerminalData(state.terminalData)
                 updateLanguage(state.terminalData)
             }
             is BaseEcrViewState.RequestInfo -> {
                 dismissDialog()
-                mIdlingRes.decrement()
                 setUpVersions(state.terminalData)
                 updateLanguageAndRestartActivity(state.terminalData)
+                downloadingParameters = false
             }
-            is BaseEcrViewState.RequestInfoLoader -> showRequestDataLoader()
             is BaseEcrViewState.RequestInfoFailed -> showRequestInfoFailedDialog()
         }
-    }
-
-    private fun showRequestDataLoader() {
-        Timber.d("showRequestDataLoader")
-        val inflater = this.layoutInflater
-        val loaderView = inflater.inflate(R.layout.dialog_loader, null)
-        val listener = object : DialogLauncher.ActionListener {
-            override fun onOkPressed() {}
-            override fun onCancelPressed() {}
-            override fun onDismiss() {
-                hideNavigationBar()
-            }
-        }
-        dialog = DialogLauncher(this).showAlertDialog(listener, customView = loaderView)
     }
 
     private fun dismissDialog() {
@@ -145,24 +135,27 @@ abstract class BaseEcrActivity<VM : BaseEcrViewModel> : AppCompatActivity() {
         }
     }
 
-    protected fun requestInfo() {
-        mIdlingRes.increment()
-        viewModel.requestInfo()
-    }
-
     private fun showRequestInfoFailedDialog() {
         dismissDialog()
         val listener = object : DialogLauncher.ActionListener {
-            override fun onCancelPressed() = finish()
+            override fun onCancelPressed() {
+                finish()
+            }
+
             override fun onDismiss() {
                 hideNavigationBar()
             }
 
-            override fun onOkPressed() = viewModel.requestInfo()
+            override fun onOkPressed() {
+                viewModel.requestInfo()
+            }
         }
         DialogLauncher(this).showAlertDialog(
             listener,
-            titleStringId = R.string.request_info_dialog
+            titleStringId = R.string.request_info_dialog,
+            hasNegativeButton = true,
+            hasPositiveButton = true,
+            cancellable = false
         )
     }
 
@@ -233,8 +226,9 @@ abstract class BaseEcrActivity<VM : BaseEcrViewModel> : AppCompatActivity() {
                 TotalsActivity.start(this)
             }
             MenuItem.DOWNLOAD_PARAMETERS.value -> {
+                downloadingParameters = true
                 binding.drawer.closeDrawer(GravityCompat.START)
-                requestInfo()
+                viewModel.requestInfo()
             }
             MenuItem.CANCEL_PAYMENT.value -> {
                 val isEnabled = menuItemsAdapter?.isMenuItemEnabled(MenuItem.CANCEL_PAYMENT)
@@ -306,7 +300,7 @@ abstract class BaseEcrActivity<VM : BaseEcrViewModel> : AppCompatActivity() {
         val configurationVersion =
             header.findViewById<AppCompatTextView>(R.id.nav_header_device_configuration)
         terminalData?.let {
-            val appVersion = packageManager.getPackageInfo(packageName, 0).versionName
+            val appVersion = BuildConfig.VERSION_NAME
             deviceSerial.text = String.format(
                 getString(
                     R.string.device_serial_number,
@@ -318,8 +312,8 @@ abstract class BaseEcrActivity<VM : BaseEcrViewModel> : AppCompatActivity() {
         }
     }
 
-    protected open fun initializeView(terminalData: TerminalData?) {
-        Timber.d("initializeView")
+    protected open fun showTerminalData(terminalData: TerminalData?) {
+        Timber.d("showTerminalData")
         binding.toolbar.buttonHamburger.setOnClickListener {
             binding.drawer.openDrawer(
                 GravityCompat.START
@@ -352,6 +346,7 @@ abstract class BaseEcrActivity<VM : BaseEcrViewModel> : AppCompatActivity() {
 
     protected abstract val viewModel: VM
     protected open fun restoreActivity() {}
+    protected abstract fun getTransactionTypeStringId(): Int
 
     companion object {
         private var currentItemSelected = MenuItem.NEW_PAYMENT.value

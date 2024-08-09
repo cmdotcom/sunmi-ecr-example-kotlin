@@ -1,19 +1,22 @@
 package com.cm.payplaza.ecr_sdk_integration.fragment.receiptView
 
 import com.cm.androidposintegration.enums.TransactionResult
+import com.cm.payplaza.ecr_sdk_integration.dialog.DialogLauncher
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import com.cm.payplaza.ecr_sdk_integration.entity.Receipt
 import com.cm.payplaza.ecr_sdk_integration.entity.TransactionResponse
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragmentViewModel
 import com.cm.payplaza.ecr_sdk_integration.uicomponents.bottomAppBarComponent.BottomAppBarComponent
+import com.cm.payplaza.ecr_sdk_integration.utils.printer.PrinterStatus
 import com.cm.payplaza.ecr_sdk_integration.utils.printer.SunmiPrinter
 import java.math.BigDecimal
-import java.util.*
+import java.util.Currency
 
 class ReceiptViewModel(
     private val localDataRepository: LocalDataRepository,
     private val printer: SunmiPrinter
 ) : BaseEcrFragmentViewModel<ReceiptState>() {
+
     override fun init() = printer.bindPrinter(::initView)
 
     fun checkReceipt() {
@@ -29,35 +32,44 @@ class ReceiptViewModel(
         localDataRepository.clearTransactionData()
     }
 
-    private fun finishTransaction() {
+    fun finishTransaction() {
         printer.unBindPrinter()
         updateView(ReceiptState.FinishTransaction)
     }
 
-    fun merchantReceiptshowed(receipt: Receipt, isSuccesfull: Boolean) {
-        updateView(ReceiptState.MerchantReceiptShowed(receipt, isSuccesfull))
+    fun merchantReceiptShowed(receipt: Receipt, isSuccessful: Boolean) {
+        updateView(ReceiptState.MerchantReceiptShowed(receipt, isSuccessful))
     }
 
-    fun printReceipt(receipt: Receipt) {
-        printer.printReceipt(receipt)
-    }
-
-    fun setUpOneReceipt(receipt: Receipt) {
-        val listener = object: BottomAppBarComponent.ClickListener {
-            override fun onActionButtonPressed() {
-                finishTransaction()
-            }
-            override fun onPrintButtonPressed() {
-                printReceipt(receipt)
-                finishTransaction()
-            }
+    fun printCardholderReceipt(receipt: Receipt, listener: DialogLauncher.ActionListener) {
+        if (!printer.isPrinterOutOfPaper()) {
+            printer.printReceipt(receipt)
+            finishTransaction()
+        } else {
+            updateView(ReceiptState.PrinterOutOfPaper(listener))
         }
-        updateView(ReceiptState.SetUpBottomAppBar(listener))
     }
 
-    fun setUpTwoReceipt(listener: BottomAppBarComponent.ClickListener) {
-        updateView(ReceiptState.SetUpBottomAppBar(listener))
+    fun printMerchantReceipt(
+        merchantReceipt: Receipt,
+        cardholderReceipt: Receipt,
+        isSuccesfull: Boolean,
+        listener: DialogLauncher.ActionListener,
+        showCardholderReceipt: (Receipt, Boolean) -> Unit
+    ) {
+        if (!printer.isPrinterOutOfPaper()) {
+            printer.printReceipt(merchantReceipt)
+            showCardholderReceipt(cardholderReceipt, isSuccesfull)
+        } else {
+            updateView(ReceiptState.PrinterOutOfPaper(listener))
+        }
     }
+
+    fun setUpBottomAppBarListener(listener: BottomAppBarComponent.ClickListener) {
+        val isPrinterAvailable = printer.printerStatus == PrinterStatus.AVAILABLE
+        updateView(ReceiptState.SetUpBottomAppBar(listener, isPrinterAvailable))
+    }
+
 
     private fun setUpSuccess(
         transactionResponse: TransactionResponse,
@@ -68,9 +80,11 @@ class ReceiptViewModel(
             AvailableReceipts.CUSTOMER -> {
                 updateReceipt(transactionResponse.customerReceipt, null, isSuccesfullTransaction)
             }
+
             AvailableReceipts.MERCHANT -> {
                 updateReceipt(transactionResponse.merchantReceipt, null, isSuccesfullTransaction)
             }
+
             AvailableReceipts.CUSTOMERANDMERCHANT -> {
                 updateReceipt(
                     transactionResponse.customerReceipt,
@@ -78,6 +92,7 @@ class ReceiptViewModel(
                     isSuccesfullTransaction
                 )
             }
+
             else -> updateView(ReceiptState.FinishTransaction)
         }
 

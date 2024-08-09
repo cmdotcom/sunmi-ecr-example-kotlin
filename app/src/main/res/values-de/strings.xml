@@ -28,6 +28,7 @@
     <string name="tear_off_receipt">Quittung abreißen</string>
     <string name="enter_password">Passwort eingeben</string>
     <string name="popup_confirm">Bestätige</string>
+    <string name="printer_out_of_paper_popup">Kein Papier mehr vorhanden, bitte die Papierrolle austauschen</string>
 
     <!-- Health check messages -->
     <string name="cancel_button">Stornieren</string>

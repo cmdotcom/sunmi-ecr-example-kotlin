@@ -28,6 +28,7 @@
     <string name="tear_off_receipt">Tear off receipt</string>
     <string name="enter_password">Enter password</string>
     <string name="popup_confirm">Confirm</string>
+    <string name="printer_out_of_paper_popup">Out of paper, please replace the paper roll</string>
 
     <!-- Health check messages -->
     <string name="cancel_button">Cancel</string>
