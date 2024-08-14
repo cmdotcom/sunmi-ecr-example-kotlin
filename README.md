@@ -11,13 +11,18 @@
   ### Compatibility table
 
   | ECR   | SDK   | Terminal | 
-  | ----- | ----- | -------- |
+  | ----- | ----- |----------|
+* | 3.1.1 | 1.1.4 | 2.7.0    |
   | 3.0.0 | 1.1.2 | 2.0.0    |
   | 2.1.0 | 1.1.0 | 1.2.0    |
   | 2.0.1 | 1.0.1 | 1.1.1    |
   | 2.0.0 | 1.0.0 | 1.1.1    |
   
   ### Versions
+  #### 3.1.1
+  - Use new version 1.1.4 of the Android POS Integration library
+  - Refactor some parts of the application
+ 
   #### 3.0.0
   - Rebrand from generic brand to CM brand
   - Bug fixes

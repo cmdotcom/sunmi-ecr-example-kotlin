@@ -11,4 +11,6 @@ sealed class TransactionResultState: BaseEcrFragmentActivityState() {
     object OnFinishTransaction: TransactionResultState()
     object GoToStatuses: TransactionResultState()
     data class SetTransactionType(val transactionType: TransactionType): TransactionResultState()
+    object ShowWarningPopupPrinterOutOfPaper: TransactionResultState()
+    data class RestoreBottomAppBar(val isPrinterOutOfPaper: Boolean): TransactionResultState()
 }

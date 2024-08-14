@@ -29,6 +29,20 @@ class TotalsActivity : BaseEcrFragmentActivity<TotalsViewModel>() {
 
     override val viewModel: TotalsViewModel by viewModel()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(!isActivityRestored) {
+            viewModel.getTotals()
+        } else {
+            goToErrorFragment()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.bottomAppView.setPrintButtonText(R.string.print_receipt)
+    }
+
     override fun render(state: BaseEcrViewState) {
         super.render(state)
         when (state) {
@@ -59,22 +73,12 @@ class TotalsActivity : BaseEcrFragmentActivity<TotalsViewModel>() {
         )
     }
 
-    override fun initializeView(terminalData: TerminalData?) {
-        super.initializeView(terminalData)
-        if (isActivityRestored) {
-            restoreActivity()
-        } else {
-            viewModel.getTotals()
-        }
-    }
-
     override fun getNavigationGraph(): Int {
         return R.navigation.totals_graph
     }
 
-    override fun restoreActivity() {
-        viewModel.error()
-        goToErrorFragment()
+    override fun getTransactionTypeStringId(): Int {
+        return R.string.bottom_app_bar_day_totals
     }
 
     private fun setUpPrinterButton(printerAvailable: Boolean) {
@@ -84,7 +88,6 @@ class TotalsActivity : BaseEcrFragmentActivity<TotalsViewModel>() {
     private fun setUpBottomBarForError(listener: BottomAppBarComponent.ClickListener) {
         binding.bottomAppView.enableActionButton()
         binding.bottomAppView.setActionButtonText(R.string.bottom_app_bar_card_payment_continue)
-        binding.bottomAppView.setTransactionTypeText(R.string.bottom_app_bar_day_totals)
         binding.bottomAppView.setButtonsListeners(listener)
     }
 

@@ -152,7 +152,7 @@ val testModule = module {
         ReceiptData(get(qualifier = named("customerReceiptLines")), null)
     }
 
-    factory(named("mockPOSIntegration")) {
+    factory<PosIntegrationService?>(named("mockPOSIntegration")) {
         object : PosIntegrationService {
             override fun doTransaction(data: TransactionData, callback: TransactionCallback) {
                 val transactionResultData = TransactionResultData(

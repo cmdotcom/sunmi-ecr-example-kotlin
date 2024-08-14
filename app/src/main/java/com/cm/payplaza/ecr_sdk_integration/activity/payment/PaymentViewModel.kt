@@ -5,8 +5,8 @@ import com.cm.payplaza.ecr_sdk_integration.activity.base.withFragment.BaseEcrFra
 import com.cm.payplaza.ecr_sdk_integration.domain.repository.localData.LocalDataRepository
 import com.cm.payplaza.ecr_sdk_integration.entity.Transaction
 import org.koin.core.component.inject
-import timber.log.Timber
-import java.util.*
+import java.util.Currency
+import java.util.Locale
 import kotlin.math.pow
 
 class PaymentViewModel: BaseEcrFragmentActivityViewModel() {
@@ -14,7 +14,6 @@ class PaymentViewModel: BaseEcrFragmentActivityViewModel() {
     private val localDataRepository: LocalDataRepository by inject()
 
     fun savePayment(insertedDigits: Int) {
-        Timber.d("savePayment")
         var doubleAmount = insertedDigits.toDouble()
         val merchantData = localDataRepository.getTerminalData()
         val currency = merchantData?.currency ?: run {

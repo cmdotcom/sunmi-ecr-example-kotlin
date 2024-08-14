@@ -28,6 +28,7 @@
 
     <!-- Popup texts -->
     <string name="popup_confirm">Confirmar</string>
+    <string name="printer_out_of_paper_popup">Impresora sin papel, por favor sustituye el rollo</string>
 
     <!-- On-screen receipt screen texts -->
     <string name="close">Cerrar</string>

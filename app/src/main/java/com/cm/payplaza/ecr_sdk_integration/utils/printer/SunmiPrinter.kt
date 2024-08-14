@@ -24,16 +24,19 @@ class SunmiPrinter(
         private const val newWidth = 348
     }
 
-    private lateinit var printerService: SunmiPrinterService
+    private var printerService: SunmiPrinterService? = null
     private lateinit var printCallback: InnerResultCallback
     private lateinit var printerConnection: ServiceConnection
-    private var printerStatus = PrinterStatus.UNAVAILABLE
+    val printerStatus: PrinterStatus
+        get() = printerService?.let { service ->
+            decodeLowLevelStatus(SunmiPrinterStatus.getByValue(service.updatePrinterState()) ?: SunmiPrinterStatus.NO_PRINTER_DETECTED)
+        } ?: decodeLowLevelStatus(SunmiPrinterStatus.NO_PRINTER_DETECTED)
+    private var isPrinterBinded = false
 
     init {
         try { printCallback = setUpPrintCallback() }
         catch(e: InnerPrinterException) {
             Timber.e(e.toString())
-            printerStatus = PrinterStatus.UNAVAILABLE
         }
     }
 
@@ -42,12 +45,12 @@ class SunmiPrinter(
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
                 Timber.d("onServiceConnected - $name")
                 serviceConnected(service)
-                updateView(isPrinterAvailable())
+                isPrinterBinded = true
+                updateView(true)
             }
-
             override fun onServiceDisconnected(name: ComponentName?){
                 Timber.d("onServiceDisconnected - $name")
-                updateView(isPrinterAvailable())
+                updateView(isPrinterBinded)
             }
         }
         val intent = Intent()
@@ -55,7 +58,6 @@ class SunmiPrinter(
         intent.action = ACTION
         if(!context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)) {
             printerConnection = serviceConnection
-            printerStatus = PrinterStatus.UNAVAILABLE
             printerConnection.onServiceDisconnected(null)
         }
     }
@@ -63,21 +65,19 @@ class SunmiPrinter(
     fun unBindPrinter() {
         try { context.unbindService(printerConnection) }
         catch(e: Exception) { Timber.d("Printer not available") }
-        finally { printerStatus = PrinterStatus.UNAVAILABLE }
+        isPrinterBinded = false
     }
 
     fun serviceConnected(service: IBinder?) {
         printerService = SunmiPrinterService.Stub.asInterface(service)
-        printerStatus = PrinterStatus.AVAILABLE
     }
 
-    fun isPrinterAvailable(): Boolean {
-        return printerStatus == PrinterStatus.AVAILABLE
+    fun isPrinterOutOfPaper(): Boolean {
+        return printerStatus == PrinterStatus.OUT_OF_PAPER
     }
 
     fun printReceipt(receipt: Receipt) {
         when(printerStatus) {
-            PrinterStatus.UNAVAILABLE -> Timber.e("Printer is not available right now")
             PrinterStatus.AVAILABLE -> {
                 printReceiptBeforeSignature(receipt)
                 receipt.signature?.let {
@@ -86,24 +86,25 @@ class SunmiPrinter(
                 }
                 doPrint()
             }
+            else -> Timber.e("Printer is not available right now")
         }
     }
 
     private fun doPrint() {
-        printerService.lineWrap(4, printCallback)
-        printerService.exitPrinterBufferWithCallback(true, printCallback)
+        printerService?.lineWrap(4, printCallback)
+        printerService?.exitPrinterBufferWithCallback(true, printCallback)
     }
 
     private fun printReceiptBeforeSignature(receipt: Receipt) {
         receipt.receiptLines?.let {
             val fontSize = calculateFontSize(it)
             setLineHeight()
-            printerService.enterPrinterBuffer(true)
+            printerService?.enterPrinterBuffer(true)
             val lines = receipt.getLinesBeforeSignature()
             lines.let { l ->
                 l.forEach { line ->
-                    printerService.printTextWithFont(line, "", fontSize.toFloat(), printCallback)
-                    printerService.lineWrap(1, printCallback)
+                    printerService?.printTextWithFont(line, "", fontSize.toFloat(), printCallback)
+                    printerService?.lineWrap(1, printCallback)
                 }
             }
         }
@@ -115,9 +116,9 @@ class SunmiPrinter(
             val scaledHeight: Int = (bmp.height * newWidth) / bmp.width
             val scaledSignature = BitmapUtils.scale(bmp, newWidth, scaledHeight)
             val coloredSignature = BitmapUtils.replaceColor(scaledSignature, Color.TRANSPARENT, Color.WHITE)
-            printerService.setAlignment(1, printCallback)
-            printerService.printBitmap(coloredSignature, printCallback)
-            printerService.setAlignment(0, printCallback)
+            printerService?.setAlignment(1, printCallback)
+            printerService?.printBitmap(coloredSignature, printCallback)
+            printerService?.setAlignment(0, printCallback)
         }
     }
 
@@ -128,8 +129,8 @@ class SunmiPrinter(
             val lines = receipt.getLinesAfterSignature()
             lines.let { l ->
                 l.forEach { line ->
-                    printerService.printTextWithFont(line, "", fontSize.toFloat(), printCallback)
-                    printerService.lineWrap(1, printCallback)
+                    printerService?.printTextWithFont(line, "", fontSize.toFloat(), printCallback)
+                    printerService?.lineWrap(1, printCallback)
                 }
             }
         }
@@ -148,7 +149,7 @@ class SunmiPrinter(
     private fun setLineHeight() {
         val command = byteArrayOf(0x1B, 0x33, 0x12)
         try {
-            printerService.sendRAWData(command, null)
+            printerService?.sendRAWData(command, null)
         } catch(e: Exception) {
             Timber.e(e.toString())
         }
@@ -163,6 +164,18 @@ class SunmiPrinter(
         }
     }
 
-    override fun onConnected(p0: SunmiPrinterService?) { Timber.e("onConnected") }
-    override fun onDisconnected() { printerStatus = PrinterStatus.UNAVAILABLE }
+    private fun decodeLowLevelStatus(status: SunmiPrinterStatus): PrinterStatus {
+        return when (status) {
+            SunmiPrinterStatus.NORMAL -> PrinterStatus.AVAILABLE
+            SunmiPrinterStatus.OUT_OF_PAPER -> PrinterStatus.OUT_OF_PAPER
+            SunmiPrinterStatus.OVERHEATED -> PrinterStatus.UNAVAILABLE
+            SunmiPrinterStatus.TRAY_OPEN -> PrinterStatus.UNAVAILABLE
+            SunmiPrinterStatus.NO_PRINTER_DETECTED -> PrinterStatus.UNAVAILABLE
+            SunmiPrinterStatus.UPDATE_STATUS, SunmiPrinterStatus.GET_STATUS_EXCEPTION, SunmiPrinterStatus.CUTTER_ABNORMAL, SunmiPrinterStatus.CUTTER_RECOVERY, SunmiPrinterStatus.NO_BLACK_MARK -> PrinterStatus.UNAVAILABLE
+        }
+    }
+
+    override fun onConnected(p0: SunmiPrinterService?) { Timber.e("Sunmi Printer service Connected") }
+
+    override fun onDisconnected() { Timber.d("Sunmi Printer service Disconnected") }
 }

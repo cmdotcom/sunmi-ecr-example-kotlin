@@ -81,9 +81,8 @@ class PreAuthActivity : BaseEcrFragmentActivity<PreAuthViewModel>() {
         return R.navigation.preauth_graph
     }
 
-    override fun initializeView(terminalData: TerminalData?) {
-        super.initializeView(terminalData)
-        initializeTransactionType()
+    override fun getTransactionTypeStringId(): Int {
+        return R.string.bottom_app_bar_start_pre_auth
     }
 
     private fun savePreauth(amount: Int) {
@@ -95,9 +94,5 @@ class PreAuthActivity : BaseEcrFragmentActivity<PreAuthViewModel>() {
         binding.bottomAppView.setTransactionTypeText(R.string.bottom_app_bar_start_pre_auth)
         binding.bottomAppView.setButtonsListeners(listener)
         binding.bottomAppView.disableActionButton()
-    }
-
-    private fun initializeTransactionType() {
-        binding.bottomAppView.setTransactionTypeText(R.string.bottom_app_bar_start_pre_auth)
     }
 }

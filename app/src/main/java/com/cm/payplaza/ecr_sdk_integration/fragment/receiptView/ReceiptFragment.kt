@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.cm.payplaza.ecr_sdk_integration.R
 import com.cm.payplaza.ecr_sdk_integration.activity.preauth.finish.FinishPreauthActivity
 import com.cm.payplaza.ecr_sdk_integration.databinding.FragmentReceiptBinding
+import com.cm.payplaza.ecr_sdk_integration.dialog.DialogLauncher
 import com.cm.payplaza.ecr_sdk_integration.entity.Receipt
 import com.cm.payplaza.ecr_sdk_integration.fragment.base.BaseEcrFragment
 import com.cm.payplaza.ecr_sdk_integration.uicomponents.bottomAppBarComponent.BottomAppBarComponent
@@ -61,30 +62,63 @@ class ReceiptFragment : BaseEcrFragment<ReceiptState,
 
     private fun setUpOneReceipt(receipt: Receipt) {
         fillReceipt(receipt, args.dayTotals)
-        viewModel.setUpOneReceipt(receipt)
+        val popupListener: DialogLauncher.ActionListener = object : DialogLauncher.ActionListener {
+            override fun onOkPressed() {
+                viewModel.printCardholderReceipt(receipt, this)
+            }
+            override fun onCancelPressed() {
+                viewModel.finishTransaction()
+            }
+            override fun onDismiss() {}
+        }
+        val bottomAppBarListener = object: BottomAppBarComponent.ClickListener {
+            override fun onActionButtonPressed() {
+                viewModel.finishTransaction()
+            }
+            override fun onPrintButtonPressed() {
+                viewModel.printCardholderReceipt(receipt, popupListener)
+            }
+        }
+        viewModel.setUpBottomAppBarListener(bottomAppBarListener)
     }
 
     private fun setUpTwoReceipt(
-        customerReceipt: Receipt,
+        cardholderReceipt: Receipt,
         merchantReceipt: Receipt,
         isSuccesfull: Boolean
     ) {
         fillReceipt(merchantReceipt)
         binding.receiptType.text = getString(R.string.receipt_merchant)
-        val listener = object: BottomAppBarComponent.ClickListener {
+        val popupListener: DialogLauncher.ActionListener = object : DialogLauncher.ActionListener {
+            override fun onOkPressed() {
+                viewModel.printMerchantReceipt(
+                    merchantReceipt,
+                    cardholderReceipt,
+                    isSuccesfull,
+                    this,
+                    ::showCardholderReceipt
+                )
+            }
+            override fun onCancelPressed() {
+                showCardholderReceipt(cardholderReceipt, isSuccesfull)
+            }
+            override fun onDismiss() {}
+        }
+        val bottomAppBarListener = object: BottomAppBarComponent.ClickListener {
             override fun onActionButtonPressed() {
-                binding.receiptType.text = getString(R.string.receipt_cardholder)
-                viewModel.merchantReceiptshowed(customerReceipt, isSuccesfull)
-                binding.receiptViewScroll.scrollY = 0
+                showCardholderReceipt(cardholderReceipt, isSuccesfull)
             }
             override fun onPrintButtonPressed() {
-                binding.receiptType.text = getString(R.string.receipt_cardholder)
-                viewModel.printReceipt(merchantReceipt)
-                viewModel.merchantReceiptshowed(customerReceipt, isSuccesfull)
-                binding.receiptViewScroll.scrollY = 0
+                viewModel.printMerchantReceipt(merchantReceipt, cardholderReceipt, isSuccesfull, popupListener, ::showCardholderReceipt)
             }
         }
-        viewModel.setUpTwoReceipt(listener)
+        viewModel.setUpBottomAppBarListener(bottomAppBarListener)
+    }
+
+    private fun showCardholderReceipt(cardholderReceipt: Receipt, isSuccesfull: Boolean) {
+        binding.receiptType.text = getString(R.string.receipt_cardholder)
+        viewModel.merchantReceiptShowed(cardholderReceipt, isSuccesfull)
+        binding.receiptViewScroll.scrollY = 0
     }
 
     private fun setUpCanceled(receipt: Receipt) {

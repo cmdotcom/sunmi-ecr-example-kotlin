@@ -2,6 +2,7 @@ package com.cm.payplaza.ecr_sdk_integration.activity.statuses
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import androidx.core.view.GravityCompat
 import com.cm.payplaza.ecr_sdk_integration.R
@@ -30,6 +31,15 @@ class StatusesActivity : BaseEcrFragmentActivity<StatusesViewModel>() {
     }
 
     override val viewModel: StatusesViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(savedInstanceState == null) {
+            viewModel.getStatuses()
+        } else {
+            goToErrorFragment()
+        }
+    }
 
     override fun render(state: BaseEcrViewState) {
         super.render(state)
@@ -66,7 +76,6 @@ class StatusesActivity : BaseEcrFragmentActivity<StatusesViewModel>() {
     private fun setUpBottomBarForError(listener: BottomAppBarComponent.ClickListener) {
         binding.bottomAppView.enableActionButton()
         binding.bottomAppView.setActionButtonText(R.string.bottom_app_bar_card_payment_continue)
-        binding.bottomAppView.setTransactionTypeText(R.string.bottom_app_bar_statuses)
         binding.bottomAppView.setButtonsListeners(listener)
     }
 
@@ -87,22 +96,12 @@ class StatusesActivity : BaseEcrFragmentActivity<StatusesViewModel>() {
         )
     }
 
-    override fun initializeView(terminalData: TerminalData?) {
-        super.initializeView(terminalData)
-        if (isActivityRestored) {
-            restoreActivity()
-        } else {
-            viewModel.getStatuses()
-        }
-    }
-
     override fun getNavigationGraph(): Int {
         return R.navigation.statuses_graph
     }
 
-    override fun restoreActivity() {
-        viewModel.error()
-        goToErrorFromStatuses()
+    override fun getTransactionTypeStringId(): Int {
+        return R.string.bottom_app_bar_statuses
     }
 
     private fun goToErrorFragment() {
