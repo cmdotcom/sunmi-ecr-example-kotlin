@@ -20,7 +20,7 @@
   
   ### Versions
   #### 3.1.1
-  - Use new version of the Android POS Integration library
+  - Use new version 1.1.4 of the Android POS Integration library
   - Refactor some parts of the application
  
   #### 3.0.0
